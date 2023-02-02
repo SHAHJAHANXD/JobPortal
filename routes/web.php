@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Authentication\AuthenticationController;
+use App\Http\Controllers\Candidate\CandidateDashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [AuthenticationController::class, 'index'])->name('index');
+Route::get('/login', [AuthenticationController::class, 'login'])->name('login');
+Route::get('/signup', [AuthenticationController::class, 'signup'])->name('signup');
+Route::post('/post-signup', [AuthenticationController::class, 'post_signup'])->name('post_signup');
+Route::post('/post-login', [AuthenticationController::class, 'authenticate'])->name('post_login');
+Route::post('/logout', [AuthenticationController::class, 'Logout'])->name('Logout');
+
+Route::group(['middleware' => 'auth:web'], function () {
+    Route::prefix('candidate')->group(function () {
+        Route::get('/dashboard', [CandidateDashboardController::class, 'dashboard'])->name('candidate.dashboard');
+    });
 });
