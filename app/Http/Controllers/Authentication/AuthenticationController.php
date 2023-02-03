@@ -15,7 +15,7 @@ class AuthenticationController extends Controller
 {
     public function index()
     {
-        return view('landingpage.index');
+        return redirect()->route('login');
     }
     public function login()
     {
