@@ -15,6 +15,7 @@
     @include('landingpage.layouts.header')
 
     @yield('content')
+    @include('landingpage.layouts.footer')
     @include('landingpage.layouts.scripts')
     @yield('extra-scripts')
 </body>

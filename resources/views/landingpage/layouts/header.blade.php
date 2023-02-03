@@ -5,7 +5,7 @@
           <div class="menu-wrapper d-flex align-items-center justify-content-between">
             <div class="left-content d-flex align-items-center">
               <div class="logo mr-45">
-                <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
+                <a href="index.html"><h1>Job Portal</h1></a>
               </div>
 
               <div class="main-menu d-none d-lg-block">
@@ -23,8 +23,8 @@
             <div class="buttons">
               <ul>
                 <li class="button-header">
-                  <a href="#" class="header-btn mr-10"> <i class="fas fa-phone-alt"></i>Post A Job</a>
-                  <a href="login.html" class="btn header-btn2">Log In</a>
+                  <a href="{{ route('signup') }}" class="header-btn mr-10"> <i class="fas fa-phone-alt"></i>Post A Job</a>
+                  <a href="{{ route('login') }}" class="btn header-btn2">Log In</a>
                 </li>
               </ul>
             </div>

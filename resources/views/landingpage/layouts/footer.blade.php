@@ -8,12 +8,11 @@
                 <div class="single-footer-caption mb-30">
 
                   <div class="footer-logo mb-25">
-                    <a href="index.html"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                    <a href="index.html"><img src="https://cybinix.com/cybinix.png" alt="" style="height: 90px;"></a>
                   </div>
                   <div class="footer-tittle">
                     <div class="footer-pera">
-                      <p>The automated process starts as soon as your clothes go into the machine.The outcome is
-                        gleaming clothes.</p>
+                      <p>Cybinix is a job portal that provides job seekers with access to a range of job opportunities. It allows employers to post job listings and search for suitable candidates, and job seekers to create a profile and apply for jobs. </p>
                     </div>
                   </div>
                   <div class="footer-social">
@@ -29,11 +28,10 @@
                 <div class="footer-tittle">
                   <h4>Useful links</h4>
                   <ul>
-                    <li><a href="#">Design & creatives</a></li>
-                    <li><a href="#">Telecommunication</a></li>
-                    <li><a href="#">Restaurant</a></li>
-                    <li><a href="#">Programing</a></li>
-                    <li><a href="#">Architecture</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Candidate</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
                   </ul>
                 </div>
               </div>
@@ -73,9 +71,7 @@
                 <div class="col-xl-12 ">
                   <div class="footer-copy-right text-center">
                     <p>Copyright &copy;
-                      <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
-                      made with <i class="fa fa-heart color-danger" aria-hidden="true"></i> by <a
-                        href="https://colorlib.com/" target="_blank" rel="nofollow noopener">Colorlib</a>
+                      <script>document.write(new Date().getFullYear());</script> All rights reserved
                     </p>
                   </div>
                 </div>
