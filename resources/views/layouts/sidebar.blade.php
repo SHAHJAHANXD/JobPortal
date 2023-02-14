@@ -2,7 +2,7 @@
     <div class="dlabnav-scroll">
 
         <ul class="metismenu" id="menu">
-            <li><a class="" href="/" aria-expanded="false">
+            <li><a class="" href="{{ route('candidate.dashboard') }}" aria-expanded="false">
                     <div class="menu-icon">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -19,7 +19,7 @@
                 </a>
             </li>
 
-            <li><a class="" href="javascript:void()" aria-expanded="false">
+            <li><a class="" href="{{ route('candidate.profile') }}" aria-expanded="false">
                     <div class="menu-icon">
                         <i class="la la-user-tie"></i>
                     </div>

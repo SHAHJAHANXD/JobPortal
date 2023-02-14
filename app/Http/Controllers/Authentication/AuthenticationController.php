@@ -19,15 +19,25 @@ class AuthenticationController extends Controller
     }
     public function login()
     {
-        return view('authenticate.login');
+        $auth_check = Auth::check();
+        if ($auth_check == true) {
+            return redirect()->back()->with('error', 'Logout first to access login page. Thank You!');
+        } else {
+            return view('authenticate.login');
+        }
     }
     public function signup()
     {
-        return view('authenticate.signup');
+        $auth_check = Auth::check();
+        if ($auth_check == true) {
+            return redirect()->back()->with('error', 'Logout first to access signup page. Thank You!');
+        } else {
+            return view('authenticate.signup');
+        }
     }
     public function post_signup(Request $request)
     {
-        $request->validate(
+        $data = $request->validate(
             [
                 'first_name' => 'required|string|max:254',
                 'last_name' => 'required|string|max:254',
@@ -56,13 +66,10 @@ class AuthenticationController extends Controller
 
             ]
         );
-        $user = new User();
-        $user->first_name = $request->first_name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        $user->password = Hash::make($request->password);
-        $user->save();
+        $code = mt_rand(1, 999999);
+        $data['password'] = Hash::make($data['password']);
+        $data['code'] = $code;
+        $user = User::create($data);
         if ($user == true) {
             return redirect()->route('login')->with('success', 'Account Created Successfully');
         }

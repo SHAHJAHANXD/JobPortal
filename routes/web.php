@@ -20,10 +20,13 @@ Route::get('/login', [AuthenticationController::class, 'login'])->name('login');
 Route::get('/signup', [AuthenticationController::class, 'signup'])->name('signup');
 Route::post('/post-signup', [AuthenticationController::class, 'post_signup'])->name('post_signup');
 Route::post('/post-login', [AuthenticationController::class, 'authenticate'])->name('post_login');
-Route::post('/logout', [AuthenticationController::class, 'Logout'])->name('Logout');
+Route::get('/logout', [AuthenticationController::class, 'Logout'])->name('Logout');
 
-Route::group(['middleware' => 'auth:web'], function () {
-    Route::prefix('candidate')->group(function () {
-        Route::get('/dashboard', [CandidateDashboardController::class, 'dashboard'])->name('candidate.dashboard');
+Route::middleware('VerifyUser')->group(function () {
+    Route::group(['middleware' => 'auth:web'], function () {
+        Route::prefix('candidate')->group(function () {
+            Route::get('/dashboard', [CandidateDashboardController::class, 'dashboard'])->name('candidate.dashboard');
+            Route::get('/profile', [CandidateDashboardController::class, 'profile'])->name('candidate.profile');
+        });
     });
 });

@@ -43,24 +43,7 @@
                         Dashboard
                     </div>
                 </div>
-                <ul class="navbar-nav header-right">
-                    <li class="nav-item d-flex align-items-start">
-                        <div class="input-group search-area">
-                            <input type="text" class="form-control" id="search" placeholder="Search here...">
-                            <span class="input-group-text"><a href="javascript:void(0)"><svg width="28"
-                                        height="28" viewBox="0 0 28 28" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="1"
-                                            d="M16.6751 19.4916C16.2194 19.036 16.2194 18.2973 16.6751 17.8417C17.1307 17.3861 17.8694 17.3861 18.325 17.8417L22.9916 22.5084C23.4473 22.964 23.4473 23.7027 22.9916 24.1583C22.536 24.6139 21.7973 24.6139 21.3417 24.1583L16.6751 19.4916Z"
-                                            fill="white" />
-                                        <path
-                                            d="M12.8333 18.6667C16.055 18.6667 18.6667 16.055 18.6667 12.8334C18.6667 9.61169 16.055 7.00002 12.8333 7.00002C9.61166 7.00002 6.99999 9.61169 6.99999 12.8334C6.99999 16.055 9.61166 18.6667 12.8333 18.6667ZM12.8333 21C8.323 21 4.66666 17.3437 4.66666 12.8334C4.66666 8.32303 8.323 4.66669 12.8333 4.66669C17.3436 4.66669 21 8.32303 21 12.8334C21 17.3437 17.3436 21 12.8333 21Z"
-                                            fill="white" />
-                                    </svg>
-                                </a></span>
-                        </div>
-                    </li>
-                </ul>
+
                 <div class="dropdown header-profile2 ">
                     <ul class="navbar-nav header-right me-sm-4">
                         <li class="nav-item dropdown notification_dropdown">
@@ -82,7 +65,7 @@
                                         <li>
                                             <div class="timeline-panel">
                                                 <div class="media me-2">
-                                                    <img alt="image" width="50" src="images/avatar/1.jpg">
+                                                    <img alt="image" width="50" src="{{ asset('dashboard') }}/images/avatar/1.jpg">
                                                 </div>
                                                 <div class="media-body">
                                                     <h6 class="mb-1"><a href="javascript:voiud(0)"> Dr sultads
@@ -118,7 +101,7 @@
                                         <li>
                                             <div class="timeline-panel">
                                                 <div class="media me-2">
-                                                    <img alt="image" width="50" src="images/avatar/1.jpg">
+                                                    <img alt="image" width="50" src="{{ asset('dashboard') }}/images/avatar/1.jpg">
                                                 </div>
                                                 <div class="media-body">
                                                     <h6 class="mb-1"><a href="javascript:voiud(0)">Dr sultads
@@ -246,8 +229,8 @@
                             <img src="{{ asset('dashboard') }}/images/placeholder.jpg" alt="">
                             <div class="d-flex align-items-center sidebar-info">
                                 <div class="user-info">
-                                    <span class="font-w500 d-block  fs-5 text-white">Adam Joe</span>
-                                    <small class="text-end font-w400">Admin</small>
+                                    <span class="font-w500 d-block  fs-5 text-white">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                                    <small class="text-end font-w400">{{ Auth::user()->role }}</small>
                                 </div>
                                 <svg width="14" height="8" viewBox="0 0 14 8" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">

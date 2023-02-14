@@ -11,4 +11,8 @@ class CandidateDashboardController extends Controller
     {
         return view('candidate.index.index');
     }
+    public function profile()
+    {
+        return view('authenticate.profile');
+    }
 }
