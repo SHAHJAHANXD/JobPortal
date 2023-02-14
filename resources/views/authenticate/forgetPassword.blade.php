@@ -53,33 +53,28 @@
                                             <h2 style="margin-left: 10px;">Cybinix Job Portal</h2>
                                         </div>
                                     </div>
-                                    <img src="{{ asset('dashboard') }}/images/verify.png" class="education-img">
+                                    <img src="{{ asset('dashboard') }}/images/forget.png" class="education-img">
                                 </div>
                             </div>
                             <div class="col-xl-6 col-md-6" style="margin-top: auto; margin-bottom: auto">
                                 <div class="sign-in-your">
-                                    <h3>Verify your account</h3>
-                                    <form action="{{ route('verify.postverify') }}" method="POST">
+                                    <h3>Forget Password</h3>
+                                    <form action="{{ route('post_forget_password') }}" method="POST">
                                         @csrf
                                         <div class="mb-3">
-                                            <label class="mb-1"><strong>Code</strong></label>
-                                            <input required type="integer" class="form-control" placeholder="Enter 6 digit code"
-                                                name="code">
-                                            @if ($errors->has('code'))
-                                                <span class="text-danger">{{ $errors->first('code') }}</span>
+                                            <label class="mb-1"><strong>Email</strong></label>
+                                            <input required type="email" class="form-control" placeholder="Enter Your Email"
+                                                name="email">
+                                            @if ($errors->has('email'))
+                                                <span class="text-danger">{{ $errors->first('email') }}</span>
                                             @endif
                                         </div>
-                                        <div class="row d-flex justify-content-between mt-4 mb-2">
-                                            <div class="mb-3">
-                                                <a href="{{ route('resend.code') }}">Resend Code?</a>
-                                            </div>
-                                        </div>
                                         <div class="text-center">
-                                            <button type="submit" class="btn btn-primary btn-block">Verify</button>
+                                            <button type="submit" class="btn btn-primary btn-block">Request</button>
                                         </div>
                                         <div class="new-account mt-3">
-                                            <p class="text-white">Want to logout? <a class="text-primary"
-                                                    href="{{ route('Logout') }}">Logout</a></p>
+                                            <p class="text-white">Have an code? <a class="text-primary"
+                                                    href="{{ route('verify_forget_password') }}">Reset Password</a></p>
                                         </div>
                                     </form>
                                 </div>

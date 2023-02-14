@@ -69,17 +69,10 @@
             </div>
         </div>
     </div>
-
-<!--**********************************
-	Scripts
-***********************************-->
-<!-- Required vendors -->
 <script src="vendor/global/global.min.js"></script>
 <script src="vendor/jquery-autocomplete/jquery-ui.js"></script>
 <script src="js/custom.min.js"></script>
 <script src="js/dlabnav-init.js"></script>
 <script src="js/styleSwitcher.js"></script>
 </body>
-
-<!-- Mirrored from dolab.dexignzone.com/xhtml/page-error-403.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 21 Jan 2023 04:19:29 GMT -->
 </html>

@@ -68,10 +68,10 @@ class AuthenticationController extends Controller
             ]
         );
         $code = mt_rand(1, 999999);
-        // $mail = Mail::send('emails.verify', ['code' => $code], function ($message) use ($request) {
-        //     $message->to($request->email);
-        //     $message->subject('Verify Email');
-        // });
+        $mail = Mail::send('emails.verify', ['code' => $code], function ($message) use ($request) {
+            $message->to($request->email);
+            $message->subject('Verify Email');
+        });
         if (true == true) {
             $user = new User();
             $user->first_name = $request->first_name;
@@ -122,5 +122,65 @@ class AuthenticationController extends Controller
         Auth::logout();
         Session::flush();
         return redirect()->route('login')->with('error', 'Session Expired!');
+    }
+    public function forget_password()
+    {
+        return view('authenticate.forgetPassword');
+    }
+    public function verify_forget_password()
+    {
+        return view('authenticate.VerifyForgetPassword');
+    }
+    public function post_verify_forget_password(Request $request)
+    {
+        $email = $request->email;
+        $count = User::where('email', $email)->count();
+        if ($count == 0) {
+            return redirect()->back()->with('error', 'Email Address Not Found. Thank You!');
+        } else {
+            $user = User::where('email', $email)->first();
+            $request->validate([
+                'email' => 'required',
+                'password' => 'required',
+            ]);
+            if ($user->password_code == $request->code) {
+                $user->password = Hash::make($request->password);
+                $user->password_code == null;
+                $user->save();
+                $credentials = $request->only('email', 'password');
+                if (Auth::guard('web')->attempt($credentials)) {
+                    if (Auth::user()->role == 'Candidate') {
+                        return redirect()->route('candidate.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+                    } elseif (Auth::user()->role == 'Admin') {
+                        return redirect()->route('admin.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+                    } elseif (Auth::user()->role == 'Employer') {
+                        return redirect()->route('employer.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+                    } else {
+                        Auth::logout();
+                        return redirect()->route('login')->with('error', 'User role is Invalid!');
+                    }
+                }
+            } else {
+                return redirect()->back()->with('error', 'Reset Code Is Invalid. Thank You!');
+            }
+        }
+    }
+    public function post_forget_password(Request $request)
+    {
+        $email = $request->email;
+        $count = User::where('email', $email)->count();
+        if ($count == 0) {
+            return redirect()->back()->with('error', 'Email Address Not Found. Thank You!');
+        } else {
+            $code = mt_rand(1, 999999);
+            $user = User::where('email', $email)->first();
+            $user->password_code = $code;
+            $user->save();
+            Mail::send('emails.forget', ['code' => $code], function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject('Verify Email');
+            });
+            return redirect()->route('verify_forget_password')->with('success', 'Resend Code Sent Successfully!');
+        }
     }
 }

@@ -4,12 +4,11 @@ Cybinix Job Portal
 @endsection
 @section('content')
     <div class="content-body">
-        <!-- row -->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-12">
                     <div class="row">
-                        <!----column-- -->
+
                         <div class="col-xl-8">
                             <div class="card balance-data">
                                 <div class="card-header border-0 flex-wrap">
@@ -105,8 +104,7 @@ Cybinix Job Portal
                                 </div>
                             </div>
                         </div>
-                        <!----/column-- -->
-                        <!----column-- -->
+
                         <div class="col-xl-4">
                             <div class="row">
                                 <div class="col-xl-12 col-lg-4 col-md-6">
@@ -135,8 +133,7 @@ Cybinix Job Portal
                                         </div>
                                     </div>
                                 </div>
-                                <!----/column-- -->
-                                <!----column-- -->
+
                                 <div class="col-xl-12 col-lg-4 col-md-6">
                                     <div class="card">
                                         <div class="card-body p-4 p-lg-3 p-xl-4 ">
@@ -155,8 +152,7 @@ Cybinix Job Portal
                                         </div>
                                     </div>
                                 </div>
-                                <!----/column-- -->
-                                <!----column-- -->
+
                                 <div class="col-xl-12 col-lg-4 col-md-12">
                                     <div class="card overflow-hidden">
                                         <div class="card-body p-4 p-lg-3 p-xl-4">
@@ -177,7 +173,7 @@ Cybinix Job Portal
                                 <!---/-column-- -->
                             </div>
                         </div>
-                        <!----column-- -->
+
                         <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="card  pia-chart">
                                 <div class="card-header border-0 pb-0 flex-wrap">
@@ -240,8 +236,7 @@ Cybinix Job Portal
                                 </div>
                             </div>
                         </div>
-                        <!----/column-- -->
-                        <!----column-- -->
+
                         <div class="col-xl-4 col-lg-4 col-md-6">
                             <div class="card student-chart">
                                 <div class="card-header border-0 pb-0">
@@ -257,8 +252,7 @@ Cybinix Job Portal
                                 </div>
                             </div>
                         </div>
-                        <!----/column-- -->
-                        <!----column-- -->
+
 
                         <div class="col-xl-4 col-lg-4 col-md-12">
                             <div class="card">

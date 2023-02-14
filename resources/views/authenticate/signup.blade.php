@@ -14,7 +14,7 @@
     <meta property="og:image" content="{{ asset('dashboard') }}/social-image.png">
     <meta name="format-detection" content="telephone=no">
     <title>Cybinix Job Portal | Signup</title>
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('dashboard') }}/images/favicon.png">
     <link href="{{ asset('dashboard') }}/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="{{ asset('dashboard') }}/vendor/jquery-autocomplete/jquery-ui.css" rel="stylesheet">
     <link href="{{ asset('dashboard') }}/css/style.css" rel="stylesheet">
@@ -57,21 +57,21 @@
                                         @csrf
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>First Name</strong></label>
-                                            <input type="text" name="first_name" class="form-control" placeholder="Enter First Name" value="{{ old('first_name') }}">
+                                            <input required type="text" name="first_name" class="form-control" placeholder="Enter First Name" value="{{ old('first_name') }}">
                                             @if ($errors->has('first_name'))
                                             <span class="text-danger">{{ $errors->first('first_name') }}</span>
                                             @endif
                                         </div>
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>Last Name</strong></label>
-                                            <input type="text" name="last_name"  class="form-control" placeholder="Enter Last Name" value="{{ old('last_name') }}">
+                                            <input required type="text" name="last_name"  class="form-control" placeholder="Enter Last Name" value="{{ old('last_name') }}">
                                             @if ($errors->has('last_name'))
                                             <span class="text-danger">{{ $errors->first('last_name') }}</span>
                                             @endif
                                         </div>
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>Email</strong></label>
-                                            <input type="email" name="email"  class="form-control" placeholder="Enter Email" value="{{ old('email') }}">
+                                            <input required type="email" name="email"  class="form-control" placeholder="Enter Email" value="{{ old('email') }}">
                                             @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                             @endif
@@ -88,7 +88,7 @@
                                         </div>
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" name="password" placeholder="Enter Password">
+                                            <input required type="password" class="form-control" name="password" placeholder="Enter Password">
                                             @if ($errors->has('password'))
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                             @endif

@@ -6,11 +6,9 @@
                 <rect x="22.6154" width="19.6154" height="6.53846" rx="3.26923" fill="white" />
                 <rect x="22.6154" y="9.15387" width="19.6154" height="6.53846" rx="3.26923" fill="white" />
                 <rect x="22.6154" y="18.3077" width="19.6154" height="6.53846" rx="3.26923" fill="white" />
-                <rect x="0.384583" y="18.3077" width="19.6154" height="6.53846" rx="3.26923" fill="white" />
                 <rect x="22.6154" y="27.4615" width="19.6154" height="6.53846" rx="3.26923" fill="white" />
                 <rect x="0.384583" y="27.4615" width="19.6154" height="6.53846" rx="3.26923" fill="white" />
             </svg>
-            <h2 style="margin-left: 10px;">Cybinix</h2>
 
         </div>
 

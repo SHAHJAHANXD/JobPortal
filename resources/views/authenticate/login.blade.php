@@ -14,7 +14,7 @@
     <meta property="og:image" content="{{ asset('dashboard') }}/social-image.png">
     <meta name="format-detection" content="telephone=no">
     <title>Cybinix Job Portal | Login</title>
-    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('dashboard') }}/images/favicon.png">
     <link href="{{ asset('dashboard') }}/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="{{ asset('dashboard') }}/vendor/jquery-autocomplete/jquery-ui.css" rel="stylesheet">
     <link href="{{ asset('dashboard') }}/css/style.css" rel="stylesheet">
@@ -56,36 +56,36 @@
                                     <img src="{{ asset('dashboard') }}/images/job.png" class="education-img">
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-md-6">
+                            <div class="col-xl-6 col-md-6" style="margin-top: auto; margin-bottom: auto">
                                 <div class="sign-in-your">
                                     <h3>Sign in your account</h3>
                                     <form action="{{ route('post_login') }}" method="POST">
                                         @csrf
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>Email</strong></label>
-                                            <input type="email" class="form-control" placeholder="Enter Email" name="email">
+                                            <input required type="email" class="form-control" placeholder="Enter Email" name="email">
                                             @if ($errors->has('email'))
                                             <span class="text-danger">{{ $errors->first('email') }}</span>
                                             @endif
                                         </div>
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>Password</strong></label>
-                                            <input type="password" class="form-control" placeholder="Enter Password" name="password">
+                                            <input required type="password" class="form-control" placeholder="Enter Password" name="password">
                                             @if ($errors->has('password'))
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                             @endif
                                         </div>
                                         <div class="row d-flex justify-content-between mt-4 mb-2">
-                                            <div class="mb-3">
+                                            {{-- <div class="mb-3">
                                                 <div class="form-check custom-checkbox ms-1">
-                                                    <input type="checkbox" class="form-check-input"
+                                                    <input required type="checkbox" class="form-check-input"
                                                         id="basic_checkbox_1">
                                                     <label class="form-check-label" for="basic_checkbox_1">Remember my
                                                         preference</label>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="mb-3">
-                                                <a href="page-forgot-password.html">Forgot Password?</a>
+                                                <a href="{{ route('forget_password') }}">Forgot Password?</a>
                                             </div>
                                         </div>
                                         <div class="text-center">

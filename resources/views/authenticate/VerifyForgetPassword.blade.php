@@ -13,7 +13,7 @@
     <meta property="og:description" content="Cybinix Job Portal">
     <meta property="og:image" content="{{ asset('dashboard') }}/social-image.png">
     <meta name="format-detection" content="telephone=no">
-    <title>Cybinix Job Portal | Verify Email</title>
+    <title>Cybinix Job Portal | Reset Forget Password</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('dashboard') }}/images/favicon.png">
     <link href="{{ asset('dashboard') }}/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="{{ asset('dashboard') }}/vendor/jquery-autocomplete/jquery-ui.css" rel="stylesheet">
@@ -56,11 +56,19 @@
                                     <img src="{{ asset('dashboard') }}/images/verify.png" class="education-img">
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-md-6" style="margin-top: auto; margin-bottom: auto">
+                            <div class="col-xl-6 col-md-6">
                                 <div class="sign-in-your">
-                                    <h3>Verify your account</h3>
-                                    <form action="{{ route('verify.postverify') }}" method="POST">
+                                    <h3>Reset Forget Password</h3>
+                                    <form action="{{ route('post_verify_forget_password') }}" method="POST">
                                         @csrf
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Email</strong></label>
+                                            <input required type="email" class="form-control" placeholder="Enter Your Email"
+                                                name="email">
+                                            @if ($errors->has('email'))
+                                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                            @endif
+                                        </div>
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>Code</strong></label>
                                             <input required type="integer" class="form-control" placeholder="Enter 6 digit code"
@@ -69,10 +77,13 @@
                                                 <span class="text-danger">{{ $errors->first('code') }}</span>
                                             @endif
                                         </div>
-                                        <div class="row d-flex justify-content-between mt-4 mb-2">
-                                            <div class="mb-3">
-                                                <a href="{{ route('resend.code') }}">Resend Code?</a>
-                                            </div>
+                                        <div class="mb-3">
+                                            <label class="mb-1"><strong>Password</strong></label>
+                                            <input required type="password" class="form-control" placeholder="Enter New Password"
+                                                name="password">
+                                            @if ($errors->has('password'))
+                                                <span class="text-danger">{{ $errors->first('password') }}</span>
+                                            @endif
                                         </div>
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Verify</button>

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 
 class VerifyUserController extends Controller
 {
+   
     public function verify()
     {
         return view('authenticate.verify');
@@ -44,10 +45,10 @@ class VerifyUserController extends Controller
         $user = User::where('email', $email)->first();
         $user->code = $code;
         $user->save();
-        // Mail::send('emails.verify', ['code' => $code], function ($message) use ($request) {
-        //     $message->to(Auth::guard('web')->user()->email);
-        //     $message->subject('Verify Email');
-        // });
+        Mail::send('emails.verify', ['code' => $code], function ($message) use ($request) {
+            $message->to(Auth::guard('web')->user()->email);
+            $message->subject('Verify Email');
+        });
         return redirect()->back()->with('success', 'Resend Code Sent Successfully!');
     }
 }

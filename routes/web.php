@@ -25,6 +25,11 @@ Route::post('/post-signup', [AuthenticationController::class, 'post_signup'])->n
 Route::post('/post-login', [AuthenticationController::class, 'authenticate'])->name('post_login');
 Route::get('/logout', [AuthenticationController::class, 'Logout'])->name('Logout');
 
+Route::get('/forget-password', [AuthenticationController::class, 'forget_password'])->name('forget_password');
+Route::post('/post-forget-password', [AuthenticationController::class, 'post_forget_password'])->name('post_forget_password');
+Route::get('/verify-forget-password', [AuthenticationController::class, 'verify_forget_password'])->name('verify_forget_password');
+Route::post('/post-verify-forget-password', [AuthenticationController::class, 'post_verify_forget_password'])->name('post_verify_forget_password');
+
 Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/verify', [VerifyUserController::class, 'verify'])->name('verify.email');
     Route::get('/resend-code', [VerifyUserController::class, 'resend_code'])->name('resend.code');
@@ -33,6 +38,8 @@ Route::group(['middleware' => 'auth:web'], function () {
 
 Route::middleware('VerifyUser')->group(function () {
     Route::group(['middleware' => 'auth:web'], function () {
+        Route::get('/candidate/complete-profile', [CandidateDashboardController::class, 'completeprofile'])->name('candidate.completeprofile');
+        Route::post('/candidate/post-complete-profile', [CandidateDashboardController::class, 'postcompleteprofile'])->name('candidate.postcompleteprofile');
         Route::middleware('SecureCandidate')->group(function () {
             Route::prefix('candidate')->group(function () {
                 Route::get('/dashboard', [CandidateDashboardController::class, 'dashboard'])->name('candidate.dashboard');
@@ -44,6 +51,7 @@ Route::middleware('VerifyUser')->group(function () {
         Route::group(['middleware' => 'auth:web'], function () {
             Route::prefix('employer')->group(function () {
                 Route::get('/dashboard', [EmployerController::class, 'dashboard'])->name('employer.dashboard');
+                Route::get('/profile', [EmployerController::class, 'profile'])->name('employer.profile');
                 Route::get('/profile', [EmployerController::class, 'profile'])->name('employer.profile');
             });
         });

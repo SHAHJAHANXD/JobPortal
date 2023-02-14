@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,8 +18,13 @@ class SecureCandidate
      */
     public function handle(Request $request, Closure $next)
     {
+        $user = User::where('id', Auth::user()->id)->first();
         if (Auth::check() && (Auth::user()->role == 'Candidate')) {
-            return $next($request);
+            if ($user->about_me == null || $user->availability == null || $user->experience == null || $user->language == null || $user->age == null || $user->location == null || $user->designation == null) {
+                return redirect()->route('candidate.completeprofile')->with('error', 'Complete your Profile First');
+            } else {
+                return $next($request);
+            }
         } else {
             return redirect()->back()->with('error', 'User role is Invalid!');
         }
