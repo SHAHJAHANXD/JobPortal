@@ -20,7 +20,7 @@
                                 <div class="profile-details">
                                     <div class="profile-name px-3 pt-2">
                                         <h4 class="text-white mb-0">{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</h4>
-                                        <p>UX / UI Designer</p>
+                                        <p>{{ Auth::user()->designation ?? 'N/A' }}</p>
                                     </div>
                                     <div class="profile-email px-2 pt-2">
                                         <h4 class="mb-0">{{ Auth::user()->email }}</h4>

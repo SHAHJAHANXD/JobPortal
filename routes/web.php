@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminCotroller;
 use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Candidate\CandidateDashboardController;
+use App\Http\Controllers\Employer\EmployerController;
+use App\Http\Controllers\VerifyUser\VerifyUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,11 +25,35 @@ Route::post('/post-signup', [AuthenticationController::class, 'post_signup'])->n
 Route::post('/post-login', [AuthenticationController::class, 'authenticate'])->name('post_login');
 Route::get('/logout', [AuthenticationController::class, 'Logout'])->name('Logout');
 
+Route::group(['middleware' => 'auth:web'], function () {
+    Route::get('/verify', [VerifyUserController::class, 'verify'])->name('verify.email');
+    Route::get('/resend-code', [VerifyUserController::class, 'resend_code'])->name('resend.code');
+    Route::post('/post-verify-email', [VerifyUserController::class, 'postverify'])->name('verify.postverify');
+});
+
 Route::middleware('VerifyUser')->group(function () {
     Route::group(['middleware' => 'auth:web'], function () {
-        Route::prefix('candidate')->group(function () {
-            Route::get('/dashboard', [CandidateDashboardController::class, 'dashboard'])->name('candidate.dashboard');
-            Route::get('/profile', [CandidateDashboardController::class, 'profile'])->name('candidate.profile');
+        Route::middleware('SecureCandidate')->group(function () {
+            Route::prefix('candidate')->group(function () {
+                Route::get('/dashboard', [CandidateDashboardController::class, 'dashboard'])->name('candidate.dashboard');
+                Route::get('/profile', [CandidateDashboardController::class, 'profile'])->name('candidate.profile');
+            });
+        });
+    });
+    Route::middleware('SecureEmployer')->group(function () {
+        Route::group(['middleware' => 'auth:web'], function () {
+            Route::prefix('employer')->group(function () {
+                Route::get('/dashboard', [EmployerController::class, 'dashboard'])->name('employer.dashboard');
+                Route::get('/profile', [EmployerController::class, 'profile'])->name('employer.profile');
+            });
+        });
+    });
+    Route::middleware('SecureAdmin')->group(function () {
+        Route::group(['middleware' => 'auth:web'], function () {
+            Route::prefix('admin')->group(function () {
+                Route::get('/dashboard', [AdminCotroller::class, 'dashboard'])->name('admin.dashboard');
+                Route::get('/profile', [AdminCotroller::class, 'profile'])->name('admin.profile');
+            });
         });
     });
 });

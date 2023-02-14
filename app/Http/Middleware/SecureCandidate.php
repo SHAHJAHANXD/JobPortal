@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class VerifyUser
+class SecureCandidate
 {
     /**
      * Handle an incoming request.
@@ -17,10 +17,10 @@ class VerifyUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && (Auth::user()->email_status == '0')) {
-            return redirect()->route('verify.email')->with('error', 'Verify Your Email!');
-        } else {
+        if (Auth::check() && (Auth::user()->role == 'Candidate')) {
             return $next($request);
+        } else {
+            return redirect()->back()->with('error', 'User role is Invalid!');
         }
     }
 }

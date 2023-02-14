@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 use function GuzzleHttp\Promise\all;
@@ -67,11 +68,32 @@ class AuthenticationController extends Controller
             ]
         );
         $code = mt_rand(1, 999999);
-        $data['password'] = Hash::make($data['password']);
-        $data['code'] = $code;
-        $user = User::create($data);
-        if ($user == true) {
-            return redirect()->route('login')->with('success', 'Account Created Successfully');
+        // $mail = Mail::send('emails.verify', ['code' => $code], function ($message) use ($request) {
+        //     $message->to($request->email);
+        //     $message->subject('Verify Email');
+        // });
+        if (true == true) {
+            $user = new User();
+            $user->first_name = $request->first_name;
+            $user->last_name = $request->last_name;
+            $user->email = $request->email;
+            $user->role = $request->role;
+            $user->password = Hash::make($request->password);
+            $user->code = $code;
+            $user->save();
+            $credentials = $request->only('email', 'password');
+            if ($user == true) {
+                if ($request->role == 'Candidate') {
+                    Auth::guard('web')->attempt($credentials);
+                    return redirect()->route('candidate.dashboard')->with('success', 'Account Created Successfully');
+                }
+                if ($request->role == 'Employer') {
+                    Auth::guard('web')->attempt($credentials);
+                    return redirect()->route('employer.dashboard')->with('success', 'Account Created Successfully');
+                }
+            }
+        } else {
+            return redirect()->back()->with('error', 'Mail server error. Thank you!');
         }
     }
     public function authenticate(Request $request)
@@ -84,6 +106,10 @@ class AuthenticationController extends Controller
         if (Auth::guard('web')->attempt($credentials)) {
             if (Auth::user()->role == 'Candidate') {
                 return redirect()->route('candidate.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+            } elseif (Auth::user()->role == 'Admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+            } elseif (Auth::user()->role == 'Employer') {
+                return redirect()->route('employer.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
             } else {
                 Auth::logout();
                 return redirect()->route('login')->with('error', 'User role is Invalid!');
