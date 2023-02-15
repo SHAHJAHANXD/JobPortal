@@ -39199,3 +39199,10 @@ input:checked+.slider:before {
 }
 
 /*# sourceMappingURL=style.css.map */
+.dz-chat-user:hover
+{
+    background-color: gray;
+    padding: 1px;
+    border-radius: 5px;
+
+}

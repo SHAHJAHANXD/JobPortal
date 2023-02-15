@@ -22,6 +22,7 @@ class AuthenticationController extends Controller
     {
         $auth_check = Auth::check();
         if ($auth_check == true) {
+
             if (Auth::user()->role == 'Candidate') {
                 return redirect()->route('candidate.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
             }
@@ -120,15 +121,20 @@ class AuthenticationController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::guard('web')->attempt($credentials)) {
-            if (Auth::user()->role == 'Candidate') {
-                return redirect()->route('candidate.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
-            } elseif (Auth::user()->role == 'Admin') {
-                return redirect()->route('admin.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
-            } elseif (Auth::user()->role == 'Employer') {
-                return redirect()->route('employer.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
-            } else {
+            if (Auth::user()->account_status == 0) {
                 Auth::logout();
-                return redirect()->route('login')->with('error', 'User role is Invalid!');
+                return redirect()->route('login')->with('error', 'Your account is Blocked. Thank You!');
+            } else {
+                if (Auth::user()->role == 'Candidate') {
+                    return redirect()->route('candidate.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+                } elseif (Auth::user()->role == 'Admin') {
+                    return redirect()->route('admin.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+                } elseif (Auth::user()->role == 'Employer') {
+                    return redirect()->route('employer.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+                } else {
+                    Auth::logout();
+                    return redirect()->route('login')->with('error', 'User role is Invalid!');
+                }
             }
         }
         return redirect()->back()->with('error', 'Email or Password is Invalid!');
