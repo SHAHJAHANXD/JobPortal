@@ -38,6 +38,10 @@ Route::group(['middleware' => 'auth:web'], function () {
 
 Route::middleware('VerifyUser')->group(function () {
     Route::group(['middleware' => 'auth:web'], function () {
+        // Chat
+        Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('sendMessage');
+        Route::get('/chat/{userId}', [ChatController::class, 'getMessages'])->name('getMessages');
+
         Route::get('/candidate/complete-profile', [CandidateDashboardController::class, 'completeprofile'])->name('candidate.completeprofile');
         Route::post('/candidate/post-complete-profile', [CandidateDashboardController::class, 'postcompleteprofile'])->name('candidate.postcompleteprofile');
         Route::middleware('SecureCandidate')->group(function () {
