@@ -22,7 +22,15 @@ class AuthenticationController extends Controller
     {
         $auth_check = Auth::check();
         if ($auth_check == true) {
-            return redirect()->back()->with('error', 'Logout first to access login page. Thank You!');
+            if (Auth::user()->role == 'Candidate') {
+                return redirect()->route('candidate.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+            }
+            if (Auth::user()->role == 'Admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+            }
+            if (Auth::user()->role == 'Employer') {
+                return redirect()->route('employer.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+            }
         } else {
             return view('authenticate.login');
         }
@@ -31,7 +39,15 @@ class AuthenticationController extends Controller
     {
         $auth_check = Auth::check();
         if ($auth_check == true) {
-            return redirect()->back()->with('error', 'Logout first to access signup page. Thank You!');
+            if (Auth::user()->role == 'Candidate') {
+                return redirect()->route('candidate.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+            }
+            if (Auth::user()->role == 'Admin') {
+                return redirect()->route('admin.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+            }
+            if (Auth::user()->role == 'Employer') {
+                return redirect()->route('employer.dashboard')->with('success', 'Welcome Back' . ' ' . Auth::user()->first_name . ' ' . Auth::user()->last_name);
+            }
         } else {
             return view('authenticate.signup');
         }

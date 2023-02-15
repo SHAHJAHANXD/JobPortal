@@ -36,4 +36,8 @@ class ChatController extends Controller
             'chats' => $chats,
         ]);
     }
+    public function inbox()
+    {
+        return view('inbox.chat');
+    }
 }

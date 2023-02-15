@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminCotroller;
 use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Candidate\CandidateDashboardController;
+use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Employer\EmployerController;
 use App\Http\Controllers\VerifyUser\VerifyUserController;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,7 @@ Route::group(['middleware' => 'auth:web'], function () {
 Route::middleware('VerifyUser')->group(function () {
     Route::group(['middleware' => 'auth:web'], function () {
         // Chat
+
         Route::post('/chat/send', [ChatController::class, 'sendMessage'])->name('sendMessage');
         Route::get('/chat/{userId}', [ChatController::class, 'getMessages'])->name('getMessages');
 
@@ -46,6 +48,7 @@ Route::middleware('VerifyUser')->group(function () {
         Route::post('/candidate/post-complete-profile', [CandidateDashboardController::class, 'postcompleteprofile'])->name('candidate.postcompleteprofile');
         Route::middleware('SecureCandidate')->group(function () {
             Route::prefix('candidate')->group(function () {
+                Route::get('/inbox', [ChatController::class, 'inbox'])->name('inbox');
                 Route::get('/dashboard', [CandidateDashboardController::class, 'dashboard'])->name('candidate.dashboard');
                 Route::get('/profile', [CandidateDashboardController::class, 'profile'])->name('candidate.profile');
             });
