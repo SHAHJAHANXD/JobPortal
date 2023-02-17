@@ -15,9 +15,7 @@
                                     <ul class="contacts"
                                         style="overflow: auto; padding: 20px;height: 600px; display: block;">
                                         @php
-                                            $chat = \App\Models\User::where('id', '!=', Auth::user()->id)
-                                                
-                                                ->get();
+                                            $chat = \App\Models\User::where('id', '!=', Auth::user()->id)->get();
                                         @endphp
                                         @foreach ($chat as $chats)
                                             @if (Auth::user()->role == 'Candidate')
@@ -185,4 +183,60 @@
             </div>
         </div>
     </div>
+    @if (Auth::user()->role == 'Candidate')
+    @endif
+
+    @if (Auth::user()->role == 'Employer')
+        <form action="{{ route('employer.sendMessage') }}" method="POST">
+    @endif
+    @if (Auth::user()->role == 'Admin')
+        <form action="{{ route('admin.sendMessage') }}" method="POST">
+    @endif
+@section('extra-scripts')
+    <script type="text/javascript" src="/assets/admin/plugins/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            setTimeout(realTime, 2000);
+        });
+
+        function realTime() {
+            $.ajax({
+                type: 'post',
+                url: '/chat/get',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                },
+                success: function(data) {
+                    $('#message').replaceWith(' <ul class="media-list" id="message"></ul>');
+                    for (var i = 0; i < data.length; i++) {
+                        $('#message').append(
+                            ' <li class="media"><div class="media-body"><div class="media"><div class="media-body">' +
+                            data[i].message + '<br/><small class="text-muted">' + data[i].from_name + '|' +
+                            data[i].created_at + '</small><hr/></div></div></div></li>')
+                    }
+                },
+            });
+            setTimeout(realTime, 2000);
+        }
+        $(document).on('click', '#send', function() {
+            $.ajax({
+                type: 'post',
+                url: '/chat/send',
+                data: {
+                    '_token': $('input[name=_token]').val(),
+                    'from_name': $('input[name=from_name]').val(),
+                    'message': $('input[name=message]').val(),
+                },
+                success: function(data) {
+                    $('#message').append(
+                        '  <li class="media"><div class="media-body"><div class="media"><div class="media-body">' +
+                        data.message + '<br/><small class="text-muted">' + data.from_name + '|' +
+                        data.created_at + '</small><hr/></div></div></div></li>');
+                }
+            })
+
+            $('input[name=message]').val('');
+        });
+    </script>
+@endsection
 @endsection

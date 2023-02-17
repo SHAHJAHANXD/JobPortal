@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('designation')->nullable();
             $table->string('status')->default(0);
             $table->string('profile')->default(0);
-            $table->string('account_status')->default(0);
+            $table->string('account_status')->default(1);
             $table->string('email_status')->default(0);
             $table->string('password')->nullable();
             $table->rememberToken();

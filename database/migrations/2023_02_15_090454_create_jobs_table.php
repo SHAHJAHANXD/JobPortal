@@ -21,21 +21,6 @@ return new class extends Migration
             $table->string('experience')->nullable();
             $table->string('recruitments')->nullable();
             $table->string('status')->default(1);
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('title')->nullable();
             $table->timestamps();
         });
     }
