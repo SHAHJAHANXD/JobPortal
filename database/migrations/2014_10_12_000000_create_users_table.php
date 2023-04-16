@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->unique()->nullable();
+            $table->string('password')->nullable();
             $table->string('code')->nullable();
             $table->string('password_code')->nullable();
             $table->string('role')->nullable();
@@ -29,11 +30,21 @@ return new class extends Migration
             $table->string('experience')->nullable();
             $table->string('avatar')->nullable();
             $table->string('designation')->nullable();
-            $table->string('status')->default(0);
+            $table->string('status')->default(1);
             $table->string('profile')->default(0);
             $table->string('account_status')->default(1);
             $table->string('email_status')->default(0);
-            $table->string('password')->nullable();
+
+            $table->string('c_name')->nullable();
+            $table->string('c_email')->nullable();
+            $table->string('c_position')->nullable();
+            $table->string('c_phone')->nullable();
+            $table->string('c_about_us')->nullable();
+            $table->string('c_image')->nullable();
+            $table->string('c_website')->nullable();
+            $table->string('c_revenue')->nullable();
+            $table->string('c_location')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

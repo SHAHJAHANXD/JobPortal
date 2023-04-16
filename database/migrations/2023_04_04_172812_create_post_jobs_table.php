@@ -13,14 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('personal_access_tokens', function (Blueprint $table) {
+        Schema::create('post_jobs', function (Blueprint $table) {
             $table->id();
-            $table->longText('tokenable');
-            $table->string('name');
-            $table->string('token', 64)->unique();
-            $table->text('abilities')->nullable();
-            $table->timestamp('last_used_at')->nullable();
-            $table->timestamp('expires_at')->nullable();
+            $table->string('title')->nullable();
+            $table->longText('desc')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('experience')->nullable();
+            $table->string('recruitments')->nullable();
+            $table->string('status')->default(1);
             $table->timestamps();
         });
     }
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('personal_access_tokens');
+        Schema::dropIfExists('post_jobs');
     }
 };

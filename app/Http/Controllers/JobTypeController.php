@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\JobType;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class CategoryController extends Controller
+class JobTypeController extends Controller
 {
     public function get()
     {
-        $category = Category::get();
-        return view('admin.category.index', compact('category'));
+        $JobType = JobType::get();
+        return view('admin.JobType.index', compact('JobType'));
     }
     public function store(Request $request)
     {
         try {
             DB::beginTransaction();
-            Category::create($request->all());
+            JobType::create($request->all());
             DB::commit();
-            return redirect()->back()->with('success', 'Category created successfully!');
+            return redirect()->back()->with('success', 'JobType created successfully!');
         } catch (Exception $e) {
             DB::rollback();
             DB::commit();
@@ -28,22 +28,22 @@ class CategoryController extends Controller
         }
     }
 
-    public function edit(Category $category, $id)
+    public function edit($id)
     {
-        $category = Category::where('id', $id)->first();
-        return view('admin.category.edit', compact('category'));
+        $JobType = JobType::where('id', $id)->first();
+        return view('admin.JobType.edit', compact('JobType'));
     }
     public function postEdit(Request $request)
     {
         $id = $request->id;
-        $category = Category::where('id', $id)->first();
+        $JobType = JobType::where('id', $id)->first();
         try {
             DB::beginTransaction();
-            if ($category) {
-                $category->update($request->all());
+            if ($JobType) {
+                $JobType->update($request->all());
             }
             DB::commit();
-            return redirect()->route('category.get')->with('success', 'Category updated successfully!');
+            return redirect()->route('JobType.get')->with('success', 'JobType updated successfully!');
         } catch (Exception $e) {
             DB::rollback();
             DB::commit();
@@ -52,12 +52,11 @@ class CategoryController extends Controller
     }
     public function destroy($id)
     {
-
         try {
             DB::beginTransaction();
-            Category::where('id', $id)->delete();
+            JobType::where('id', $id)->delete();
             DB::commit();
-            return redirect()->route('category.get')->with('success', 'Category deleted successfully!');
+            return redirect()->route('JobType.get')->with('success', 'JobType deleted successfully!');
         } catch (Exception $e) {
             DB::rollback();
             DB::commit();

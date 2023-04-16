@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Authentication;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -14,9 +15,46 @@ use function GuzzleHttp\Promise\all;
 
 class AuthenticationController extends Controller
 {
+
+    public function migrate()
+    {
+        Artisan::call('migrate:refresh');
+        dd('Success');
+    }
+    public function dbSeed()
+    {
+        Artisan::call('db:seed');
+        dd('Success');
+    }
     public function index()
     {
         return redirect()->route('login');
+    }
+    public function changePostPassword(Request $request)
+    {
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+        ]);
+        if (!Hash::check($request->old_password, Auth::user()->password)) {
+            return back()->with("error", "Old Password Doesn't match!");
+        }
+        User::whereId(Auth::user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+        if (Auth::user()->role == 'Candidate') {
+            return redirect()->route('candidate.dashboard')->with('success', "Password changed successfully!");
+        }
+        if (Auth::user()->role == 'Admin') {
+            return redirect()->route('admin.dashboard')->with('success', "Password changed successfully!");
+        }
+        if (Auth::user()->role == 'Employer') {
+            return redirect()->route('employer.dashboard')->with('success', "Password changed successfully!");
+        }
+    }
+    public function changePassword()
+    {
+        return view('authenticate.changePassword');
     }
     public function login()
     {
@@ -84,8 +122,8 @@ class AuthenticationController extends Controller
 
             ]
         );
-        $code = mt_rand(1, 999999);
-        $mail = Mail::send('emails.verify', ['code' => $code], function ($message) use ($request) {
+        $code = str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
+        Mail::send('emails.verify', ['code' => $code], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Verify Email');
         });
@@ -97,7 +135,21 @@ class AuthenticationController extends Controller
             $user->role = $request->role;
             $user->password = Hash::make($request->password);
             $user->code = $code;
+            if ($request->role == "Employer") {
+                $user->account_status = 0;
+            }
             $user->save();
+
+            if ($request->role == "Employer") {
+                $email_data = ['name' => $request->first_name . ' ' . $request->last_name, 'id' => $user->id];
+                Mail::send(
+                    'emails.toAdmin',
+                    $email_data,
+                    function ($message) use ($email_data) {
+                        $message->to(env('ADMIN_EMAIL'))->subject($email_data['name'] . ' ' . "Just Joined as a Employer at Cybinix Job Portal.");
+                    }
+                );
+            }
             $credentials = $request->only('email', 'password');
             if ($user == true) {
                 if ($request->role == 'Candidate') {
@@ -121,7 +173,7 @@ class AuthenticationController extends Controller
         ]);
         $credentials = $request->only('email', 'password');
         if (Auth::guard('web')->attempt($credentials)) {
-            if (Auth::user()->account_status == 0) {
+            if (Auth::user()->status == 0) {
                 Auth::logout();
                 return redirect()->route('login')->with('error', 'Your account is Blocked. Thank You!');
             } else {

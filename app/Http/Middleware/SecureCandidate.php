@@ -20,7 +20,7 @@ class SecureCandidate
     {
         $user = User::where('id', Auth::user()->id)->first();
         if (Auth::check() && (Auth::user()->role == 'Candidate')) {
-            if ($user->about_me == null || $user->availability == null || $user->experience == null || $user->language == null || $user->age == null || $user->location == null || $user->designation == null) {
+            if ($user->about_me == null || $user->availability == null || $user->experience == null || $user->age == null || $user->location == null || $user->designation == null) {
                 return redirect()->route('candidate.completeprofile')->with('error', 'Complete your Profile First');
             } else {
                 return $next($request);

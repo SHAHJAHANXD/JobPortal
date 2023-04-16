@@ -70,35 +70,25 @@
                         <span class="nav-text">Dashboard</span>
                     </a>
                 </li>
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
+                        <div class="menu-icon">
+                            <i class="la la-briefcase"></i>
+                        </div>
+                        <span class="nav-text">Jobs</span>
+                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('employer.postNewJob') }}">Post New Job</a></li>
+                        <li><a href="index.html">Applied Jobs</a></li>
+                        <li><a href="balance-page.html">Shortlisted Jobs</a></li>
 
+                    </ul>
+                </li>
                 <li><a class="" href="{{ route('employer.profile') }}" aria-expanded="false">
                         <div class="menu-icon">
                             <i class="la la-user-tie"></i>
                         </div>
 
                         <span class="nav-text">My Profile</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="javascript:void()" aria-expanded="false">
-                        <div class="menu-icon">
-                            <i class="la la-user-friends"></i>
-                        </div>
-                        <span class="nav-text">Applied Jobs</span>
-                    </a>
-                </li>
-                <li><a class="" href="javascript:void()" aria-expanded="false">
-                        <div class="menu-icon">
-                            <i class="la la-bookmark-o"></i>
-                        </div>
-                        <span class="nav-text">Shortlisted Jobs</span>
-                    </a>
-                </li>
-                <li><a href="widget-basic.html" class="" aria-expanded="false">
-                        <div class="menu-icon">
-                            <i class="la la-envelope"></i>
-                        </div>
-                        <span class="nav-text">My Contact</span>
                     </a>
                 </li>
             @endif
@@ -136,7 +126,7 @@
                         <span class="nav-text">All Candidates</span>
                     </a>
                 </li>
-                <li><a class="" href="{{ route('admin.profile') }}" aria-expanded="false">
+                <li><a class="" href="{{ route('admin.AllEmployers') }}" aria-expanded="false">
                         <div class="menu-icon">
                             <i class="la la-user-friends"></i>
                         </div>
@@ -144,12 +134,45 @@
                         <span class="nav-text">All Employers</span>
                     </a>
                 </li>
+                <li><a class="" href="{{ route('category.get') }}" aria-expanded="false">
+                        <div class="menu-icon">
+                            <i class="la la-chain-broken"></i>
+                        </div>
+
+                        <span class="nav-text">Category</span>
+                    </a>
+                </li>
+                <li><a class="" href="{{ route('JobType.get') }}" aria-expanded="false">
+                        <div class="menu-icon">
+                            <i class="la la-xing"></i>
+                        </div>
+                        <span class="nav-text">Job Type</span>
+                    </a>
+                </li>
+                <li><a class="" href="{{ route('JobSkill.get') }}" aria-expanded="false">
+                        <div class="menu-icon">
+                            <i class="la la-tags"></i>
+                        </div>
+                        <span class="nav-text">Job Skills</span>
+                    </a>
+                </li>
             @endif
-            <li><a class="" href="javascript:void()" aria-expanded="false">
-                    <div class="menu-icon">
-                        <i class="la la-lock"></i>
-                    </div>
-                    <span class="nav-text">Change Password</span>
+
+            <li>
+                @if (Auth::user()->role == 'Admin')
+                    <a class="" href="{{ route('admin.changePassword') }}" aria-expanded="false">
+                @endif
+                @if (Auth::user()->role == 'Candidate')
+                    <a class="" href="{{ route('candidate.changePassword') }}" aria-expanded="false">
+                @endif
+                @if (Auth::user()->role == 'Employer')
+                    <a class="" href="{{ route('employer.changePassword') }}" aria-expanded="false">
+                @endif
+
+                <div class="menu-icon">
+                    <i class="la la-lock"></i>
+                </div>
+                <span class="nav-text">Change Password</span>
 
                 </a>
             </li>
@@ -162,9 +185,5 @@
                 </a>
             </li>
         </ul>
-
-        <div class="copyright">
-            <p class="fs-14"><strong>Cybinix Job Portal</strong> © 2023 All Rights Reserved</p>
-        </div>
     </div>
 </div>

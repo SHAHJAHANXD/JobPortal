@@ -51,6 +51,7 @@
                                             <th>Role</th>
                                             <th>Designation</th>
                                             <th>Account Status</th>
+                                            <th>Account Status Action</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -71,14 +72,22 @@
                                                 <td>{{ $user->email }}</td>
                                                 <td>{{ $user->role }}</td>
                                                 <td>{{ $user->designation }}</td>
-
                                                 <td>
                                                     @if ($user->account_status == 1)
-                                                        <span class="badge light badge-success">Active</span>
+                                                        <span class="badge light badge-success">Approved</span>
                                                     @else
-                                                        <span class="badge light badge-danger">Blocked</span>
+                                                        <span class="badge light badge-danger">Rejected</span>
                                                     @endif
                                                 </td>
+                                                <td>
+                                                    @if ($user->account_status == 0)
+                                                        <a href="{{ route('admin.ActivateEmployerAccount', $user->id) }}"  class="btn btn-success shadow btn-xs me-1">Activate</a>
+                                                    @endif
+                                                    @if ($user->account_status == 1)
+                                                        <a href="{{ route('admin.RejectEmployerAccount', $user->id) }}"  class="btn btn-danger shadow btn-xs me-1">Reject</a>
+                                                    @endif
+                                                </td>
+
                                                 <td>
                                                     <div class="d-flex">
                                                         <a href="#"
@@ -90,19 +99,12 @@
 
                                                             <button class="btn btn-danger shadow btn-xs sharp"><i
                                                                     class="fa fa-trash"></i></button>
-                                                            {{-- <button type="submit" class="btn btn-danger show_confirm"
-                                                                data-toggle="tooltip" title='Delete'>Delete</button> --}}
-
-
 
                                                         </form>
-
                                                     </div>
                                                 </td>
                                             </tr>
                                         @endforeach
-
-
                                     </tbody>
                                 </table>
                             </div>

@@ -9,63 +9,183 @@
     <meta name="x-apple-disable-message-reformatting">
     <title></title>
     <style id="" media="all">
+        /* devanagari */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 200;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLFj_Z11lFc-K.woff2) format('woff2');
+            unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+        }
+
         /* latin-ext */
         @font-face {
-            font-family: 'Lato';
+            font-family: 'Poppins';
             font-style: normal;
-            font-weight: 300;
+            font-weight: 200;
             font-display: swap;
-            src: url(/fonts.gstatic.com/s/lato/v23/S6u9w4BMUTPHh7USSwaPGR_p.woff2) format('woff2');
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLFj_Z1JlFc-K.woff2) format('woff2');
             unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
         }
 
         /* latin */
         @font-face {
-            font-family: 'Lato';
+            font-family: 'Poppins';
             font-style: normal;
-            font-weight: 300;
+            font-weight: 200;
             font-display: swap;
-            src: url(/fonts.gstatic.com/s/lato/v23/S6u9w4BMUTPHh7USSwiPGQ.woff2) format('woff2');
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLFj_Z1xlFQ.woff2) format('woff2');
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
 
+        /* devanagari */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 300;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2) format('woff2');
+            unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+        }
+
         /* latin-ext */
         @font-face {
-            font-family: 'Lato';
+            font-family: 'Poppins';
             font-style: normal;
-            font-weight: 400;
+            font-weight: 300;
             font-display: swap;
-            src: url(/fonts.gstatic.com/s/lato/v23/S6uyw4BMUTPHjxAwXjeu.woff2) format('woff2');
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2) format('woff2');
             unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
         }
 
         /* latin */
         @font-face {
-            font-family: 'Lato';
+            font-family: 'Poppins';
             font-style: normal;
-            font-weight: 400;
+            font-weight: 300;
             font-display: swap;
-            src: url(/fonts.gstatic.com/s/lato/v23/S6uyw4BMUTPHjx4wXg.woff2) format('woff2');
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2) format('woff2');
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
 
+        /* devanagari */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJbecmNE.woff2) format('woff2');
+            unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+        }
+
         /* latin-ext */
         @font-face {
-            font-family: 'Lato';
+            font-family: 'Poppins';
             font-style: normal;
-            font-weight: 700;
+            font-weight: 400;
             font-display: swap;
-            src: url(/fonts.gstatic.com/s/lato/v23/S6u9w4BMUTPHh6UVSwaPGR_p.woff2) format('woff2');
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJnecmNE.woff2) format('woff2');
             unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
         }
 
         /* latin */
         @font-face {
-            font-family: 'Lato';
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfecg.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* devanagari */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2) format('woff2');
+            unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+        }
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2) format('woff2');
+            unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* devanagari */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2) format('woff2');
+            unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+        }
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2) format('woff2');
+            unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2) format('woff2');
+            unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+        }
+
+        /* devanagari */
+        @font-face {
+            font-family: 'Poppins';
             font-style: normal;
             font-weight: 700;
             font-display: swap;
-            src: url(/fonts.gstatic.com/s/lato/v23/S6u9w4BMUTPHh6UVSwiPGQ.woff2) format('woff2');
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2) format('woff2');
+            unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+25CC, U+A830-A839, U+A8E0-A8FF;
+        }
+
+        /* latin-ext */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2) format('woff2');
+            unicode-range: U+0100-02AF, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+        }
+
+        /* latin */
+        @font-face {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url(/fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2) format('woff2');
             unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
         }
     </style>
@@ -177,7 +297,7 @@
 
     <style>
         .primary {
-            background: #2A2A2A;
+            background: #17bebb;
         }
 
         .bg_white {
@@ -185,7 +305,7 @@
         }
 
         .bg_light {
-            background: #fafafa;
+            background: #f7fafa;
         }
 
         .bg_black {
@@ -208,7 +328,7 @@
 
         .btn.btn-primary {
             border-radius: 5px;
-            background: #2A2A2A;
+            background: #17bebb;
             color: #ffffff;
         }
 
@@ -233,20 +353,25 @@
             font-weight: 700;
         }
 
+        .btn-custom {
+            color: rgba(0, 0, 0, .3);
+            text-decoration: underline;
+        }
+
         h1,
         h2,
         h3,
         h4,
         h5,
         h6 {
-            font-family: 'Lato', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: #000000;
             margin-top: 0;
             font-weight: 400;
         }
 
         body {
-            font-family: 'Lato', sans-serif;
+            font-family: 'Poppins', sans-serif;
             font-weight: 400;
             font-size: 15px;
             line-height: 1.8;
@@ -254,7 +379,7 @@
         }
 
         a {
-            color: #2A2A2A;
+            color: #17bebb;
         }
 
         table {}
@@ -266,10 +391,10 @@
         }
 
         .logo h1 a {
-            color: #2A2A2A;
+            color: #17bebb;
             font-size: 24px;
             font-weight: 700;
-            font-family: 'Lato', sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
 
         /*HERO*/
@@ -284,9 +409,9 @@
 
         .hero .text h2 {
             color: #000;
-            font-size: 40px;
+            font-size: 34px;
             margin-bottom: 0;
-            font-weight: 400;
+            font-weight: 200;
             line-height: 1.4;
         }
 
@@ -297,66 +422,24 @@
 
         .hero .text h2 span {
             font-weight: 600;
-            color: #2A2A2A;
+            color: #000;
         }
 
-
-        /*HEADING SECTION*/
-        .heading-section {}
-
-        .heading-section h2 {
-            color: #000000;
-            font-size: 28px;
-            margin-top: 0;
-            line-height: 1.4;
-            font-weight: 400;
-        }
-
-        .heading-section .subheading {
-            margin-bottom: 20px !important;
-            display: inline-block;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: rgba(0, 0, 0, .4);
-            position: relative;
-        }
-
-        .heading-section .subheading::after {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -10px;
-            content: '';
-            width: 100%;
-            height: 2px;
-            background: #2A2A2A;
+        .text-author {
+            bordeR: 1px solid rgba(0, 0, 0, .05);
+            max-width: 50%;
             margin: 0 auto;
+            padding: 2em;
         }
 
-        .heading-section-white {
-            color: rgba(255, 255, 255, .8);
+        .text-author img {
+            border-radius: 50%;
+            padding-bottom: 20px;
         }
 
-        .heading-section-white h2 {
-            font-family:
-                line-height: 1;
-            padding-bottom: 0;
-        }
-
-        .heading-section-white h2 {
-            color: #ffffff;
-        }
-
-        .heading-section-white .subheading {
+        .text-author h3 {
             margin-bottom: 0;
-            display: inline-block;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: rgba(255, 255, 255, .4);
         }
-
 
         ul.social {
             padding: 0;
@@ -397,7 +480,7 @@
         @media screen and (max-width: 500px) {}
     </style>
     <meta name="robots" content="noindex, follow">
-    <script nonce="23a1a8e0-ced7-463a-9d12-198209b6ef35">
+    <script nonce="153e533c-10be-49c7-909e-a63c8c77f804">
         (function(w, d) {
             ! function(bv, bw, bx, by) {
                 bv[bx] = bv[bx] || {};
@@ -480,41 +563,40 @@
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
                                 <td style="text-align: center; color: #2A2A2A;">
-                                    <h1><a  style="color: #2A2A2A;
+                                    <h1><a
+                                            style="color: #2A2A2A;
                                         font-size: 40px;
-                                        font-weight: 700;">Cybinix Job Portal</a></h1>
+                                        font-weight: 700;">Cybinix
+                                            Job Portal</a></h1>
                                 </td>
                             </tr>
                         </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
-                        <img src="https://img.freepik.com/free-vector/mail-sent-concept-illustration_114360-168.jpg?t=st=1680969460~exp=1680970060~hmac=de1c745b1907a57f2c90c05bdb128d26850daa8bfe98d8393656a3de67c40e85" alt=""
-                            style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
                     </td>
                 </tr>
                 <tr>
                     <td valign="middle" class="hero bg_white" style="padding: 2em 0 4em 0;">
-                        <table>
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tr>
-                                <td>
-                                    <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                        <h2>Verify Your Email!</h2>
-                                        <h3 style="    margin-top: 20px;
-                                        margin-bottom: 40px;">Your Verification Code is {{ $code }}</h3>
-                                        <p><a href="http://jobs.cybinix.com/" style="    border-radius: 5px;
+                                <td style="text-align: center;">
+                                    <img src="https://img.freepik.com/free-vector/verified-concept-illustration_114360-4998.jpg?size=626&ext=jpg&ga=GA1.1.1229420217.1680018487&semt=ais"
+                                        alt="" style="    width: 300px;">
+                                    <h3 class="name">{{ $name }}</h3>
+                                    <h3
+                                        style="    margin-top: 20px;
+                                        margin-bottom: 40px;">
+                                        Your Account Got Verified Successfully!</h3>
+
+                                    <p><a href="{{ env('APP_URL') }}"
+                                            style="    border-radius: 5px;
                                             background: #2A2A2A;
-                                            color: #ffffff; padding: 16px;">Cybinix Job Portal</a></p>
-                                    </div>
+                                            color: #ffffff; padding: 16px;">Cybinix
+                                            Job Portal</a></p>
                                 </td>
                             </tr>
                         </table>
                     </td>
                 </tr>
-
             </table>
-
         </div>
     </center>
 
@@ -531,7 +613,7 @@
     </script>
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js/v2b4487d741ca48dcbadcaf954e159fc61680799950996"
         integrity="sha512-D/jdE0CypeVxFadTejKGTzmwyV10c1pxZk/AqjJuZbaJwGMyNHY3q/mTPWqMUnFACfCTunhZUVcd4cV78dK1pQ=="
-        data-cf-beacon='{"rayId":"7b4b9b8c195f3db9","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.3.0","si":100}'
+        data-cf-beacon='{"rayId":"7b4b9c516b733db9","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2023.3.0","si":100}'
         crossorigin="anonymous"></script>
 </body>
 

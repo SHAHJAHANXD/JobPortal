@@ -5,26 +5,25 @@
 @section('content')
     <div class="content-body">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
+            <div class="row" style="justify-content: center;">
+                <div class="col-lg-6">
                     <div class="profile card card-body px-3 pt-3 pb-0">
                         <div class="profile-head">
-                            <div class="photo-content" style="height: 75px">
-                            </div>
                             <div class="profile-info">
-                                <div class="profile-photo">
-                                    <img src="{{ asset('dashboard') }}/images/guest.png"
-                                        class="img-fluid rounded-circle" alt="">
+                                <div class="profile-photo" style="margin-top: auto">
+                                    <img src="{{ asset('dashboard') }}/images/guest.png" class="img-fluid rounded-circle"
+                                        alt="">
                                 </div>
                                 <div class="profile-details">
                                     <div class="profile-name px-3 pt-2">
+                                        <p>Name</p>
                                         <h4 class="text-white mb-0">{{ Auth::user()->first_name }}
                                             {{ Auth::user()->last_name }}</h4>
-                                        <p>{{ Auth::user()->designation ?? 'N/A' }}</p>
                                     </div>
                                     <div class="profile-email px-2 pt-2">
-                                        <h4 class="mb-0">{{ Auth::user()->email }}</h4>
                                         <p>Email</p>
+                                        <h4 class="mb-0">{{ Auth::user()->email }}</h4>
+
                                     </div>
                                     <div class="dropdown ms-auto">
                                         <a href="#" class="btn btn-primary light sharp" data-bs-toggle="dropdown"
@@ -43,13 +42,16 @@
                                                 </g>
                                             </svg></a>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <li class="dropdown-item"><i class="fa fa-user-circle text-primary me-2"></i>
-                                                View profile</li>
-                                            <li class="dropdown-item"><i class="fa fa-users text-primary me-2"></i> Add to
+                                            <li class="dropdown-item">
+
+                                                <a type="button" data-bs-toggle="modal" data-bs-target="#basicModal"><i
+                                                        class="fa fa-user-circle text-primary me-2"></i>Update profile</a>
+                                            </li>
+                                            {{-- <li class="dropdown-item"><i class="fa fa-users text-primary me-2"></i> Add to
                                                 btn-close friends</li>
                                             <li class="dropdown-item"><i class="fa fa-plus text-primary me-2"></i> Add to
                                                 group</li>
-                                            <li class="dropdown-item"><i class="fa fa-ban text-primary me-2"></i> Block</li>
+                                            <li class="dropdown-item"><i class="fa fa-ban text-primary me-2"></i> Block</li> --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -58,106 +60,175 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xl-4">
-                    <div class="row">
-                        <div class="col-xl-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="profile-statistics">
-                                        <div class="text-center">
-                                            <div class="row">
-                                                <div class="col border-end">
-                                                    <h3 class="m-b-0">150</h3><span>Follower</span>
-                                                </div>
-                                                <div class="col border-end">
-                                                    <h3 class="m-b-0">140</h3><span>Place Stay</span>
-                                                </div>
-                                                <div class="col ">
-                                                    <h3 class="m-b-0">45</h3><span>Reviews</span>
-                                                </div>
-                                            </div>
-                                            <div class="mt-4">
-                                                <a href="javascript:void(0);"
-                                                    class="btn btn-primary mb-1 me-1 btn-sm">Follow</a>
-                                                <a href="javascript:void(0);" class="btn btn-primary mb-1 btn-sm"
-                                                    data-bs-toggle="modal" data-bs-target="#sendMessageModal">Send
-                                                    Message</a>
-                                            </div>
-                                        </div>
-                                        <div class="modal fade" id="sendMessageModal">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Send Message</h5>
-                                                        <button type="button" class="btn-close"
-                                                            data-bs-dismiss="modal"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form class="comment-form">
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label class="text-white font-w600 form-label">Name
-                                                                            <span class="required">*</span></label>
-                                                                        <input required type="text" class="form-control"
-                                                                            value="Author" name="Author"
-                                                                            placeholder="Author">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-6">
-                                                                    <div class="mb-3">
-                                                                        <label
-                                                                            class="text-white font-w600 form-label">Email
-                                                                            <span class="required">*</span></label>
-                                                                        <input required type="text" class="form-control"
-                                                                            value="Email" placeholder="Email"
-                                                                            name="Email">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="mb-3">
-                                                                        <label
-                                                                            class="text-white font-w600 form-label">Comment</label>
-                                                                        <textarea rows="8" class="form-control" name="comment" placeholder="Comment"></textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-12">
-                                                                    <div class="mb-3 mb-0">
-                                                                        <input required type="submit" value="Post Comment"
-                                                                            class="submit btn btn-primary btn-sm"
-                                                                            name="submit">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="basicModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Update Your Profile Here!</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal">
+                            </button>
                         </div>
-                        <div class="col-xl-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="profile-blog">
-                                        <h4 class="text-white d-inline">Today Highlights</h4>
-                                        <img src="{{ asset('dashboard') }}/images/profile/1.jpg" alt=""
-                                            class="img-fluid mt-4 mb-4 w-100 rounded">
-                                        <h4><a href="post-details.html" class="text-white">Darwin Creative Agency
-                                                Theme</a></h4>
-                                        <p class="mb-0">A small river named Duden flows by their place and supplies it
-                                            with the necessary regelialia. It is a paradisematic country, in which roasted
-                                            parts of sentences fly into your mouth.</p>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4 class="card-title">Update Profile</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="basic-form">
+                                                <form action="{{ route('candidate.updateProfile') }}" method="POST">
+                                                    @csrf
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>First Name</strong></label>
+                                                        <input type="text" class="form-control" name="first_name"
+                                                            value="{{ $userData->first_name }}">
+                                                        @if ($errors->has('first_name'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('first_name') }}</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>Last Name</strong></label>
+                                                        <input type="text" class="form-control" name="last_name"
+                                                            value="{{ $userData->last_name }}">
+                                                        @if ($errors->has('last_name'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('last_name') }}</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>Email</strong></label>
+                                                        <input type="text" disabled class="form-control" name="email"
+                                                            value="{{ $userData->email }}">
+                                                        @if ($errors->has('email'))
+                                                            <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>About me</strong></label>
+                                                        <textarea class="form-control" name="about_me" placeholder="Enter Your Biography!">{{ $userData->about_me }}</textarea>
+                                                        @if ($errors->has('about_me'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('about_me') }}</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>Skills</strong></label>
+                                                        <br>
+                                                        @php
+                                                            $userJobSkills = \App\Models\Skills::where('user_id', Auth::user()->id)
+                                                                ->orderBy('name')
+                                                                ->get();
+
+                                                        @endphp
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>Designation</strong></label>
+                                                        <input type="text" class="form-control"
+                                                            placeholder="Enter Your Designation/Expertise"
+                                                            name="designation" value="{{ $userData->designation }}">
+                                                        @if ($errors->has('designation'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('designation') }}</span>
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>Experience</strong></label>
+                                                        <select name="experience" id="" class="form-control"
+                                                            style="background: #2A2A2A">
+                                                            <option value="{{ $userData->experience }}">
+                                                                {{ $userData->experience }}</option>
+                                                            <option value="Less Then 1 Years">Less Then 1 Years</option>
+                                                            <option value="1-2 Years">1-2 Years</option>
+                                                            <option value="2-3 Years">2-3 Years</option>
+                                                            <option value="3-4 Years">3-4 Years</option>
+                                                            <option value="4-5 Years">4-5 Years</option>
+                                                            <option value="5-6 Years">5-6 Years</option>
+                                                            <option value="6-7 Years">6-7 Years</option>
+                                                            <option value="7-8 Years">7-8 Years</option>
+                                                            <option value="8-9 Years">8-9 Years</option>
+                                                            <option value="9-10 Years">9-10 Years</option>
+                                                            <option value="More Then 10 Years">More Then 10 Years</option>
+                                                        </select>
+                                                        @if ($errors->has('experience'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('experience') }}</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>Availability</strong></label>
+                                                        <select name="availability" id="" class="form-control"
+                                                            style="background: #2A2A2A">
+                                                            <option value="{{ $userData->availability }}">
+                                                                {{ $userData->availability }}</option>
+                                                            <option value="1-2 Hours">1-2 Hours</option>
+                                                            <option value="3-4 Hours">3-4 Hours</option>
+                                                            <option value="5-6 Hours">5-6 Hours</option>
+                                                            <option value="7-8 Hours">7-8 Hours</option>
+                                                            <option value="9-10 Hours">9-10 Hours</option>
+                                                        </select>
+                                                        @if ($errors->has('availability'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('availability') }}</span>
+                                                        @endif
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>Age</strong></label>
+                                                        <select name="age" id="" class="form-control"
+                                                            style="background: #2A2A2A">
+                                                            <option value="{{ $userData->age }}">{{ $userData->age }}
+                                                            </option>
+                                                            <option value="Less Then 15 Years">Less Then 15 Years</option>
+                                                            <option value="15-20 Years">15-20 Years</option>
+                                                            <option value="20-25 Years">20-25 Years</option>
+                                                            <option value="25-30 Years">25-30 Years</option>
+                                                            <option value="30-35 Years">30-35 Years</option>
+                                                            <option value="35-40 Years">35-40 Years</option>
+                                                            <option value="40-45 Years">40-45 Years</option>
+                                                            <option value="45-50 Years">45-50 Years</option>
+                                                            <option value="More Then 50 Years">More Then 50 Years</option>
+                                                        </select>
+                                                        @if ($errors->has('age'))
+                                                            <span class="text-danger">{{ $errors->first('age') }}</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="mb-1"><strong>Location</strong></label>
+                                                        <select name="location" id="" class="form-control"
+                                                            style="background: #2A2A2A">
+                                                            <option value="{{ $userData->location }}">
+                                                                {{ $userData->location }}</option>
+                                                            @foreach ($cities as $cities)
+                                                                <option value="{{ $cities->name }}">{{ $cities->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+
+                                                        @if ($errors->has('location'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('location') }}</span>
+                                                        @endif
+                                                    </div>
+                                                    <div class="text-center">
+                                                        <button type="submit"
+                                                            class="btn btn-primary btn-block">Submit</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-8">
+            </div>
+            <div class="row" style="justify-content: center;">
+                <div class="col-xl-6">
                     <div class="card h-auto">
                         <div class="card-body">
                             <div class="profile-tab">
@@ -165,9 +236,6 @@
                                     <ul class="nav nav-tabs">
                                         <li class="nav-item"><a href="#about-me" data-bs-toggle="tab"
                                                 class="nav-link active show">About Me</a>
-                                        </li>
-                                        <li class="nav-item"><a href="#profile-settings" data-bs-toggle="tab"
-                                                class="nav-link">Setting</a>
                                         </li>
                                     </ul>
                                     <div class="tab-content">
@@ -179,19 +247,25 @@
                                                     <p class="mb-2">{{ Auth::user()->about_me ?? 'N/A' }}</p>
                                                 </div>
                                             </div>
-                                            <div class="profile-skills mb-5">
-                                                <h4 class="text-primary mb-2">Skills</h4>
-                                                @foreach ($skills as $skill)
-                                                <a href="javascript:void(0);"
-                                                class="btn btn-primary light btn-xs mb-1">{{ $skill->skills }}</a>
-                                                @endforeach
+                                            @if (!empty($skills))
+                                                <div class="profile-skills mb-5">
+                                                    <h4 class="text-primary mb-2">Skills</h4>
+                                                    @foreach ($skills as $skill)
+                                                        <a href="javascript:void(0);"
+                                                            class="btn btn-primary light btn-xs mb-1">{{ $skill->name ?? 'N/A' }}</a>
+                                                    @endforeach
 
-                                            </div>
-                                            <div class="profile-lang  mb-5">
-                                                <h4 class="text-primary mb-2">Language</h4>
-                                                <a href="javascript:void(0);" class="text-muted pe-3 f-s-16"><i
-                                                        class="flag-icon flag-icon-us"></i>{{ Auth::user()->language }}</a>
-                                            </div>
+                                                </div>
+                                            @endif
+                                            @if (!empty($languageUser))
+                                                <div class="profile-lang  mb-5">
+                                                    <h4 class="text-primary mb-2">Language</h4>
+                                                    @foreach ($languageUser as $languageUser)
+                                                        <a href="javascript:void(0);"
+                                                            class="btn btn-primary light btn-xs mb-1">{{ $languageUser->name ?? 'N/A' }}</a>
+                                                    @endforeach
+                                                </div>
+                                            @endif
                                             <div class="profile-personal-info">
                                                 <h4 class="text-primary mb-4">Personal Information</h4>
                                                 <div class="row mb-2">
@@ -199,7 +273,8 @@
                                                         <h5 class="f-w-500">Name <span class="pull-end">:</span>
                                                         </h5>
                                                     </div>
-                                                    <div class="col-sm-9 col-7"><span>{{ Auth::user()->first_name }} {{ Auth::user()->last_name }}</span>
+                                                    <div class="col-sm-9 col-7"><span>{{ Auth::user()->first_name }}
+                                                            {{ Auth::user()->last_name }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
@@ -215,7 +290,8 @@
                                                         <h5 class="f-w-500">Availability <span class="pull-end">:</span>
                                                         </h5>
                                                     </div>
-                                                    <div class="col-sm-9 col-7"><span>{{ Auth::user()->availability }}</span>
+                                                    <div class="col-sm-9 col-7">
+                                                        <span>{{ Auth::user()->availability }}</span>
                                                     </div>
                                                 </div>
                                                 <div class="row mb-2">
@@ -235,73 +311,12 @@
                                                 </div>
                                                 <div class="row mb-2">
                                                     <div class="col-sm-3 col-5">
-                                                        <h5 class="f-w-500">Year Experience <span
-                                                                class="pull-end">:</span></h5>
+                                                        <h5 class="f-w-500">Experience <span class="pull-end">:</span>
+                                                        </h5>
                                                     </div>
-                                                    <div class="col-sm-9 col-7"><span>{{ Auth::user()->experience }}</span>
+                                                    <div class="col-sm-9 col-7">
+                                                        <span>{{ Auth::user()->experience }}</span>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="profile-settings" class="tab-pane fade">
-                                            <div class="pt-3">
-                                                <div class="settings-form">
-                                                    <h4 class="text-primary">Account Setting</h4>
-                                                    <form>
-                                                        <div class="row">
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Email</label>
-                                                                <input required type="email" placeholder="Email"
-                                                                    class="form-control">
-                                                            </div>
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">Password</label>
-                                                                <input required type="password" placeholder="Password"
-                                                                    class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Address</label>
-                                                            <input required type="text" placeholder="1234 Main St"
-                                                                class="form-control">
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Address 2</label>
-                                                            <input required type="text"
-                                                                placeholder="Apartment, studio, or floor"
-                                                                class="form-control">
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="mb-3 col-md-6">
-                                                                <label class="form-label">City</label>
-                                                                <input required type="text" class="form-control">
-                                                            </div>
-                                                            <div class="mb-3 col-md-4">
-                                                                <label class="form-label">State</label>
-                                                                <select class="form-control default-select wide"
-                                                                    id="inputState">
-                                                                    <option selected="">Choose...</option>
-                                                                    <option>Option 1</option>
-                                                                    <option>Option 2</option>
-                                                                    <option>Option 3</option>
-                                                                </select>
-                                                            </div>
-                                                            <div class="mb-3 col-md-2">
-                                                                <label class="form-label">Zip</label>
-                                                                <input required type="text" class="form-control">
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <div class="form-check custom-checkbox">
-                                                                <input required type="checkbox" class="form-check-input"
-                                                                    id="gridCheck">
-                                                                <label class="form-check-label form-label"
-                                                                    for="gridCheck"> Check me out</label>
-                                                            </div>
-                                                        </div>
-                                                        <button class="btn btn-primary btn-sm" type="submit">Sign
-                                                            in</button>
-                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -350,9 +365,9 @@
                     </div>
                     <div class="modal-body">
                         <label for="PersonName" class="form-label d-block">Enter Name</label>
-                        <input required type="text" id="PersonName" class="form-control w-100 mb-3" placeholder="Username">
+                        <input type="text" id="PersonName" class="form-control w-100 mb-3" placeholder="Username">
                         <label for="PersonPosition" class="form-label d-block">Enter Position</label>
-                        <input required type="text" id="PersonPosition" class="form-control w-100" placeholder="Position">
+                        <input type="text" id="PersonPosition" class="form-control w-100" placeholder="Position">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
