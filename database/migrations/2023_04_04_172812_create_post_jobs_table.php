@@ -20,6 +20,9 @@ return new class extends Migration
             $table->string('gender')->nullable();
             $table->string('experience')->nullable();
             $table->string('recruitments')->nullable();
+            $table->string('category')->nullable();
+            $table->string('job_type')->nullable();
+            $table->string('location')->nullable();
             $table->string('status')->default(1);
             $table->timestamps();
         });
