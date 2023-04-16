@@ -30,6 +30,14 @@
                     </a>
                 </li>
                 <li>
+                    <a class="" href="{{ route('candidate.allJobs') }}" aria-expanded="false">
+                        <div class="menu-icon">
+                            <i class="la la-user-friends"></i>
+                        </div>
+                        <span class="nav-text">All Jobs</span>
+                    </a>
+                </li>
+                <li>
                     <a class="" href="javascript:void()" aria-expanded="false">
                         <div class="menu-icon">
                             <i class="la la-user-friends"></i>
@@ -78,7 +86,7 @@
                     </a>
                     <ul aria-expanded="false">
                         <li><a href="{{ route('employer.postNewJob') }}">Post New Job</a></li>
-                        <li><a href="index.html">Applied Jobs</a></li>
+                        <li><a href="{{ route('employer.listAllJobs') }}">List Posted Jobs</a></li>
                         <li><a href="balance-page.html">Shortlisted Jobs</a></li>
 
                     </ul>

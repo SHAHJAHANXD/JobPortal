@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Employer;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\City;
 use App\Models\JobSkill;
+use App\Models\JobType;
 use App\Models\Language as ModelsLanguage;
 use App\Models\LanguageUserSpeak;
+use App\Models\PostJob;
 use App\Models\Skills;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,7 +37,11 @@ class EmployerController extends Controller
     }
     public function postNewJob()
     {
-        return view('candidate.job.postJob');
+        $category = Category::get();
+        $type = JobType::get();
+        $location = City::get();
+        $Skills = JobSkill::get();
+        return view('employer.job.postJob', compact('category', 'type', 'location','Skills'));
     }
     public function completeprofile()
     {
@@ -50,15 +57,6 @@ class EmployerController extends Controller
     }
     public function postcompleteprofile(Request $request)
     {
-        // $table->string('c_name')->nullable();
-        // $table->string('c_email')->nullable();
-        // $table->string('c_position')->nullable();
-        // $table->string('c_phone')->nullable();
-        // $table->string('c_about_us')->nullable();
-        // $table->string('c_image')->nullable();
-        // $table->string('c_website')->nullable();
-        // $table->string('c_revenue')->nullable();
-        // $table->string('c_location')->nullable();
         $user = User::where('id', Auth::user()->id)->first();
         $user->about_me = $request->about_me;
         $user->designation = $request->designation;
@@ -67,17 +65,39 @@ class EmployerController extends Controller
         $user->age = $request->age;
         $user->profile = 1;
         $user->location = $request->location;
-
         $user->c_name = $request->c_name;
         $user->c_email = $request->c_email;
         $user->c_position = $request->c_position;
         $user->c_phone = $request->c_phone;
         $user->c_about_us = $request->c_about_us;
-        // $user->c_image = $request->c_image;
         $user->c_website = $request->c_website;
         $user->c_revenue = $request->c_revenue;
         $user->c_location = $request->c_location;
         $user->save();
         return redirect()->route('candidate.dashboard')->with('success', 'Profile updated successfully!');
+    }
+    public function postJob(Request $request)
+    {
+        $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
+        $job = PostJob::create($data);
+        if ($job == true) {
+            return redirect()->route('employer.listAllJobs')->with('success', 'Job Created Successfully!');
+        }
+    }
+    public function listAllJobs()
+    {
+        $all_jobs = PostJob::where('user_id', Auth::user()->id)->get();
+        return view('employer.job.listJob', compact('all_jobs'));
+    }
+    public function ActivateJob($id)
+    {
+        PostJob::where('id', $id)->update(['status' => 1]);
+        return redirect()->back()->with('success', 'Job Published Successfully!');
+    }
+    public function BlockJob($id)
+    {
+        PostJob::where('id', $id)->update(['status' => 0]);
+        return redirect()->back()->with('success', 'Job Blocked Successfully!');
     }
 }

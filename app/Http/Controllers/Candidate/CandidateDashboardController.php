@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\JobSkill;
 use App\Models\Language;
 use App\Models\LanguageUserSpeak;
+use App\Models\PostJob;
 use App\Models\Skills;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -101,5 +102,10 @@ class CandidateDashboardController extends Controller
         }
         $user->save();
         return redirect()->route('candidate.profile')->with('success', 'Profile updated successfully!');
+    }
+    public function allJobs()
+    {
+      $skills = JobSkill::get();
+      return view('candidate.job.allJobs', compact('skills'));
     }
 }

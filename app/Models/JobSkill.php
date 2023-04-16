@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class JobSkill extends Model
 {
     use HasFactory;
-    protected $fillable = ['name'];
+    protected $fillable = ['name','img'];
     public function skills(): BelongsTo
     {
         return  $this->belongsTo(Skills::class, 'name', 'name');

@@ -27,6 +27,11 @@
                                         <input type="text" name="name" class="form-control input-default "
                                             value="{{ $JobSkill->name }}">
                                     </div>
+                                    <div class="mb-3">
+                                        <img src="{{ $JobSkill->img }}" alt="">
+                                        <input type="text" name="img" class="form-control input-default "
+                                            value="{{ $JobSkill->img }}" placeholder="Enter Url">
+                                    </div>
                                     <div class="mb-3" style="text-align: center">
                                         <button type="subit" class="btn btn-primary btn-sm">Save changes</button>
                                     </div>

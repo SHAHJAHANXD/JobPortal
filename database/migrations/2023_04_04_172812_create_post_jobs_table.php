@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('post_jobs', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id')->nullable();
             $table->string('title')->nullable();
             $table->longText('desc')->nullable();
             $table->string('gender')->nullable();
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('job_type')->nullable();
             $table->string('location')->nullable();
             $table->string('status')->default(1);
+            $table->string('skills')->nullable();
             $table->timestamps();
         });
     }

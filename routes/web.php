@@ -56,6 +56,7 @@ Route::middleware('VerifyUser')->group(function () {
         Route::middleware('SecureCandidate')->group(function () {
             Route::prefix('candidate')->group(function () {
                 Route::get('/inbox', [ChatController::class, 'inbox'])->name('candidate.inbox');
+                Route::get('/all-jobs', [CandidateDashboardController::class, 'allJobs'])->name('candidate.allJobs');
                 Route::get('/dashboard', [CandidateDashboardController::class, 'dashboard'])->name('candidate.dashboard');
                 Route::get('/profile', [CandidateDashboardController::class, 'profile'])->name('candidate.profile');
                 Route::post('/update-profile', [CandidateDashboardController::class, 'updateProfile'])->name('candidate.updateProfile');
@@ -80,6 +81,11 @@ Route::middleware('VerifyUser')->group(function () {
                 Route::get('/dashboard', [EmployerController::class, 'dashboard'])->name('employer.dashboard');
                 Route::get('/profile', [EmployerController::class, 'profile'])->name('employer.profile');
                 Route::get('/post-new-job', [EmployerController::class, 'postNewJob'])->name('employer.postNewJob');
+                Route::get('/list-all-job', [EmployerController::class, 'listAllJobs'])->name('employer.listAllJobs');
+
+                Route::get('/activate-job/{id}', [EmployerController::class, 'ActivateJob'])->name('admin.ActivateJob');
+                Route::get('/block-job/{id}', [EmployerController::class, 'BlockJob'])->name('admin.BlockJob');
+
                 Route::post('/post-job', [EmployerController::class, 'postJob'])->name('employer.postJob');
                 Route::get('/change-password', [AuthenticationController::class, 'changePassword'])->name('employer.changePassword');
                 Route::post('/post-change-password', [AuthenticationController::class, 'changePostPassword'])->name('employer.post.changePassword');

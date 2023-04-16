@@ -64,6 +64,7 @@
                                         <tr>
                                             <th class="text-center">ID</th>
                                             <th class="text-center">Name</th>
+                                            <th class="text-center">IMG</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -72,6 +73,7 @@
                                             <tr>
                                                 <td class="text-center">{{ $JobSkill->id }}</td>
                                                 <td class="text-center">{{ $JobSkill->name }}</td>
+                                                <td class="text-center"><img src="{{ $JobSkill->img }}" alt="{{ $JobSkill->name }} Image" style="height: 60px;     width: 80px;"></td>
                                                 <td class="text-center">
                                                     <div class="d-flex" style="justify-content: center">
                                                         <a href="{{ route('JobSkill.edit', $JobSkill->id) }}"
