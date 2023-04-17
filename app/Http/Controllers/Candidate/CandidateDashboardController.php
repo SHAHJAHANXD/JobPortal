@@ -33,7 +33,7 @@ class CandidateDashboardController extends Controller
         $language = Language::orderBy('name')->get();
         $skills = Skills::where('user_id', Auth::user()->id)->orderBy('name')->get();
         $languageUser = LanguageUserSpeak::where('user_id', Auth::user()->id)->orderBy('name')->get();
-        return view('authenticate.profile', compact('skills', 'languageUser', 'jobSkills', 'cities', 'language', 'activatedSkills','userData'));
+        return view('authenticate.profile', compact('skills', 'languageUser', 'jobSkills', 'cities', 'language', 'activatedSkills', 'userData'));
     }
     public function completeprofile()
     {
@@ -105,7 +105,28 @@ class CandidateDashboardController extends Controller
     }
     public function allJobs()
     {
-      $skills = JobSkill::get();
-      return view('candidate.job.allJobs', compact('skills'));
+        $skills = JobSkill::get();
+        return view('candidate.job.allJobs', compact('skills'));
     }
+    public function listallJobs(Request $request)
+    {
+        if ($request->page == null) {
+            $loadmore = "?page=2";
+        } else {
+            $loadmore = "?page=" . $request->page + 1;
+        }
+        $PostJob = PostJob::where('status', 1)->with('Users')->with('Skills')->inRandomOrder()->orderBy('id' , 'desc')->paginate(16);
+        return view('candidate.job.listallJobs', compact('PostJob','loadmore'));
+    }
+    public function listallJobsBySkills(Request $request, $skills)
+    {
+        if ($request->page == null) {
+            $loadmore = "?page=2";
+        } else {
+            $loadmore = "?page=" . $request->page + 1;
+        }
+        $PostJob = PostJob::where('status', 1)->where('skills' , $skills)->with('Users')->with('Skills')->inRandomOrder()->orderBy('id' , 'desc')->paginate(16);
+        return view('candidate.job.listallJobs', compact('PostJob','loadmore'));
+    }
+
 }

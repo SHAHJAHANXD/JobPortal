@@ -22,4 +22,12 @@ class PostJob extends Model
         'status',
         'skills'
     ];
+    public function Users()
+    {
+        return $this->belongsTo(User::class , "user_id" , 'id');
+    }
+    public function Skills()
+    {
+        return $this->belongsTo(JobSkill::class , "skills" , 'name');
+    }
 }
