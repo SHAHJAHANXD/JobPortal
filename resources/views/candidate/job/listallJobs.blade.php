@@ -20,6 +20,12 @@
             color: black;
             font-weight: 600;
         }
+
+        @media (max-device-width: 600px) {
+            .mobile-text {
+                text-align: center !important;
+            }
+        }
     </style>
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-contain-center">
@@ -43,19 +49,24 @@
                                                         alt="{{ $PostJob->name }} Image">
                                                 </div>
                                                 <div class="col-lg-6" style="margin-top: auto;">
-                                                    <p class="text-style"> @if ($PostJob->Users->avatar == true)
-                                                        <img class="rounded-circle" width="35" src="{{ $PostJob->Users->avatar }}" alt="{{ $PostJob->Users->first_name }} {{ $PostJob->Users->last_name }} Image">
-                                                    @else
-                                                        <img class="rounded-circle" width="35"
-                                                            src="{{ asset('dashboard') }}/images/guest.png" alt="{{ $PostJob->Users->first_name }} {{ $PostJob->Users->last_name }} Image">
-                                                    @endif
-                                                    {{ $PostJob->Users->first_name }} {{ $PostJob->Users->last_name }}
-                                                </p>
+                                                    <p class="text-style">
+                                                        @if ($PostJob->Users->avatar == true)
+                                                            <img class="rounded-circle" width="35"
+                                                                src="{{ $PostJob->Users->avatar }}"
+                                                                alt="{{ $PostJob->Users->first_name }} {{ $PostJob->Users->last_name }} Image">
+                                                        @else
+                                                            <img class="rounded-circle" width="35"
+                                                                src="{{ asset('dashboard') }}/images/guest.png"
+                                                                alt="{{ $PostJob->Users->first_name }} {{ $PostJob->Users->last_name }} Image">
+                                                        @endif
+                                                        {{ $PostJob->Users->first_name }} {{ $PostJob->Users->last_name }}
+                                                    </p>
                                                     <p class="text-style">Title: {{ $PostJob->title }}</p>
                                                     <p class="text-style">Location: {{ $PostJob->location }}</p>
                                                     <p class="text-style">Experience: {{ $PostJob->experience }}</p>
                                                     <p class="text-style">Skills: {{ $PostJob->skills }}</p>
-                                                    <p class="text-style">Posted: {{ $PostJob->created_at->diffForHumans() }}</p>
+                                                    <p class="text-style">Posted:
+                                                        {{ $PostJob->created_at->diffForHumans() }}</p>
 
                                                 </div>
                                             </div>
