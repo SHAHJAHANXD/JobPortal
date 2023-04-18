@@ -118,7 +118,11 @@ class CandidateDashboardController extends Controller
             $loadmore = "?page=" . $request->page + 1;
         }
         $PostJob = PostJob::where('status', 1)->with('Users')->with('Skills')->inRandomOrder()->orderBy('id', 'desc')->paginate(16);
-        return view('candidate.job.listallJobs', compact('PostJob', 'loadmore'));
+        $category = Category::orderBy('name')->get();
+        $job_type = JobType::get();
+        $location = City::orderBy('name')->get();
+        $skill = JobSkill::get();
+        return view('candidate.job.listallJobs', compact('PostJob', 'request', 'loadmore', 'category', 'job_type', 'location', 'skill'));
     }
     public function listallJobsBySkills(Request $request, $skills)
     {
