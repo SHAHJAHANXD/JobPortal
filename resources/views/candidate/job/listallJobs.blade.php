@@ -58,7 +58,7 @@
                                     <label class="mb-1"><strong>Skills</strong></label>
                                     <select  name="skills" id="" class="form-control"
                                         style="background: #2A2A2A">
-                                        <option value="{{ $request->skills ?? $appliedSkill }}">{{ $request->skills ?? $appliedSkill ?? 'Select' }}</option>
+                                        <option value="{{ $request->skills ?? $appliedSkill ?? ''}}">{{ $request->skills ?? $appliedSkill ?? 'Select' }}</option>
                                         @foreach ($skill as $skill)
                                             <option value="{{ $skill->name }}">{{ $skill->name }}
                                             </option>

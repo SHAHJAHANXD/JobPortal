@@ -145,7 +145,11 @@ class CandidateDashboardController extends Controller
         }
         $search = $request['search'] ?? '';
         $PostJob = PostJob::where('status', 1)->where('title', 'LIKE', "%{$search}%")->with('Users')->with('Skills')->inRandomOrder()->orderBy('id', 'desc')->paginate(16);
-        return view('candidate.job.listallJobs', compact('PostJob', 'loadmore'));
+        $category = Category::orderBy('name')->get();
+        $job_type = JobType::get();
+        $location = City::orderBy('name')->get();
+        $skill = JobSkill::get();
+        return view('candidate.job.listallJobs', compact('PostJob', 'request', 'loadmore', 'category', 'job_type', 'location', 'skill'));
     }
     public function jobSearchFilter(Request $request)
     {
