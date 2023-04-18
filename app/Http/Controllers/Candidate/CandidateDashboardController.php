@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Candidate;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\City;
 use App\Models\JobSkill;
+use App\Models\JobType;
 use App\Models\Language;
 use App\Models\LanguageUserSpeak;
 use App\Models\PostJob;
@@ -115,18 +117,49 @@ class CandidateDashboardController extends Controller
         } else {
             $loadmore = "?page=" . $request->page + 1;
         }
-        $PostJob = PostJob::where('status', 1)->with('Users')->with('Skills')->inRandomOrder()->orderBy('id' , 'desc')->paginate(16);
-        return view('candidate.job.listallJobs', compact('PostJob','loadmore'));
+        $PostJob = PostJob::where('status', 1)->with('Users')->with('Skills')->inRandomOrder()->orderBy('id', 'desc')->paginate(16);
+        return view('candidate.job.listallJobs', compact('PostJob', 'loadmore'));
     }
     public function listallJobsBySkills(Request $request, $skills)
+    {
+        $appliedSkill = $skills;
+        if ($request->page == null) {
+            $loadmore = "?page=2";
+        } else {
+            $loadmore = "?page=" . $request->page + 1;
+        }
+        $search = $request['search'] ?? '';
+        $PostJob = PostJob::where('status', 1)->where('skills', $appliedSkill)->with('Users')->with('Skills')->inRandomOrder()->orderBy('id', 'desc')->paginate(16);
+        $category = Category::orderBy('name')->get();
+        $job_type = JobType::get();
+        $location = City::orderBy('name')->get();
+        $skill = JobSkill::get();
+        return view('candidate.job.listallJobs', compact('PostJob', 'request', 'loadmore', 'category', 'job_type', 'location', 'skill', 'appliedSkill'));
+    }
+    public function jobSearch(Request $request)
     {
         if ($request->page == null) {
             $loadmore = "?page=2";
         } else {
             $loadmore = "?page=" . $request->page + 1;
         }
-        $PostJob = PostJob::where('status', 1)->where('skills' , $skills)->with('Users')->with('Skills')->inRandomOrder()->orderBy('id' , 'desc')->paginate(16);
-        return view('candidate.job.listallJobs', compact('PostJob','loadmore'));
+        $search = $request['search'] ?? '';
+        $PostJob = PostJob::where('status', 1)->where('title', 'LIKE', "%{$search}%")->with('Users')->with('Skills')->inRandomOrder()->orderBy('id', 'desc')->paginate(16);
+        return view('candidate.job.listallJobs', compact('PostJob', 'loadmore'));
     }
-
+    public function jobSearchFilter(Request $request)
+    {
+        if ($request->page == null) {
+            $loadmore = "?page=2";
+        } else {
+            $loadmore = "?page=" . $request->page + 1;
+        }
+        $appliedSkill = $request->skills;
+        $PostJob = PostJob::where('status', 1)->where('experience', 'LIKE', "%{$request->experience}%")->where('skills', 'LIKE', "%{$request->skills}%")->where('job_type', 'LIKE', "%{$request->job_type}%")->where('location', 'LIKE', "%{$request->location}%")->where('gender', 'LIKE', "%{$request->gender}%")->with('Users')->with('Skills')->orderBy('id', 'desc')->paginate(16);
+        $category = Category::orderBy('name')->get();
+        $job_type = JobType::get();
+        $location = City::orderBy('name')->get();
+        $skill = JobSkill::get();
+        return view('candidate.job.listallJobs', compact('PostJob', 'request', 'loadmore', 'category', 'job_type', 'location', 'skill', 'appliedSkill'));
+    }
 }

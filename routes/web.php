@@ -59,6 +59,8 @@ Route::middleware('VerifyUser')->group(function () {
                 Route::get('/all-jobs', [CandidateDashboardController::class, 'allJobs'])->name('candidate.allJobs');
                 Route::get('/list-all-jobs', [CandidateDashboardController::class, 'listallJobs'])->name('candidate.listallJobs');
                 Route::get('/list-jobs-by-skills/{skill}', [CandidateDashboardController::class, 'listallJobsBySkills'])->name('candidate.listallJobsBySkills');
+                Route::get('/jobs', [CandidateDashboardController::class, 'jobSearch'])->name('candidate.jobSearch');
+                Route::get('/jobs-filter', [CandidateDashboardController::class, 'jobSearchFilter'])->name('candidate.jobSearchFilter');
                 Route::get('/dashboard', [CandidateDashboardController::class, 'dashboard'])->name('candidate.dashboard');
                 Route::get('/profile', [CandidateDashboardController::class, 'profile'])->name('candidate.profile');
                 Route::post('/update-profile', [CandidateDashboardController::class, 'updateProfile'])->name('candidate.updateProfile');

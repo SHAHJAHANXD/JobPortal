@@ -30,4 +30,5 @@ class PostJob extends Model
     {
         return $this->belongsTo(JobSkill::class , "skills" , 'name');
     }
+    
 }
