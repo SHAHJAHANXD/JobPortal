@@ -48,6 +48,7 @@ class User extends Authenticatable
         'c_revenue',
         'c_location',
         'remember_token',
+        'wa_no'
     ];
 
     /**

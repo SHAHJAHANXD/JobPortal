@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/activate-employer-account-email/{id}', [AdminCotroller::class, 'ActivateEmployerAccountEmail'])->name('admin.ActivateEmployerAccountEmail');
 
 Route::get('/', [AuthenticationController::class, 'index'])->name('index');
+Route::get('/autocomplete', [AdminCotroller::class, 'autocomplete'])->name('autocomplete');
 
 Route::get('/migrate-refresh', [AuthenticationController::class, 'migrate'])->name('migrate');
 Route::get('/db-seed', [AuthenticationController::class, 'dbSeed'])->name('dbSeed');
@@ -57,6 +58,9 @@ Route::middleware('VerifyUser')->group(function () {
             Route::prefix('candidate')->group(function () {
                 Route::get('/inbox', [ChatController::class, 'inbox'])->name('candidate.inbox');
                 Route::get('/all-jobs', [CandidateDashboardController::class, 'allJobs'])->name('candidate.allJobs');
+                Route::get('/job-detail/{id}', [CandidateDashboardController::class, 'jobDetails'])->name('candidate.jobDetails');
+                Route::get('/job-detail-to-apply/{id}', [CandidateDashboardController::class, 'jobDetailsToApply'])->name('candidate.jobDetailsToApply');
+                Route::post('/job-to-apply', [CandidateDashboardController::class, 'jobToApply'])->name('candidate.jobToApply');
                 Route::get('/list-all-jobs', [CandidateDashboardController::class, 'listallJobs'])->name('candidate.listallJobs');
                 Route::get('/list-jobs-by-skills/{skill}', [CandidateDashboardController::class, 'listallJobsBySkills'])->name('candidate.listallJobsBySkills');
                 Route::get('/jobs', [CandidateDashboardController::class, 'jobSearch'])->name('candidate.jobSearch');
@@ -66,6 +70,7 @@ Route::middleware('VerifyUser')->group(function () {
                 Route::post('/update-profile', [CandidateDashboardController::class, 'updateProfile'])->name('candidate.updateProfile');
                 Route::get('/change-password', [AuthenticationController::class, 'changePassword'])->name('candidate.changePassword');
                 Route::post('/post-change-password', [AuthenticationController::class, 'changePostPassword'])->name('candidate.post.changePassword');
+                Route::get('/applied-job', [CandidateDashboardController::class, 'appliedJobs'])->name('candidate.appliedJobs');
             });
         });
     });
@@ -73,9 +78,7 @@ Route::middleware('VerifyUser')->group(function () {
     Route::group(['middleware' => 'auth:web'], function () {
         Route::get('/employer/complete-profile', [EmployerController::class, 'completeprofile'])->name('employer.completeprofile');
         Route::post('/employer/post-complete-profile', [EmployerController::class, 'postcompleteprofile'])->name('employer.postcompleteprofile');
-
         Route::get('/employer/profile-approved', [EmployerController::class, 'profielApproved'])->name('employer.profielApproved');
-
 
         Route::middleware('SecureEmployer')->group(function () {
             Route::post('/employer/chat/send', [ChatController::class, 'sendMessage'])->name('employer.sendMessage');
@@ -86,11 +89,16 @@ Route::middleware('VerifyUser')->group(function () {
                 Route::get('/profile', [EmployerController::class, 'profile'])->name('employer.profile');
                 Route::get('/post-new-job', [EmployerController::class, 'postNewJob'])->name('employer.postNewJob');
                 Route::get('/list-all-job', [EmployerController::class, 'listAllJobs'])->name('employer.listAllJobs');
-
-                Route::get('/activate-job/{id}', [EmployerController::class, 'ActivateJob'])->name('admin.ActivateJob');
-                Route::get('/block-job/{id}', [EmployerController::class, 'BlockJob'])->name('admin.BlockJob');
+                Route::get('/edit-job/{id}', [EmployerController::class, 'editJob'])->name('employer.editJob');
+                Route::delete('/delete-job/{id}', [EmployerController::class, 'deleteJob'])->name('employer.deleteJob');
+                Route::post('/update-profile', [EmployerController::class, 'updateProfile'])->name('employer.updateProfile');
+                Route::get('/activate-job/{id}', [EmployerController::class, 'ActivateJob'])->name('employer.ActivateJob');
+                Route::get('/block-job/{id}', [EmployerController::class, 'BlockJob'])->name('employer.BlockJob');
+                Route::get('/applied-job', [EmployerController::class, 'appliedJobs'])->name('employer.appliedJobs');
 
                 Route::post('/post-job', [EmployerController::class, 'postJob'])->name('employer.postJob');
+                Route::post('/post-edit-job', [EmployerController::class, 'postEditJob'])->name('employer.postEditJob');
+
                 Route::get('/change-password', [AuthenticationController::class, 'changePassword'])->name('employer.changePassword');
                 Route::post('/post-change-password', [AuthenticationController::class, 'changePostPassword'])->name('employer.post.changePassword');
             });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobSkill;
 use App\Models\LanguageUserSpeak;
 use App\Models\Skills;
 use App\Models\User;
@@ -14,7 +15,7 @@ class AdminCotroller extends Controller
 {
     public function dashboard()
     {
-        return view('candidate.index.index');
+        return view('admin.index.index');
     }
 
     public function profile()
@@ -75,5 +76,16 @@ class AdminCotroller extends Controller
     {
         User::where('id', $id)->update(['account_status' => 0]);
         return redirect()->back()->with('success', 'Account rejected successfully!');
+    }
+    public function autocomplete(Request $request)
+    {
+        $data = [];
+
+        if($request->filled('q')){
+            $data = JobSkill::select("name", "id")
+                        ->where('name', 'LIKE', '%'. $request->get('q'). '%')
+                        ->get();
+        }
+        return response()->json($data);
     }
 }

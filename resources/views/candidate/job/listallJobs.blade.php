@@ -141,13 +141,13 @@
                                                 </div>
                                             </div>
                                             <div class="card-body">
-                                                <a>
+                                                <a href="{{ route('candidate.jobDetails',$PostJob->id."?slug=".$PostJob->slug) }}">
                                                     <h5 class="card-title"
                                                         style="    border-radius: 10px;
                                             border: 2px solid;
                                             background: black;
                                             padding: 10px;">
-                                                        Apply Now</h5>
+                                                        View Details</h5>
                                                 </a>
                                             </div>
                                         </div>

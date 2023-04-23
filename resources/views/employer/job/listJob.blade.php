@@ -45,57 +45,57 @@
                                     <thead>
                                         <tr>
 
-                                            <th>Title</th>
-                                            <th>Description</th>
-                                            <th>Gender</th>
-                                            <th>experience</th>
-                                            <th>Recruitments</th>
-                                            <th>Category</th>
-                                            <th>Job Type</th>
-                                            <th>location</th>
-                                            <th>Status</th>
-                                            <th>Status Action</th>
-                                            <th>Action</th>
+                                            <th class="text-center">Title</th>
+                                            <th class="text-center">Description</th>
+                                            <th class="text-center">Gender</th>
+                                            <th class="text-center">experience</th>
+                                            <th class="text-center">Recruitments</th>
+                                            <th class="text-center">Category</th>
+                                            <th class="text-center">Job Type</th>
+                                            <th class="text-center">location</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Status Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($all_jobs as $all_jobs)
                                             <tr>
-                                                <td>{{ $all_jobs->title }}</td>
-                                                <td><a href="">View</a></td>
-                                                <td>{{ $all_jobs->gender }}</td>
-                                                <td>{{ $all_jobs->experience }}</td>
-                                                <td>{{ $all_jobs->recruitments }}</td>
-                                                <td>{{ $all_jobs->category }}</td>
-                                                <td>{{ $all_jobs->job_type }}</td>
-                                                <td>{{ $all_jobs->location }}</td>
-                                                <td>
+                                                <td class="text-center">{{ $all_jobs->title }}</td>
+                                                <td class="text-center"><a href="">View</a></td>
+                                                <td class="text-center">{{ $all_jobs->gender }}</td>
+                                                <td class="text-center">{{ $all_jobs->experience }}</td>
+                                                <td class="text-center">{{ $all_jobs->recruitments }}</td>
+                                                <td class="text-center">{{ $all_jobs->category }}</td>
+                                                <td class="text-center">{{ $all_jobs->job_type }}</td>
+                                                <td class="text-center">{{ $all_jobs->location }}</td>
+                                                <td class="text-center">
                                                     @if ($all_jobs->status == 1)
                                                         <span class="badge light badge-success">Published</span>
                                                     @else
                                                         <span class="badge light badge-danger">Drafted</span>
                                                     @endif
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     @if ($all_jobs->status == 0)
-                                                        <a href="{{ route('admin.ActivateJob', $all_jobs->id) }}"  class="btn btn-success shadow btn-xs me-1">Publish</a>
+                                                        <a href="{{ route('employer.ActivateJob', $all_jobs->id) }}"  class="btn btn-success shadow btn-xs me-1">Publish</a>
                                                     @endif
                                                     @if ($all_jobs->status == 1)
-                                                        <a href="{{ route('admin.BlockJob', $all_jobs->id) }}"  class="btn btn-danger shadow btn-xs me-1">Draft</a>
+                                                        <a href="{{ route('employer.BlockJob', $all_jobs->id) }}"  class="btn btn-danger shadow btn-xs me-1">Draft</a>
                                                     @endif
                                                 </td>
 
-                                                <td>
+                                                <td class="text-center">
                                                     <div class="d-flex">
-                                                        <a href="#"
+                                                        <a href="{{ route('employer.editJob', $all_jobs->id) }}"
                                                             class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                                 class="fas fa-pencil-alt"></i></a>
-                                                        <form method="POST" action="">
+                                                        <form method="POST" action="{{ route('employer.deleteJob', $all_jobs->id) }}">
                                                             @csrf
                                                             <input name="_method" type="hidden" value="DELETE">
 
-                                                            <button class="btn btn-danger shadow btn-xs sharp"><i
-                                                                    class="fa fa-trash"></i></button>
+                                                            <button class="btn btn-danger show_confirm shadow btn-xs sharp"><i
+                                                                    class="fa fa-trash"   data-toggle="tooltip" title='Delete'></i></button>
 
                                                         </form>
                                                     </div>

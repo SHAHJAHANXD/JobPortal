@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Candidate;
 
 use App\Http\Controllers\Controller;
+use App\Models\appliedjob;
 use App\Models\Category;
 use App\Models\City;
 use App\Models\JobSkill;
@@ -19,7 +20,8 @@ class CandidateDashboardController extends Controller
 {
     public function dashboard()
     {
-        return view('candidate.index.index');
+        $applied_jobs = appliedjob::where('candidate_id' , Auth::user()->id)->count();
+        return view('candidate.index.index', compact('applied_jobs'));
     }
     public function changePassword()
     {
@@ -87,6 +89,9 @@ class CandidateDashboardController extends Controller
         if ($request->about_me == true) {
             $user->about_me = $request->about_me;
         }
+        if ($request->wa_no == true) {
+            $user->wa_no = $request->wa_no;
+        }
         if ($request->designation == true) {
             $user->designation = $request->designation;
         }
@@ -107,7 +112,7 @@ class CandidateDashboardController extends Controller
     }
     public function allJobs()
     {
-        $skills = JobSkill::get();
+        $skills = JobSkill::orderBy('name')->get();
         return view('candidate.job.allJobs', compact('skills'));
     }
     public function listallJobs(Request $request)
@@ -169,5 +174,49 @@ class CandidateDashboardController extends Controller
         $location = City::orderBy('name')->get();
         $skill = JobSkill::get();
         return view('candidate.job.listallJobs', compact('PostJob', 'request', 'loadmore', 'category', 'job_type', 'location', 'skill', 'appliedSkill'));
+    }
+    public function jobDetails($id)
+    {
+        $PostJob = PostJob::where('status', 1)->where('id', $id)->with('Skills')->first();
+        return view('candidate.job.jobDetails', compact('PostJob'));
+    }
+    public function jobDetailsToApply($id)
+    {
+        $PostJob = PostJob::where('status', 1)->where('id', $id)->with('Skills')->first();
+        return view('candidate.job.jobDetailsToApply', compact('PostJob'));
+    }
+    public function jobToApply(Request $request)
+    {
+        $request->validate(
+            [
+                'cv' => 'required|file|mimes:ppt,pptx,doc,docx,pdf,xls,xlsx|max:5120',
+                'cover_letter' => 'required|max:255',
+            ]
+        );
+        $auth_id = Auth::user()->id;
+        $data = $request->all();
+        $jobSkills = PostJob::where('id', $request->job_id)->first();
+        $count = appliedjob::where('employer_id', $request->employer_id)->where('job_id', $request->job_id)->where('candidate_id', $auth_id)->count();
+        if ($count > 0) {
+            return redirect()->route('candidate.listallJobsBySkills', $jobSkills->skills)->with('error', 'You have already applied the job. Thank You!');
+        }
+        if ($request->hasfile('cv')) {
+            $imageName = $request->cv->getClientOriginalName();
+            $data['cv'] = $imageName;
+            $request->cv->move(public_path('cv'), $imageName);
+        }
+        $data['candidate_id'] = $auth_id;
+        $job = appliedjob::create($data);
+
+
+        if ($job == true) {
+            return redirect()->route('candidate.listallJobsBySkills', $jobSkills->skills)->with('success', 'You have successfully applied for the job. The employer will contact you soon. Thank You!');
+        }
+    }
+    public function appliedJobs()
+    {
+        $auth_id = Auth::user()->id;
+        $all_jobs = appliedjob::where('candidate_id', $auth_id)->with('PostJobs')->with('user')->orderBy('id', 'desc')->get();
+        return view('candidate.job.AppliedListJobs', compact('all_jobs'));
     }
 }

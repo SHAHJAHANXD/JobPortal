@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('user_id')->nullable();
             $table->string('title')->nullable();
+            $table->string('slug')->nullable();
             $table->longText('desc')->nullable();
             $table->string('gender')->nullable();
             $table->string('experience')->nullable();

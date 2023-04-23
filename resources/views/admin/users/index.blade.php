@@ -44,21 +44,20 @@
                                 <table id="example3" class="display" style="min-width: 845px">
                                     <thead>
                                         <tr>
-                                            <th></th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                            <th>Designation</th>
-                                            <th>Account Status</th>
-                                            <th>Account Status Action</th>
-                                            <th>Action</th>
+                                            <th class="text-center">First Name</th>
+                                            <th class="text-center">Last Name</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Role</th>
+                                            <th class="text-center">Designation</th>
+                                            <th class="text-center">Account Status</th>
+                                            <th class="text-center">Account Status Action</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($user as $user)
                                             <tr>
-                                                <td>
+                                                <td class="text-center">
                                                     @if ($user->avatar == true)
                                                         <img class="rounded-circle" width="35" src="{{ $user->avatar }}"
                                                             alt="">
@@ -67,19 +66,19 @@
                                                             src="{{ asset('dashboard') }}/images/guest.png" alt="">
                                                     @endif
                                                 </td>
-                                                <td>{{ $user->first_name }}</td>
-                                                <td>{{ $user->last_name }}</td>
-                                                <td>{{ $user->email }}</td>
-                                                <td>{{ $user->role }}</td>
-                                                <td>{{ $user->designation }}</td>
-                                                <td>
+                                                <td class="text-center">{{ $user->first_name }}</td>
+                                                <td class="text-center">{{ $user->last_name }}</td>
+                                                <td class="text-center">{{ $user->email }}</td>
+                                                <td class="text-center">{{ $user->role }}</td>
+                                                <td class="text-center">{{ $user->designation }}</td>
+                                                <td class="text-center">
                                                     @if ($user->account_status == 1)
                                                         <span class="badge light badge-success">Approved</span>
                                                     @else
                                                         <span class="badge light badge-danger">Rejected</span>
                                                     @endif
                                                 </td>
-                                                <td>
+                                                <td class="text-center">
                                                     @if ($user->account_status == 0)
                                                         <a href="{{ route('admin.ActivateEmployerAccount', $user->id) }}"  class="btn btn-success shadow btn-xs me-1">Activate</a>
                                                     @endif
@@ -88,7 +87,7 @@
                                                     @endif
                                                 </td>
 
-                                                <td>
+                                                <td class="text-center">
                                                     <div class="d-flex">
                                                         <a href="#"
                                                             class="btn btn-primary shadow btn-xs sharp me-1"><i

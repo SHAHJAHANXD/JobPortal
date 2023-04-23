@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('email')->unique()->nullable();
+            $table->string('wa_no')->unique()->nullable();
             $table->string('password')->nullable();
+            $table->text('views')->default(0);
             $table->string('code')->nullable();
             $table->string('password_code')->nullable();
             $table->string('role')->nullable();
@@ -34,7 +36,6 @@ return new class extends Migration
             $table->string('profile')->default(0);
             $table->string('account_status')->default(1);
             $table->string('email_status')->default(0);
-
             $table->string('c_name')->nullable();
             $table->string('c_email')->nullable();
             $table->string('c_position')->nullable();
@@ -44,7 +45,6 @@ return new class extends Migration
             $table->string('c_website')->nullable();
             $table->string('c_revenue')->nullable();
             $table->string('c_location')->nullable();
-
             $table->rememberToken();
             $table->timestamps();
         });

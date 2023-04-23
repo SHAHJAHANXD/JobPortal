@@ -20,7 +20,8 @@ class PostJob extends Model
         'job_type',
         'location',
         'status',
-        'skills'
+        'skills',
+        'slug'
     ];
     public function Users()
     {
@@ -30,5 +31,5 @@ class PostJob extends Model
     {
         return $this->belongsTo(JobSkill::class , "skills" , 'name');
     }
-    
+
 }

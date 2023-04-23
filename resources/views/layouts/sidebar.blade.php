@@ -29,35 +29,16 @@
                         <span class="nav-text">My Profile</span>
                     </a>
                 </li>
-                <li>
-                    <a class="" href="{{ route('candidate.allJobs') }}" aria-expanded="false">
+                <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                         <div class="menu-icon">
-                            <i class="la la-user-friends"></i>
+                            <i class="la la-briefcase"></i>
                         </div>
-                        <span class="nav-text">All Jobs</span>
+                        <span class="nav-text">Jobs</span>
                     </a>
-                </li>
-                <li>
-                    <a class="" href="javascript:void()" aria-expanded="false">
-                        <div class="menu-icon">
-                            <i class="la la-user-friends"></i>
-                        </div>
-                        <span class="nav-text">Applied Jobs</span>
-                    </a>
-                </li>
-                <li><a class="" href="javascript:void()" aria-expanded="false">
-                        <div class="menu-icon">
-                            <i class="la la-bookmark-o"></i>
-                        </div>
-                        <span class="nav-text">Shortlisted Jobs</span>
-                    </a>
-                </li>
-                <li><a href="widget-basic.html" class="" aria-expanded="false">
-                        <div class="menu-icon">
-                            <i class="la la-envelope"></i>
-                        </div>
-                        <span class="nav-text">My Contact</span>
-                    </a>
+                    <ul aria-expanded="false">
+                        <li><a href="{{ route('candidate.allJobs') }}">All Jobs</a></li>
+                        <li><a href="{{ route('candidate.appliedJobs') }}">Applied Jobs</a></li>
+                    </ul>
                 </li>
             @endif
 
@@ -78,6 +59,14 @@
                         <span class="nav-text">Dashboard</span>
                     </a>
                 </li>
+                <li><a class="" href="{{ route('employer.profile') }}" aria-expanded="false">
+                    <div class="menu-icon">
+                        <i class="la la-user-tie"></i>
+                    </div>
+
+                    <span class="nav-text">My Profile</span>
+                </a>
+            </li>
                 <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">
                         <div class="menu-icon">
                             <i class="la la-briefcase"></i>
@@ -87,18 +76,11 @@
                     <ul aria-expanded="false">
                         <li><a href="{{ route('employer.postNewJob') }}">Post New Job</a></li>
                         <li><a href="{{ route('employer.listAllJobs') }}">List Posted Jobs</a></li>
-                        <li><a href="balance-page.html">Shortlisted Jobs</a></li>
+                        <li><a href="{{ route('employer.appliedJobs') }}">Applied Jobs</a></li>
 
                     </ul>
                 </li>
-                <li><a class="" href="{{ route('employer.profile') }}" aria-expanded="false">
-                        <div class="menu-icon">
-                            <i class="la la-user-tie"></i>
-                        </div>
 
-                        <span class="nav-text">My Profile</span>
-                    </a>
-                </li>
             @endif
             @if (Auth::user()->role == 'Admin')
                 <li><a class="" href="{{ route('admin.dashboard') }}" aria-expanded="false">

@@ -76,8 +76,16 @@
                                                 @endif
                                             </div>
                                             <div class="mb-3">
+                                                <label class="mb-1"><strong>Whatsapp Contact</strong></label>
+                                                <input required type="number" class="form-control"
+                                                    placeholder="Enter Your Whatsapp Contact With Country Code" name="wa_number">
+                                                @if ($errors->has('wa_number'))
+                                                    <span
+                                                        class="text-danger">{{ $errors->first('wa_number') }}</span>
+                                                @endif
+                                            </div>
+                                            <div class="mb-3">
                                                 <label class="mb-1"><strong>Skills</strong></label>
-
                                                 <br>
                                                 <i class="fas fa-exclamation" style="color: red;"></i> <small> Choose your skills wisely, as you cannot update them later. Thank you</small> <i class="fas fa-exclamation" style="color: red;"></i>
                                                 <div class="row">
