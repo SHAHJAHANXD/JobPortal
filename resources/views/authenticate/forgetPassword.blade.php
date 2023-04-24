@@ -74,7 +74,7 @@
                                         </div>
                                         <div class="new-account mt-3">
                                             <p class="text-white">Have an code? <a class="text-primary"
-                                                    href="">Reset Password</a></p>
+                                                    href="{{ route('verify_forget_password') }}">Reset Password</a></p>
                                         </div>
                                     </form>
                                 </div>
