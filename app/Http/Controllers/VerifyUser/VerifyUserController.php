@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\VerifyUser;
 
 use App\Http\Controllers\Controller;
+use App\Mail\UserVerifyEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 
 class VerifyUserController extends Controller
 {
-   
+
     public function verify()
     {
         return view('authenticate.verify');
@@ -45,10 +46,8 @@ class VerifyUserController extends Controller
         $user = User::where('email', $email)->first();
         $user->code = $code;
         $user->save();
-        Mail::send('emails.verify', ['code' => $code], function ($message) use ($request) {
-            $message->to(Auth::guard('web')->user()->email);
-            $message->subject('Verify Email');
-        });
+        $user = ['email' => $request->email, 'code' => $code];
+        Mail::to($user['email'])->queue(new UserVerifyEmail($user));
         return redirect()->back()->with('success', 'Resend Code Sent Successfully!');
     }
 }
