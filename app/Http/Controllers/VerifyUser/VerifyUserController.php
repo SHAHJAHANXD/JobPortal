@@ -46,7 +46,7 @@ class VerifyUserController extends Controller
         $users = User::where('email', $email)->first();
         $users->code = $code;
         $users->save();
-        $user = ['email' => $request->email, 'code' => $code];
+        $user = ['email' => $email, 'code' => $code];
         Mail::to($user['email'])->queue(new UserVerifyEmail($user));
         return redirect()->back()->with('success', 'Resend Code Sent Successfully!');
     }
