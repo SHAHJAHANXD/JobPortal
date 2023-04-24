@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\GotVerifiedMail;
+use App\Mail\UserVerifyMail;
 use App\Models\JobSkill;
 use App\Models\LanguageUserSpeak;
 use App\Models\Skills;
@@ -41,14 +43,8 @@ class AdminCotroller extends Controller
             return redirect()->back()->with('success', 'Account approved successfully!');
         } else {
             User::where('id', $id)->update(['account_status' => 1]);
-            $email_data = ['name' => $user->first_name . ' ' . $user->last_name, 'email' => $user->email];
-            Mail::send(
-                'emails.gotVerified',
-                $email_data,
-                function ($message) use ($email_data) {
-                    $message->to($email_data['email'])->subject("Dear " . ' ' . $email_data['name'] . ' ' . "Your Profile at Cybinix Job Portal Got Approved!");
-                }
-            );
+            $user = ['name' => $user->first_name . ' ' . $user->last_name, 'email' => $user->email];
+            Mail::to($user['email'])->queue(new UserVerifyMail($user));
             return redirect()->back()->with('success', 'Account approved successfully!');
         }
     }
@@ -59,15 +55,16 @@ class AdminCotroller extends Controller
             return view('admin.users.verified', compact('id'));
         } else {
             User::where('id', $id)->update(['account_status' => 1]);
-            $user = User::where('id', $id)->first();
-            $email_data = ['name' => $user->first_name . ' ' . $user->last_name, 'email' => $user->email];
-            Mail::send(
-                'emails.gotVerified',
-                $email_data,
-                function ($message) use ($email_data) {
-                    $message->to($email_data['email'])->subject("Dear " . ' ' . $email_data['name'] . ' ' . "Your Profile at Cybinix Job Portal Got Approved!");
-                }
-            );
+            $user_info = User::where('id', $id)->first();
+            $user = ['name' => $user_info->first_name . ' ' . $user_info->last_name, 'email' => $user_info->email];
+            Mail::to($user['email'])->queue(new GotVerifiedMail($user));
+            // Mail::queue(
+            //     'emails.gotVerified',
+            //     $email_data,
+            //     function ($message) use ($email_data) {
+            //         $message->to($email_data['email'])->subject("Dear " . ' ' . $email_data['name'] . ' ' . "Your Profile at Cybinix Job Portal Got Approved!");
+            //     }
+            // );
             return view('admin.users.verified', compact('id'));
         }
     }
@@ -81,10 +78,10 @@ class AdminCotroller extends Controller
     {
         $data = [];
 
-        if($request->filled('q')){
+        if ($request->filled('q')) {
             $data = JobSkill::select("name", "id")
-                        ->where('name', 'LIKE', '%'. $request->get('q'). '%')
-                        ->get();
+                ->where('name', 'LIKE', '%' . $request->get('q') . '%')
+                ->get();
         }
         return response()->json($data);
     }

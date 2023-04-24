@@ -580,7 +580,7 @@
                                 <td style="text-align: center;">
                                     <img src="https://img.freepik.com/free-vector/verified-concept-illustration_114360-4998.jpg?size=626&ext=jpg&ga=GA1.1.1229420217.1680018487&semt=ais"
                                         alt="" style="    width: 300px;">
-                                    <h3 class="name">{{ $name }}</h3>
+                                    <h3 class="name">{{ $user['name'] }}</h3>
                                     <h3
                                         style="    margin-top: 20px;
                                         margin-bottom: 40px;">

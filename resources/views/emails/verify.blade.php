@@ -502,7 +502,7 @@
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
                                         <h2>Verify Your Email!</h2>
                                         <h3 style="    margin-top: 20px;
-                                        margin-bottom: 40px;">Your Verification Code is {{ $code }}</h3>
+                                        margin-bottom: 40px;">Your Verification Code is {{ $user['code'] }}</h3>
                                         <p><a href="http://jobs.cybinix.com/" style="    border-radius: 5px;
                                             background: #2A2A2A;
                                             color: #ffffff; padding: 16px;">Cybinix Job Portal</a></p>

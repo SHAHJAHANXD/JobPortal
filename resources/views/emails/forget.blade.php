@@ -399,8 +399,7 @@
     <meta name="robots" content="noindex, follow">
 </head>
 
-<body width="100%"
-    style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: white;">
+<body width="100%" style="margin: 0; padding: 0 !important; mso-line-height-rule: exactly; background-color: white;">
     <center style="width: 100%; background-color: white;">
         <div
             style="display: none; font-size: 1px;max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
@@ -427,9 +426,11 @@
                             <tr>
                                 <td>
                                     <div class="text" style="padding: 0 2.5em; text-align: center;">
-                                        <h3>Verification Code: <b>{{ $code }}</b></h3>
+                                        <h3>Verification Code: <b>{{ $user['code'] }}</b></h3>
                                         <h3>Use this code to verify your email address. Thank You!</h3>
-                                        <p><a href="#" class="btn btn-primary">Visit Website?</a><a style="margin-left: 10px;" href="#" class="btn btn-primary">Request New Code!</a></p>
+                                        <p><a href="#" class="btn btn-primary">Visit Website?</a><a
+                                                style="margin-left: 10px;" href="#"
+                                                class="btn btn-primary">Request New Code!</a></p>
                                     </div>
                                 </td>
                             </tr>

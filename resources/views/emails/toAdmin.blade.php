@@ -513,10 +513,10 @@
                             <tr>
                                 <td style="text-align: center;">
                                         <img src="https://img.freepik.com/free-vector/subscriber-concept-illustration_114360-3453.jpg?size=626&ext=jpg&ga=GA1.2.1229420217.1680018487&semt=ais" alt="" style="    width: 300px;">
-                                        <h3 class="name">{{ $name }}</h3>
+                                        <h3 class="name">{{ $user['name'] }}</h3>
                                         <h3 style="    margin-top: 20px;
                                         margin-bottom: 40px;">Joined as a Employer at Cybinix Job Portal!</h3>
-                                        <p><a href="{{ env('APP_URL') }}activate-employer-account-email/{{ $id }}" style="    border-radius: 5px;
+                                        <p><a href="{{ env('APP_URL') }}activate-employer-account-email/{{ $user['id'] }}" style="    border-radius: 5px;
                                             background: #2A2A2A;
                                             color: #ffffff; padding: 16px;">Accept Request</a></p>
                                 </td>

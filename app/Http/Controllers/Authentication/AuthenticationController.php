@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Authentication;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ForgetPasswordMail;
+use App\Mail\MailToAdmin;
+use App\Mail\UserVerifyEmail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -123,10 +126,8 @@ class AuthenticationController extends Controller
             ]
         );
         $code = str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
-        Mail::send('emails.verify', ['code' => $code], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Verify Email');
-        });
+        $user = ['email' => $request->email, 'code' => $code];
+        Mail::to($user['email'])->queue(new UserVerifyEmail($user));
         if (true == true) {
             $user = new User();
             $user->first_name = $request->first_name;
@@ -139,16 +140,9 @@ class AuthenticationController extends Controller
                 $user->account_status = 0;
             }
             $user->save();
-
             if ($request->role == "Employer") {
-                $email_data = ['name' => $request->first_name . ' ' . $request->last_name, 'id' => $user->id];
-                Mail::send(
-                    'emails.toAdmin',
-                    $email_data,
-                    function ($message) use ($email_data) {
-                        $message->to(env('ADMIN_EMAIL'))->subject($email_data['name'] . ' ' . "Just Joined as a Employer at Cybinix Job Portal.");
-                    }
-                );
+                $user = ['email' => env('ADMIN_EMAIL'), 'name' => $request->first_name . ' ' . $request->last_name, 'id' => $user->id];
+                Mail::to($user['email'])->queue(new MailToAdmin($user));
             }
             $credentials = $request->only('email', 'password');
             if ($user == true) {
@@ -250,10 +244,8 @@ class AuthenticationController extends Controller
             $user = User::where('email', $email)->first();
             $user->password_code = $code;
             $user->save();
-            Mail::send('emails.forget', ['code' => $code], function ($message) use ($request) {
-                $message->to($request->email);
-                $message->subject('Verify Email');
-            });
+            $user = ['email' => $request->email, 'code' => $code];
+            Mail::to($user['email'])->queue(new ForgetPasswordMail($user));
             return redirect()->route('verify_forget_password')->with('success', 'Resend Code Sent Successfully!');
         }
     }
