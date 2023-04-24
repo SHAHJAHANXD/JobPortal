@@ -6,6 +6,7 @@ use App\Http\Controllers\Candidate\CandidateDashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Employer\EmployerController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\JobSkillController;
 use App\Http\Controllers\JobTypeController;
 use App\Http\Controllers\VerifyUser\VerifyUserController;
@@ -39,6 +40,9 @@ Route::get('/forget-password', [AuthenticationController::class, 'forget_passwor
 Route::post('/post-forget-password', [AuthenticationController::class, 'post_forget_password'])->name('post_forget_password');
 Route::get('/verify-forget-password', [AuthenticationController::class, 'verify_forget_password'])->name('verify_forget_password');
 Route::post('/post-verify-forget-password', [AuthenticationController::class, 'post_verify_forget_password'])->name('post_verify_forget_password');
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/verify', [VerifyUserController::class, 'verify'])->name('verify.email');

@@ -75,15 +75,8 @@
                                             <span class="text-danger">{{ $errors->first('password') }}</span>
                                             @endif
                                         </div>
+
                                         <div class="row d-flex justify-content-between mt-4 mb-2">
-                                            {{-- <div class="mb-3">
-                                                <div class="form-check custom-checkbox ms-1">
-                                                    <input required type="checkbox" class="form-check-input"
-                                                        id="basic_checkbox_1">
-                                                    <label class="form-check-label" for="basic_checkbox_1">Remember my
-                                                        preference</label>
-                                                </div>
-                                            </div> --}}
                                             <div class="mb-3">
                                                 <a href="{{ route('forget_password') }}">Forgot Password?</a>
                                             </div>
@@ -91,6 +84,10 @@
                                         <div class="text-center">
                                             <button type="submit" class="btn btn-primary btn-block">Sign Me
                                                 In</button>
+                                        </div>
+                                        <p class="text-center">OR</p>
+                                        <div class="text-center">
+                                            <a type="submit" class="btn btn-primary btn-block" style="    background: #363636;"><img style="height: 40px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png" alt=""><span style="margin-left: 15px;">Signin With Google</span></a>
                                         </div>
                                         <div class="new-account mt-3">
                                             <p class="text-white">Don't have an account? <a class="text-primary"
