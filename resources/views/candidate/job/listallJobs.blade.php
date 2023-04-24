@@ -37,9 +37,10 @@
                             <div class="row" style="justify-content: center;     margin-top: 40px; margin-bottom: 40px;">
                                 <div class="col-lg-2">
                                     <label class="mb-1"><strong>Experience</strong></label>
-                                    <select  name="experience" id=""
-                                        class="form-control" style="background: #2A2A2A">
-                                        <option value="{{ $request->experience }}">{{ $request->experience ?? 'Select' }}</option>
+                                    <select name="experience" id="" class="form-control"
+                                        style="background: #2A2A2A">
+                                        <option value="{{ $request->experience }}">{{ $request->experience ?? 'Select' }}
+                                        </option>
                                         <option value="Less Then 1 Years">Less Then 1 Years</option>
                                         <option value="1-2 Years">1-2 Years</option>
                                         <option value="2-3 Years">2-3 Years</option>
@@ -56,9 +57,9 @@
                                 {{-- <input type="text" hidden value="{{ $appliedSkill }}" name="skills"> --}}
                                 <div class="col-lg-2">
                                     <label class="mb-1"><strong>Skills</strong></label>
-                                    <select  name="skills" id="" class="form-control"
-                                        style="background: #2A2A2A">
-                                        <option value="{{ $request->skills ?? $appliedSkill ?? ''}}">{{ $request->skills ?? $appliedSkill ?? 'Select' }}</option>
+                                    <select name="skills" id="" class="form-control" style="background: #2A2A2A">
+                                        <option value="{{ $request->skills ?? ($appliedSkill ?? '') }}">
+                                            {{ $request->skills ?? ($appliedSkill ?? 'Select') }}</option>
                                         @foreach ($skill as $skill)
                                             <option value="{{ $skill->name }}">{{ $skill->name }}
                                             </option>
@@ -67,9 +68,9 @@
                                 </div>
                                 <div class="col-lg-2">
                                     <label class="mb-1"><strong>Job Type</strong></label>
-                                    <select  name="job_type" id="" class="form-control"
-                                        style="background: #2A2A2A">
-                                        <option value="{{ $request->job_type }}">{{ $request->job_type ?? 'Select' }}</option>
+                                    <select name="job_type" id="" class="form-control" style="background: #2A2A2A">
+                                        <option value="{{ $request->job_type }}">{{ $request->job_type ?? 'Select' }}
+                                        </option>
                                         @foreach ($job_type as $job_type)
                                             <option value="{{ $job_type->name }}">{{ $job_type->name }}
                                             </option>
@@ -78,19 +79,18 @@
                                 </div>
                                 <div class="col-lg-2">
                                     <label class="mb-1"><strong>Gender</strong></label>
-                                    <select  name="gender" id="" class="form-control"
-                                        style="background: #2A2A2A">
+                                    <select name="gender" id="" class="form-control" style="background: #2A2A2A">
                                         <option value="{{ $request->gender }}">{{ $request->gender ?? 'Select' }}</option>
 
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-2">
                                     <label class="mb-1"><strong>Location</strong></label>
-                                    <select  name="location" id="" class="form-control"
-                                        style="background: #2A2A2A">
-                                        <option value="{{ $request->location }}">{{ $request->location ?? 'Select' }}</option>
+                                    <select name="location" id="" class="form-control" style="background: #2A2A2A">
+                                        <option value="{{ $request->location }}">{{ $request->location ?? 'Select' }}
+                                        </option>
                                         @foreach ($location as $location)
                                             <option value="{{ $location->name }}">{{ $location->name }}
                                             </option>
@@ -114,11 +114,11 @@
                                     <div class="mb-3">
                                         <div class="card" style="background: white;">
                                             <div class="row">
-                                                <div class="col-lg-6" style="text-align: center;">
+                                                <div class="col-lg-5" style="text-align: center;">
                                                     <img class="card-img-top" src="{{ $PostJob->Skills->img }}"
                                                         alt="{{ $PostJob->name }} Image">
                                                 </div>
-                                                <div class="col-lg-6" style="margin-top: auto;">
+                                                <div class="col-lg-7" style="margin-top: auto;">
                                                     <p class="text-style">
                                                         @if ($PostJob->Users->avatar == true)
                                                             <img class="rounded-circle" width="35"
@@ -141,7 +141,8 @@
                                                 </div>
                                             </div>
                                             <div class="card-body">
-                                                <a href="{{ route('candidate.jobDetails',$PostJob->id."?slug=".$PostJob->slug) }}">
+                                                <a
+                                                    href="{{ route('candidate.jobDetails', $PostJob->id . '?slug=' . $PostJob->slug) }}">
                                                     <h5 class="card-title"
                                                         style="    border-radius: 10px;
                                             border: 2px solid;
