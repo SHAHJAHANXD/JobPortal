@@ -26,6 +26,13 @@
                 text-align: center !important;
             }
         }
+
+        @media screen and (min-width: 320px) and (min-width: 479px) {
+            .btn-danger {
+                padding: 10px 125px;
+                margin-top: 20px;
+            }
+        }
     </style>
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-contain-center">
