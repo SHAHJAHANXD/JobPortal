@@ -43,9 +43,9 @@ class VerifyUserController extends Controller
     {
         $code = mt_rand(1, 999999);
         $email = Auth::guard('web')->user()->email;
-        $user = User::where('email', $email)->first();
-        $user->code = $code;
-        $user->save();
+        $users = User::where('email', $email)->first();
+        $users->code = $code;
+        $users->save();
         $user = ['email' => $request->email, 'code' => $code];
         Mail::to($user['email'])->queue(new UserVerifyEmail($user));
         return redirect()->back()->with('success', 'Resend Code Sent Successfully!');
