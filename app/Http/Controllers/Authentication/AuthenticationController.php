@@ -241,12 +241,12 @@ class AuthenticationController extends Controller
             return redirect()->back()->with('error', 'Email Address Not Found. Thank You!');
         } else {
             $code = mt_rand(1, 999999);
-            $user = User::where('email', $email)->first();
-            $user->password_code = $code;
-            $user->save();
+            $users = User::where('email', $email)->first();
+            $users->password_code = $code;
+            $users->save();
             $user = ['email' => $request->email, 'code' => $code];
             Mail::to($user['email'])->queue(new ForgetPasswordMail($user));
-            return redirect()->route('verify_forget_password')->with('success', 'Resend Code Sent Successfully!');
+            return redirect()->route('verify_forget_password' , $request->email)->with('success', 'Resend Code Sent Successfully!');
         }
     }
 }
