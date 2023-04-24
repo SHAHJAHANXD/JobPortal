@@ -27,7 +27,7 @@
             }
         }
 
-        @media screen and (min-width: 320px) and (min-width: 479px) {
+        @media screen and (min-width: 320px) and (max-width: 479px) {
             .btn-danger {
                 padding: 10px 125px;
                 margin-top: 20px;
