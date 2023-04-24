@@ -63,8 +63,8 @@
                                         @csrf
                                         <div class="mb-3">
                                             <label class="mb-1"><strong>Email</strong></label>
-                                            <input required type="email" class="form-control" placeholder="Enter Your Email"
-                                                name="email">
+                                            <input required type="email" disabled class="form-control" placeholder="Enter Your Email"
+                                                name="email" value="{{ $email }}">
                                             @if ($errors->has('email'))
                                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                             @endif

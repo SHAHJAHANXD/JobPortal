@@ -38,7 +38,7 @@ Route::get('/logout', [AuthenticationController::class, 'Logout'])->name('Logout
 
 Route::get('/forget-password', [AuthenticationController::class, 'forget_password'])->name('forget_password');
 Route::post('/post-forget-password', [AuthenticationController::class, 'post_forget_password'])->name('post_forget_password');
-Route::get('/verify-forget-password', [AuthenticationController::class, 'verify_forget_password'])->name('verify_forget_password');
+Route::get('/verify-forget-password/{email}', [AuthenticationController::class, 'verify_forget_password'])->name('verify_forget_password');
 Route::post('/post-verify-forget-password', [AuthenticationController::class, 'post_verify_forget_password'])->name('post_verify_forget_password');
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);

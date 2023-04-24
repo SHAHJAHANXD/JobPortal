@@ -195,9 +195,9 @@ class AuthenticationController extends Controller
     {
         return view('authenticate.forgetPassword');
     }
-    public function verify_forget_password()
+    public function verify_forget_password($email)
     {
-        return view('authenticate.VerifyForgetPassword');
+        return view('authenticate.VerifyForgetPassword', compact('email'));
     }
     public function post_verify_forget_password(Request $request)
     {
