@@ -45,6 +45,7 @@ return new class extends Migration
             $table->string('c_website')->nullable();
             $table->string('c_revenue')->nullable();
             $table->string('c_location')->nullable();
+            $table->string('google_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
