@@ -87,7 +87,7 @@
                                         </div>
                                         <p class="text-center">OR</p>
                                         <div class="text-center">
-                                            <a type="submit" class="btn btn-primary btn-block" style="    background: #363636;"><img style="height: 40px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png" alt=""><span style="margin-left: 15px;">Signin With Google</span></a>
+                                            <a href="{{ url('auth/google') }}" type="submit" class="btn btn-primary btn-block" style="    background: #363636;"><img style="height: 40px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/706px-Google_%22G%22_Logo.svg.png" alt=""><span style="margin-left: 15px;">Signin With Google</span></a>
                                         </div>
                                         <div class="new-account mt-3">
                                             <p class="text-white">Don't have an account? <a class="text-primary"
