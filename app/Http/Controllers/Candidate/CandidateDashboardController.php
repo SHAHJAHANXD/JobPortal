@@ -72,6 +72,7 @@ class CandidateDashboardController extends Controller
         $user->experience = $request->experience;
         $user->availability = $request->availability;
         $user->age = $request->age;
+        $user->wa_no = $request->wa_no;
         $user->profile = 1;
         $user->location = $request->location;
         $user->save();

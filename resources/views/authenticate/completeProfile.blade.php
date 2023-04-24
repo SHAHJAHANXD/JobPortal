@@ -78,10 +78,10 @@
                                             <div class="mb-3">
                                                 <label class="mb-1"><strong>Whatsapp Contact</strong></label>
                                                 <input required type="number" class="form-control"
-                                                    placeholder="Enter Your Whatsapp Contact With Country Code" name="wa_number">
-                                                @if ($errors->has('wa_number'))
+                                                    placeholder="Enter Your Whatsapp Contact With Country Code" name="wa_no">
+                                                @if ($errors->has('wa_no'))
                                                     <span
-                                                        class="text-danger">{{ $errors->first('wa_number') }}</span>
+                                                        class="text-danger">{{ $errors->first('wa_no') }}</span>
                                                 @endif
                                             </div>
                                             <div class="mb-3">
