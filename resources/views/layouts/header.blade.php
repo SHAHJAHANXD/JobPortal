@@ -81,81 +81,38 @@
                             <div class="dropdown-menu dropdown-menu-end">
                                 <div id="DZ_W_Notification1" class="widget-media dz-scroll p-3"
                                     style="height:380px;">
+                                    @php
+                                        $applied_jobs = \App\Models\appliedjob::where('employer_id', Auth::user()->id)
+                                            ->with('user')
+                                            ->with('PostJobs')
+                                            ->get();
+                                    @endphp
                                     <ul class="timeline">
-                                        <li>
-                                            <div class="timeline-panel">
-                                                <div class="media me-2">
-                                                    <img alt="image" width="50"
-                                                        src="{{ asset('dashboard') }}/images/avatar/1.jpg">
+                                        @foreach ($applied_jobs as $applied_jobs)
+                                            <li>
+                                                <div class="timeline-panel">
+                                                    <div class="media me-2">
+                                                        @if ($applied_jobs->user->avatar == null)
+                                                            <img alt="image" width="50"
+                                                                src="{{ asset('dashboard/images/guest.png') }}">
+                                                        @else
+                                                            <img alt="image" width="50"
+                                                                src="{{ $applied_jobs->user->avatar }}">
+                                                        @endif
+
+
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <h6 class="mb-1"><a
+                                                                href="javascript:voiud(0)">{{ $applied_jobs->user->first_name . ' ' . $applied_jobs->user->last_name }}</a>
+                                                        </h6>
+                                                        <small class="d-block">Apply job for {{ $applied_jobs->PostJobs->title }} <br> {{ $applied_jobs->created_at->diffForHumans() }}</small>
+                                                    </div>
                                                 </div>
-                                                <div class="media-body">
-                                                    <h6 class="mb-1"><a href="javascript:voiud(0)"> Dr sultads
-                                                            Send you Photo</a></h6>
-                                                    <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-panel">
-                                                <div class="media me-2 media-info">
-                                                    KG
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="mb-1"><a href="javascript:voiud(0)">Resport
-                                                            created successfully</a></h6>
-                                                    <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-panel">
-                                                <div class="media me-2 media-success">
-                                                    <i class="fa fa-home"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="mb-1"><a href="javascript:voiud(0)">Reminder :
-                                                            Treatment Time!</a></h6>
-                                                    <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-panel">
-                                                <div class="media me-2">
-                                                    <img alt="image" width="50"
-                                                        src="{{ asset('dashboard') }}/images/avatar/1.jpg">
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="mb-1"><a href="javascript:voiud(0)">Dr sultads
-                                                            Send you Photo</a></h6>
-                                                    <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-panel">
-                                                <div class="media me-2 media-danger">
-                                                    KG
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="mb-1"><a href="javascript:voiud(0)"> Resport
-                                                            created successfully </a></h6>
-                                                    <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="timeline-panel">
-                                                <div class="media me-2 media-primary">
-                                                    <i class="fa fa-home"></i>
-                                                </div>
-                                                <div class="media-body">
-                                                    <h6 class="mb-1"><a href="javascript:voiud(0)"> Reminder :
-                                                            Treatment Time! </a></h6>
-                                                    <small class="d-block">29 July 2020 - 02:26 PM</small>
-                                                </div>
-                                            </div>
-                                        </li>
+                                            </li>
+                                        @endforeach
+
+
                                     </ul>
                                 </div>
                                 <a class="all-notification" href="javascript:void(0);">See all notifications <i

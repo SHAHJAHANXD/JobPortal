@@ -143,7 +143,7 @@ class EmployerController extends Controller
                 'location' => 'required',
             ]
         );
-        $job = PostJob::where('id' , $request->id)->first();
+        $job = PostJob::where('id', $request->id)->first();
         $data = $request->all();
         $data['slug'] =  Str::slug($request->title);
         $data['user_id'] = Auth::user()->id;
@@ -165,7 +165,7 @@ class EmployerController extends Controller
         $location = City::get();
         $Skills = JobSkill::get();
         $job = PostJob::where('id', $id)->first();
-        return view('employer.job.editJob', compact('job','id','category', 'type', 'location', 'Skills'));
+        return view('employer.job.editJob', compact('job', 'id', 'category', 'type', 'location', 'Skills'));
     }
     public function deleteJob($id)
     {

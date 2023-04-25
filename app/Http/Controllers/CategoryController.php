@@ -57,7 +57,7 @@ class CategoryController extends Controller
             DB::beginTransaction();
             Category::where('id', $id)->delete();
             DB::commit();
-            return redirect()->route('category.get')->with('success', 'Category deleted successfully!');
+            return redirect()->back()->with('success', 'Category deleted successfully!');
         } catch (Exception $e) {
             DB::rollback();
             DB::commit();

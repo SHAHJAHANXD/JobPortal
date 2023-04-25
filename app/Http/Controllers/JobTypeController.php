@@ -56,7 +56,7 @@ class JobTypeController extends Controller
             DB::beginTransaction();
             JobType::where('id', $id)->delete();
             DB::commit();
-            return redirect()->route('JobType.get')->with('success', 'JobType deleted successfully!');
+            return redirect()->back()->with('success', 'JobType deleted successfully!');
         } catch (Exception $e) {
             DB::rollback();
             DB::commit();

@@ -14,15 +14,27 @@
                                     <h1 class="text-center">Inbox</h1>
                                     <ul class="contacts"
                                         style="overflow: auto; padding: 20px;height: 600px; display: block;">
-                                        @php
-                                            $chat = \App\Models\User::where('id', '!=', Auth::user()->id)->get();
-                                        @endphp
+                                        @if (Auth::user()->role == 'Candidate')
+                                            @php
+                                                $chat = \App\Models\appliedjob::where('candidate_id', Auth::user()->id)
+                                                    ->with('userCandidate')
+                                                    ->orderBy('id',;desc)
+                                                    ->get();
+                                            @endphp
+                                        @endif
+                                        @if (Auth::user()->role == 'Employer')
+                                            @php
+                                                $chat = \App\Models\appliedjob::where('employer_id', Auth::user()->id)
+                                                    ->with('userEmployer')
+                                                    ->get();
+                                            @endphp
+                                        @endif
                                         @foreach ($chat as $chats)
                                             @if (Auth::user()->role == 'Candidate')
-                                                <a href="{{ route('candidate.getMessages', $chats->id) }}">
+                                                <a href="{{ route('candidate.getMessages', $chats->employer_id) }}">
                                             @endif
                                             @if (Auth::user()->role == 'Employer')
-                                                <a href="{{ route('employer.getMessages', $chats->id) }}">
+                                                <a href="{{ route('employer.getMessages', $chats->candidate_id) }}">
                                             @endif
                                             @if (Auth::user()->role == 'Admin')
                                                 <a href="{{ route('admin.getMessages', $chats->id) }}">
@@ -30,24 +42,49 @@
                                             <li class="active dz-chat-user">
                                                 <div class="d-flex bd-highlight" style=" padding: 5px;">
                                                     <div class="img_cont">
-                                                        @if ($chats->avatar == true)
-                                                            <img src="{{ $chats->avatar }}" class="rounded-circle user_img"
-                                                                alt="{{ $chats->first_name ?? '' }} {{ $chats->last_name ?? '' }} Image"
-                                                                style="    height: 40px;">
-                                                        @else
-                                                            <img src="{{ asset('dashboard/images/guest.png') }}"
-                                                                class="rounded-circle user_img" alt="Guest Image"
-                                                                style="    height: 40px;">
+                                                        @if (Auth::user()->role == 'Employer')
+                                                            @if ($chats->userCandidate->avatar == true)
+                                                                <img src="{{ $chats->userCandidate->avatar }}"
+                                                                    class="rounded-circle user_img"
+                                                                    alt="{{ $chats->userCandidate->first_name ?? '' }} {{ $chats->userCandidate->last_name ?? '' }} Image"
+                                                                    style="    height: 40px;">
+                                                            @else
+                                                                <img src="{{ asset('dashboard/images/guest.png') }}"
+                                                                    class="rounded-circle user_img" alt="Guest Image"
+                                                                    style="    height: 40px;">
+                                                            @endif
                                                         @endif
-                                                        <span class="online_icon"></span>
+                                                        @if (Auth::user()->role == 'Candidate')
+                                                            @if ($chats->userEmployer->avatar == true)
+                                                                <img src="{{ $chats->userEmployer->avatar }}"
+                                                                    class="rounded-circle user_img"
+                                                                    alt="{{ $chats->userEmployer->first_name ?? '' }} {{ $chats->userEmployer->last_name ?? '' }} Image"
+                                                                    style="    height: 40px;">
+                                                            @else
+                                                                <img src="{{ asset('dashboard/images/guest.png') }}"
+                                                                    class="rounded-circle user_img" alt="Guest Image"
+                                                                    style="    height: 40px;">
+                                                            @endif
+                                                        @endif
                                                     </div>
-                                                    <div class="user_info" style="    margin-left: 10px;">
-                                                        <span>{{ $chats->first_name ?? '' }}
-                                                            {{ $chats->last_name ?? '' }}</span>
-                                                        <p>{{ $chats->first_name ?? '' }} {{ $chats->last_name ?? '' }}
-                                                            is online
-                                                        </p>
-                                                    </div>
+                                                    @if (Auth::user()->role == 'Candidate')
+                                                        <div class="user_info" style="    margin-left: 10px;">
+                                                            <span>{{ $chats->userCandidate->first_name ?? '' }}
+                                                                {{ $chats->userCandidate->last_name ?? '' }}</span>
+                                                            <p>{{ $chats->userCandidate->first_name ?? '' }}
+                                                                {{ $chats->userCandidate->last_name ?? '' }}
+                                                            </p>
+                                                        </div>
+                                                    @endif
+                                                    @if (Auth::user()->role == 'Employer')
+                                                        <div class="user_info" style="    margin-left: 10px;">
+                                                            <span>{{ $chats->userEmployer->first_name ?? '' }}
+                                                                {{ $chats->userEmployer->last_name ?? '' }}</span>
+                                                            <p>{{ $chats->userEmployer->first_name ?? '' }}
+                                                                {{ $chats->userEmployer->last_name ?? '' }}
+                                                            </p>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </li>
                                             </a>
@@ -81,7 +118,6 @@
 
                                         <div>
                                             <h6 class="mb-1">{{ $user->first_name }} {{ $user->last_name }}</h6>
-                                            <p class="mb-0 text-success">Online</p>
                                         </div>
                                         <div class="dropdown">
                                             <a href="javascript:void(0);" data-bs-toggle="dropdown"
@@ -103,15 +139,6 @@
                                                         class="fa fa-user-circle text-primary me-2"></i>
                                                     View
                                                     profile</li>
-                                                <li class="dropdown-item"><i class="fa fa-users text-primary me-2"></i> Add
-                                                    to
-                                                    btn-close
-                                                    friends</li>
-                                                <li class="dropdown-item"><i class="fa fa-plus text-primary me-2"></i> Add
-                                                    to
-                                                    group</li>
-                                                <li class="dropdown-item"><i class="fa fa-ban text-primary me-2"></i> Block
-                                                </li>
                                             </ul>
                                         </div>
 
@@ -127,18 +154,29 @@
                                                         class="msg_time_send">({{ \Carbon\Carbon::parse($chat->created_at)->diffForHumans() }})</span>
                                                 </div>
                                                 <div class="img_cont_msg">
-                                                    <img src="{{ asset('dashboard') }}/images/avatar/1.jpg"
-                                                        class="rounded-circle user_img_msg" alt=""
-                                                        style="height: 50px; border: 2px solid;">
-
+                                                    @if (Auth::user()->avatar == true)
+                                                        <img src="{{ Auth::user()->avatar }}"
+                                                            class="rounded-circle user_img_msg" alt=""
+                                                            style="height: 50px; border: 2px solid;">
+                                                    @else
+                                                        <img src="{{ asset('dashboard/images/guest.png') }}"
+                                                            class="rounded-circle user_img_msg" alt=""
+                                                            style="height: 50px; border: 2px solid;">
+                                                    @endif
                                                 </div>
                                             </div>
                                         @else
                                             <div class="d-flex justify-content-start mb-4">
                                                 <div class="img_cont_msg">
-                                                    <img src="{{ asset('dashboard') }}/images/avatar/1.jpg"
-                                                        class="rounded-circle user_img_msg" alt=""
-                                                        style="height: 50px; border: 2px solid;">
+                                                    @if ($user->avatar == true)
+                                                        <img src="{{ $user->avatar }}"
+                                                            class="rounded-circle user_img_msg" alt=""
+                                                            style="height: 50px; border: 2px solid;">
+                                                    @else
+                                                        <img src="{{ asset('dashboard/images/guest.png') }}"
+                                                            class="rounded-circle user_img_msg" alt=""
+                                                            style="height: 50px; border: 2px solid;">
+                                                    @endif
                                                 </div>
                                                 <div class="msg_cotainer"
                                                     style="margin-top: auto; margin-bottom: auto; margin-left: 10px; background: gray; padding: 3px; border-radius: 5px; color: white">

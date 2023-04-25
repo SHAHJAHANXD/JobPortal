@@ -57,7 +57,7 @@ class JobSkillController extends Controller
             DB::beginTransaction();
             JobSkill::where('id', $id)->delete();
             DB::commit();
-            return redirect()->route('JobSkill.get')->with('success', 'JobSkill deleted successfully!');
+            return redirect()->back()->with('success', 'JobSkill deleted successfully!');
         } catch (Exception $e) {
             DB::rollback();
             DB::commit();

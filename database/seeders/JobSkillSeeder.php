@@ -42,7 +42,7 @@ class JobSkillSeeder extends Seeder
             0 => 'https://laravel.com/img/logomark.min.svg',
             1 => 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/PHP-logo.svg/182px-PHP-logo.svg.png',
             2 => 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/768px-React-icon.svg.png?20220125121207',
-            3 => 'https://logowik.com/content/uploads/images/flutter5786.jpg',
+            3 => 'https://i.ibb.co/FKF3VLk/flutter5786-removebg-preview.png',
             4 => 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Android_logo_2019_%28stacked%29.svg/182px-Android_logo_2019_%28stacked%29.svg.png',
             5 => 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/IOS_wordmark_%282017%29.svg/113px-IOS_wordmark_%282017%29.svg.png',
             6 => 'https://developer.apple.com/assets/elements/icons/swift/swift-64x64_2x.png',

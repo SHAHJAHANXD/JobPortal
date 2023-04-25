@@ -9,80 +9,107 @@ use App\Models\JobSkill;
 use App\Models\LanguageUserSpeak;
 use App\Models\Skills;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class AdminCotroller extends Controller
 {
     public function dashboard()
     {
-        return view('admin.index.index');
+        try {
+            return view('admin.index.index');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function profile()
     {
-        $skills = Skills::where('user_id', Auth::user()->id)->orderBy('skills')->get();
-        $language = LanguageUserSpeak::where('user_id', Auth::user()->id)->orderBy('name')->get();
-        return view('authenticate.profile', compact('skills', 'language'));
+        try {
+            $skills = Skills::where('user_id', Auth::user()->id)->orderBy('skills')->get();
+            $language = LanguageUserSpeak::where('user_id', Auth::user()->id)->orderBy('name')->get();
+            return view('authenticate.profile', compact('skills', 'language'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
     public function AllCandidates()
     {
-        $user = User::where('role', 'Candidate')->get();
-        return view('admin.users.index', compact('user'));
+        try {
+            $user = User::where('role', 'Candidate')->get();
+            return view('admin.users.index', compact('user'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
     public function AllEmployers()
     {
-        $user = User::where('role', 'Employer')->get();
-        return view('admin.users.index', compact('user'));
+        try {
+            $user = User::where('role', 'Employer')->get();
+            return view('admin.users.index', compact('user'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
     public function ActivateEmployerAccount($id)
     {
-        $user = User::where('id', $id)->first();
-        if ($user->account_status == 1) {
-            return redirect()->back()->with('success', 'Account approved successfully!');
-        } else {
-            User::where('id', $id)->update(['account_status' => 1]);
-            $user = ['name' => $user->first_name . ' ' . $user->last_name, 'email' => $user->email];
-            Mail::to($user['email'])->queue(new UserVerifyMail($user));
-            return redirect()->back()->with('success', 'Account approved successfully!');
+        try {
+            $user = User::where('id', $id)->first();
+            if ($user->account_status == 1) {
+                return redirect()->back()->with('success', 'Account approved successfully!');
+            } else {
+                User::where('id', $id)->update(['account_status' => 1]);
+                $user = ['name' => $user->first_name . ' ' . $user->last_name, 'email' => $user->email];
+                Mail::to($user['email'])->queue(new UserVerifyMail($user));
+                return redirect()->back()->with('success', 'Account approved successfully!');
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
     public function ActivateEmployerAccountEmail($id)
     {
-        $user = User::where('id', $id)->first();
-        if ($user->account_status == 1) {
-            return view('admin.users.verified', compact('id'));
-        } else {
-            User::where('id', $id)->update(['account_status' => 1]);
-            $user_info = User::where('id', $id)->first();
-            $user = ['name' => $user_info->first_name . ' ' . $user_info->last_name, 'email' => $user_info->email];
-            Mail::to($user['email'])->queue(new GotVerifiedMail($user));
-            // Mail::queue(
-            //     'emails.gotVerified',
-            //     $email_data,
-            //     function ($message) use ($email_data) {
-            //         $message->to($email_data['email'])->subject("Dear " . ' ' . $email_data['name'] . ' ' . "Your Profile at Cybinix Job Portal Got Approved!");
-            //     }
-            // );
-            return view('admin.users.verified', compact('id'));
+        try {
+            $user = User::where('id', $id)->first();
+            if ($user->account_status == 1) {
+                return view('admin.users.verified', compact('id'));
+            } else {
+                User::where('id', $id)->update(['account_status' => 1]);
+                $user_info = User::where('id', $id)->first();
+                $user = ['name' => $user_info->first_name . ' ' . $user_info->last_name, 'email' => $user_info->email];
+                Mail::to($user['email'])->queue(new GotVerifiedMail($user));
+                return view('admin.users.verified', compact('id'));
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
     }
 
     public function BlockEmployerAccount($id)
     {
-        User::where('id', $id)->update(['account_status' => 0]);
-        return redirect()->back()->with('success', 'Account rejected successfully!');
+        try {
+            User::where('id', $id)->update(['account_status' => 0]);
+            return redirect()->back()->with('success', 'Account rejected successfully!');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
     public function autocomplete(Request $request)
     {
-        $data = [];
+        try {
+            $data = [];
 
-        if ($request->filled('q')) {
-            $data = JobSkill::select("name", "id")
-                ->where('name', 'LIKE', '%' . $request->get('q') . '%')
-                ->get();
+            if ($request->filled('q')) {
+                $data = JobSkill::select("name", "id")
+                    ->where('name', 'LIKE', '%' . $request->get('q') . '%')
+                    ->get();
+            }
+            return response()->json($data);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
         }
-        return response()->json($data);
     }
 }

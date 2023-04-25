@@ -1,14 +1,17 @@
 <?php
 
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\Admin\AdminCotroller;
 use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Candidate\CandidateDashboardController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Chat\ChatController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\Employer\EmployerController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\JobSkillController;
 use App\Http\Controllers\JobTypeController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\VerifyUser\VerifyUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +28,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/activate-employer-account-email/{id}', [AdminCotroller::class, 'ActivateEmployerAccountEmail'])->name('admin.ActivateEmployerAccountEmail');
 
 Route::get('/', [AuthenticationController::class, 'index'])->name('index');
+Route::get('/about-us', [AuthenticationController::class, 'aboutUs'])->name('aboutUs');
+Route::get('/contact-us', [AuthenticationController::class, 'contactUs'])->name('contactUs');
+Route::get('/jobs', [AuthenticationController::class, 'jobs'])->name('jobs');
+Route::post('/contact-us-store', [ContactUsController::class, 'store'])->name('home.contact.store');
+Route::post('/newsletter-store', [NewsletterController::class, 'store'])->name('newsletter.store');
+
 Route::get('/autocomplete', [AdminCotroller::class, 'autocomplete'])->name('autocomplete');
 
 Route::get('/migrate-refresh', [AuthenticationController::class, 'migrate'])->name('migrate');
@@ -120,10 +129,8 @@ Route::middleware('VerifyUser')->group(function () {
                 Route::post('/post-change-password', [AuthenticationController::class, 'changePostPassword'])->name('admin.post.changePassword');
                 Route::get('/all-candidates', [AdminCotroller::class, 'AllCandidates'])->name('admin.AllCandidates');
                 Route::get('/all-employers', [AdminCotroller::class, 'AllEmployers'])->name('admin.AllEmployers');
-
                 Route::get('/activate-employer-account/{id}', [AdminCotroller::class, 'ActivateEmployerAccount'])->name('admin.ActivateEmployerAccount');
                 Route::get('/reject-employer-account/{id}', [AdminCotroller::class, 'BlockEmployerAccount'])->name('admin.RejectEmployerAccount');
-
                 Route::prefix('category')->group(function () {
                     Route::get('/get', [CategoryController::class, 'get'])->name('category.get');
                     Route::post('/store', [CategoryController::class, 'store'])->name('category.store');
@@ -138,6 +145,7 @@ Route::middleware('VerifyUser')->group(function () {
                     Route::post('/post-edit', [JobTypeController::class, 'postEdit'])->name('JobType.postEdit');
                     Route::delete('/delete/{id}', [JobTypeController::class, 'destroy'])->name('JobType.delete');
                 });
+
                 Route::prefix('job-skill')->group(function () {
                     Route::get('/get', [JobSkillController::class, 'get'])->name('JobSkill.get');
                     Route::post('/store', [JobSkillController::class, 'store'])->name('JobSkill.store');
@@ -145,6 +153,25 @@ Route::middleware('VerifyUser')->group(function () {
                     Route::post('/post-edit', [JobSkillController::class, 'postEdit'])->name('JobSkill.postEdit');
                     Route::delete('/delete/{id}', [JobSkillController::class, 'destroy'])->name('JobSkill.delete');
                 });
+
+                Route::prefix('address-setting')->group(function () {
+                    Route::get('/get', [AddressController::class, 'get'])->name('address.get');
+                    Route::post('/store', [AddressController::class, 'store'])->name('address.store');
+                    Route::get('/edit/{id}', [AddressController::class, 'edit'])->name('address.edit');
+                    Route::post('/post-edit', [AddressController::class, 'postEdit'])->name('address.postEdit');
+                });
+
+                Route::prefix('contact')->group(function () {
+                    Route::get('/get', [ContactUsController::class, 'get'])->name('ContactUs.get');
+                    Route::post('/store', [ContactUsController::class, 'store'])->name('ContactUs.store');
+                    Route::delete('/delete/{id}', [ContactUsController::class, 'destroy'])->name('ContactUs.delete');
+                });
+                Route::prefix('newsletter')->group(function () {
+                    Route::get('/get', [NewsletterController::class, 'get'])->name('newsletter.get');
+                    Route::post('/store', [NewsletterController::class, 'store'])->name('newsletter.store');
+                    Route::delete('/delete/{id}', [NewsletterController::class, 'destroy'])->name('newsletter.delete');
+                });
+
             });
         });
     });

@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="keywords" content="Cybinix Job Portal">
-    <meta name="author" content="Cybinix Job Portal">
-    <meta name="robots" content="Cybinix Job Portal">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Cybinix Job Portal">
-    <meta property="og:title" content="Cybinix Job Portal">
-    <meta property="og:description" content="Cybinix Job Portal">
-    <meta property="og:image" content="{{ asset('dashboard') }}/social-image.png">
-    <meta name="format-detection" content="telephone=no">
     <title>@yield('title')</title>
     @include('layouts.heads')
     @yield('extra-heads')

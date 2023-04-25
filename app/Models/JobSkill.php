@@ -15,4 +15,8 @@ class JobSkill extends Model
     {
         return  $this->belongsTo(Skills::class, 'name', 'name');
     }
+    public function JobPostedSkills(): HasMany
+    {
+        return  $this->hasMany(PostJob::class, 'skills', 'name');
+    }
 }

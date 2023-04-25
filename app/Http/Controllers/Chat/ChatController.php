@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Chat;
 
 use App\Http\Controllers\Controller;
+use App\Models\appliedjob;
 use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,16 +18,13 @@ class ChatController extends Controller
         $chat->to_user_id = $request->to_user_id;
         $chat->message = $request->message;
         $chat->save();
-        if(Auth::user()->role == 'Candidate')
-        {
+        if (Auth::user()->role == 'Candidate') {
             return redirect()->route('candidate.getMessages', $request->to_user_id);
         }
-        if(Auth::user()->role == 'Employer')
-        {
+        if (Auth::user()->role == 'Employer') {
             return redirect()->route('employer.getMessages', $request->to_user_id);
         }
-        if(Auth::user()->role == 'Admin')
-        {
+        if (Auth::user()->role == 'Admin') {
             return redirect()->route('admin.getMessages', $request->to_user_id);
         }
 
@@ -53,7 +51,13 @@ class ChatController extends Controller
     }
     public function inbox()
     {
-        $user = Chat::where('from_user_id', Auth::user()->id)->first();
+        if (Auth::user()->role == 'Candidate') {
+            $user = appliedjob::where('candidate_id', Auth::user()->id)->first();
+        }
+        if (Auth::user()->role == 'Employer') {
+            $user = appliedjob::where('employer_id', Auth::user()->id)->first();
+        }
+
         return view('inbox.chat', compact('user'));
     }
 }

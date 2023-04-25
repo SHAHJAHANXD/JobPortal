@@ -23,4 +23,12 @@ class appliedjob extends Model
     {
         return $this->belongsTo(User::class , "candidate_id" , 'id');
     }
+    public function userEmployer()
+    {
+        return $this->belongsTo(User::class , "employer_id" , 'id');
+    }
+    public function userCandidate()
+    {
+        return $this->belongsTo(User::class , "candidate_id" , 'id');
+    }
 }

@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
         $this->call(JobSkillSeeder::class);
         $this->call(LanguageSeeder::class);
         $this->call(CitySeeder::class);
+        $this->call(AddressSeeder::class);
     }
 }
