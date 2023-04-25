@@ -31,6 +31,8 @@ Route::get('/', [AuthenticationController::class, 'index'])->name('index');
 Route::get('/about-us', [AuthenticationController::class, 'aboutUs'])->name('aboutUs');
 Route::get('/contact-us', [AuthenticationController::class, 'contactUs'])->name('contactUs');
 Route::get('/jobs', [AuthenticationController::class, 'jobs'])->name('jobs');
+Route::get('/job-details/{id}', [AuthenticationController::class, 'jobDetails'])->name('jobDetails');
+
 Route::post('/contact-us-store', [ContactUsController::class, 'store'])->name('home.contact.store');
 Route::post('/newsletter-store', [NewsletterController::class, 'store'])->name('newsletter.store');
 

@@ -43,31 +43,7 @@ class EmployerController extends Controller
     public function updateProfile(Request $request)
     {
         $user = User::where('id', Auth::user()->id)->first();
-        if ($request->first_name == true) {
-            $user->first_name = $request->first_name;
-        }
-        if ($request->last_name == true) {
-            $user->last_name = $request->last_name;
-        }
-        if ($request->about_me == true) {
-            $user->about_me = $request->about_me;
-        }
-        if ($request->designation == true) {
-            $user->designation = $request->designation;
-        }
-        if ($request->experience == true) {
-            $user->experience = $request->experience;
-        }
-        if ($request->availability == true) {
-            $user->availability = $request->availability;
-        }
-        if ($request->age == true) {
-            $user->age = $request->age;
-        }
-        if ($request->location == true) {
-            $user->location = $request->location;
-        }
-        $user->save();
+        $user->update($request->all());
         return redirect()->route('employer.profile')->with('success', 'Profile updated successfully!');
     }
     public function completeprofile()
@@ -84,24 +60,28 @@ class EmployerController extends Controller
     }
     public function postcompleteprofile(Request $request)
     {
+        $request->validate(
+            [
+                'c_image' => 'required|file|mimes:gif,png,jpg,jpeg|max:5120',
+            ]
+        );
         $user = User::where('id', Auth::user()->id)->first();
-        $user->about_me = $request->about_me;
-        $user->designation = $request->designation;
-        $user->experience = $request->experience;
-        $user->availability = $request->availability;
-        $user->age = $request->age;
-        $user->profile = 1;
-        $user->location = $request->location;
-        $user->c_name = $request->c_name;
-        $user->c_email = $request->c_email;
-        $user->c_position = $request->c_position;
-        $user->c_phone = $request->c_phone;
-        $user->c_about_us = $request->c_about_us;
-        $user->c_website = $request->c_website;
-        $user->c_revenue = $request->c_revenue;
-        $user->c_location = $request->c_location;
-        $user->save();
-        return redirect()->route('candidate.dashboard')->with('success', 'Profile updated successfully!');
+        $data = $request->all();
+        if ($request->hasfile('c_image')) {
+            $imageName = $request->c_image->getClientOriginalName();
+            $data['c_image'] = $imageName;
+            $request->c_image->move(public_path('c_image'), $imageName);
+        }
+        $user->update($data);
+        if (Auth::user()->role == 'Candidate') {
+            return redirect()->route('candidate.dashboard')->with('success', "Profile updated successfully!");
+        }
+        if (Auth::user()->role == 'Admin') {
+            return redirect()->route('admin.dashboard')->with('success', "Profile updated successfully!");
+        }
+        if (Auth::user()->role == 'Employer') {
+            return redirect()->route('employer.dashboard')->with('success', "Profile updated successfully!");
+        }
     }
     public function postJob(Request $request)
     {

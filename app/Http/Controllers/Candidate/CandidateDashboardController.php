@@ -81,34 +81,7 @@ class CandidateDashboardController extends Controller
     public function updateProfile(Request $request)
     {
         $user = User::where('id', Auth::user()->id)->first();
-        if ($request->first_name == true) {
-            $user->first_name = $request->first_name;
-        }
-        if ($request->last_name == true) {
-            $user->last_name = $request->last_name;
-        }
-        if ($request->about_me == true) {
-            $user->about_me = $request->about_me;
-        }
-        if ($request->wa_no == true) {
-            $user->wa_no = $request->wa_no;
-        }
-        if ($request->designation == true) {
-            $user->designation = $request->designation;
-        }
-        if ($request->experience == true) {
-            $user->experience = $request->experience;
-        }
-        if ($request->availability == true) {
-            $user->availability = $request->availability;
-        }
-        if ($request->age == true) {
-            $user->age = $request->age;
-        }
-        if ($request->location == true) {
-            $user->location = $request->location;
-        }
-        $user->save();
+        $user->update($request->all());
         return redirect()->route('candidate.profile')->with('success', 'Profile updated successfully!');
     }
     public function allJobs()

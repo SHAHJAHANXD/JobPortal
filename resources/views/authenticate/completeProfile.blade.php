@@ -66,7 +66,8 @@
                                 <div class="col-xl-6 col-md-6" style="margin-top: auto; margin-bottom: auto">
                                     <div class="sign-in-your">
                                         <h3>Complete Your Profile</h3>
-                                        <form action="{{ route('candidate.postcompleteprofile') }}" method="POST">
+                                        <form action="{{ route('candidate.postcompleteprofile') }}" method="POST"
+                                            enctype="multipart/form-data">
                                             @csrf
                                             <div class="mb-3">
                                                 <label class="mb-1"><strong>About me</strong></label>
@@ -78,16 +79,18 @@
                                             <div class="mb-3">
                                                 <label class="mb-1"><strong>Whatsapp Contact</strong></label>
                                                 <input required type="number" class="form-control"
-                                                    placeholder="Enter Your Whatsapp Contact With Country Code" name="wa_no">
+                                                    placeholder="Enter Your Whatsapp Contact With Country Code"
+                                                    name="wa_no">
                                                 @if ($errors->has('wa_no'))
-                                                    <span
-                                                        class="text-danger">{{ $errors->first('wa_no') }}</span>
+                                                    <span class="text-danger">{{ $errors->first('wa_no') }}</span>
                                                 @endif
                                             </div>
                                             <div class="mb-3">
                                                 <label class="mb-1"><strong>Skills</strong></label>
                                                 <br>
-                                                <i class="fas fa-exclamation" style="color: red;"></i> <small> Choose your skills wisely, as you cannot update them later. Thank you</small> <i class="fas fa-exclamation" style="color: red;"></i>
+                                                <i class="fas fa-exclamation" style="color: red;"></i> <small> Choose
+                                                    your skills wisely, as you cannot update them later. Thank
+                                                    you</small> <i class="fas fa-exclamation" style="color: red;"></i>
                                                 <div class="row">
                                                     @foreach ($jobSkills as $skills)
                                                         <div class="col-lg-6">
@@ -187,7 +190,9 @@
                                             <div class="mb-3">
                                                 <label class="mb-1"><strong>Language You Speak</strong></label>
                                                 <br>
-                                                <i class="fas fa-exclamation" style="color: red;"></i> <small> Choose your languages wisely, as you cannot update them later. Thank you</small> <i class="fas fa-exclamation" style="color: red;"></i>
+                                                <i class="fas fa-exclamation" style="color: red;"></i> <small> Choose
+                                                    your languages wisely, as you cannot update them later. Thank
+                                                    you</small> <i class="fas fa-exclamation" style="color: red;"></i>
                                                 <div class="row">
                                                     @foreach ($language as $language)
                                                         <div class="col-lg-4">
@@ -232,222 +237,258 @@
                                                     </a></li>
                                             </ul>
                                             <div class="tab-content">
-                                               <form action="{{ route('employer.postcompleteprofile') }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                <div id="personal_info" class="tab-pane" role="tabpanel">
-                                                    <h1 class="text-center">Personal Info</h1>
-                                                    <div class="row">
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="mb-1"><strong>About me</strong></label>
-                                                                <textarea class="form-control" name="about_me" placeholder="Enter Your Biography"></textarea>
-                                                                @if ($errors->has('about_me'))
-                                                                    <span
-                                                                        class="text-danger">{{ $errors->first('about_me') }}</span>
-                                                                @endif
+                                                <form action="{{ route('employer.postcompleteprofile') }}"
+                                                    method="POST" enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div id="personal_info" class="tab-pane" role="tabpanel">
+                                                        <h1 class="text-center">Personal Info</h1>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="mb-1"><strong>About
+                                                                            me</strong></label>
+                                                                    <textarea class="form-control" name="about_me" placeholder="Enter Your Biography"></textarea>
+                                                                    @if ($errors->has('about_me'))
+                                                                        <span
+                                                                            class="text-danger">{{ $errors->first('about_me') }}</span>
+                                                                    @endif
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-3">
-                                                            <div class="mb-3">
-                                                                <label
-                                                                    class="mb-1"><strong>Designation</strong></label>
-                                                                <input required type="text" class="form-control"
-                                                                    placeholder="Enter Your Designation/Expertise"
-                                                                    name="designation">
-                                                                @if ($errors->has('designation'))
-                                                                    <span
-                                                                        class="text-danger">{{ $errors->first('designation') }}</span>
-                                                                @endif
+                                                            <div class="col-lg-12 mb-3">
+                                                                <div class="mb-3">
+                                                                    <label
+                                                                        class="mb-1"><strong>Designation</strong></label>
+                                                                    <input required type="text"
+                                                                        class="form-control"
+                                                                        placeholder="Enter Your Designation/Expertise"
+                                                                        name="designation">
+                                                                    @if ($errors->has('designation'))
+                                                                        <span
+                                                                            class="text-danger">{{ $errors->first('designation') }}</span>
+                                                                    @endif
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label
-                                                                    class="mb-1"><strong>Availability</strong></label>
-                                                                <select required name="availability" id=""
-                                                                    class="form-control" style="background: #2A2A2A">
-                                                                    <option value="">Select</option>
-                                                                    <option value="1-2 Hours">1-2 Hours</option>
-                                                                    <option value="3-4 Hours">3-4 Hours</option>
-                                                                    <option value="5-6 Hours">5-6 Hours</option>
-                                                                    <option value="7-8 Hours">7-8 Hours</option>
-                                                                    <option value="9-10 Hours">9-10 Hours</option>
-                                                                </select>
-                                                                @if ($errors->has('availability'))
-                                                                    <span
-                                                                        class="text-danger">{{ $errors->first('availability') }}</span>
-                                                                @endif
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label
+                                                                        class="mb-1"><strong>Availability</strong></label>
+                                                                    <select required name="availability"
+                                                                        id="" class="form-control"
+                                                                        style="background: #2A2A2A">
+                                                                        <option value="">Select</option>
+                                                                        <option value="1-2 Hours">1-2 Hours</option>
+                                                                        <option value="3-4 Hours">3-4 Hours</option>
+                                                                        <option value="5-6 Hours">5-6 Hours</option>
+                                                                        <option value="7-8 Hours">7-8 Hours</option>
+                                                                        <option value="9-10 Hours">9-10 Hours</option>
+                                                                    </select>
+                                                                    @if ($errors->has('availability'))
+                                                                        <span
+                                                                            class="text-danger">{{ $errors->first('availability') }}</span>
+                                                                    @endif
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label
-                                                                    class="mb-1"><strong>Experience</strong></label>
-                                                                <select required name="experience" id=""
-                                                                    class="form-control" style="background: #2A2A2A">
-                                                                    <option value="">Select</option>
-                                                                    <option value="Less Then 1 Years">Less Then 1 Years
-                                                                    </option>
-                                                                    <option value="1-2 Years">1-2 Years</option>
-                                                                    <option value="2-3 Years">2-3 Years</option>
-                                                                    <option value="3-4 Years">3-4 Years</option>
-                                                                    <option value="4-5 Years">4-5 Years</option>
-                                                                    <option value="5-6 Years">5-6 Years</option>
-                                                                    <option value="6-7 Years">6-7 Years</option>
-                                                                    <option value="7-8 Years">7-8 Years</option>
-                                                                    <option value="8-9 Years">8-9 Years</option>
-                                                                    <option value="9-10 Years">9-10 Years</option>
-                                                                    <option value="More Then 10 Years">More Then 10
-                                                                        Years</option>
-                                                                </select>
-                                                                @if ($errors->has('experience'))
-                                                                    <span
-                                                                        class="text-danger">{{ $errors->first('experience') }}</span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="mb-1"><strong>Age</strong></label>
-                                                                <select required name="age" id=""
-                                                                    class="form-control" style="background: #2A2A2A">
-                                                                    <option value="">Select</option>
-                                                                    <option value="Less Then 15 Years">Less Then 15
-                                                                        Years</option>
-                                                                    <option value="15-20 Years">15-20 Years</option>
-                                                                    <option value="20-25 Years">20-25 Years</option>
-                                                                    <option value="25-30 Years">25-30 Years</option>
-                                                                    <option value="30-35 Years">30-35 Years</option>
-                                                                    <option value="35-40 Years">35-40 Years</option>
-                                                                    <option value="40-45 Years">40-45 Years</option>
-                                                                    <option value="45-50 Years">45-50 Years</option>
-                                                                    <option value="More Then 50 Years">More Then 50
-                                                                        Years</option>
-                                                                </select>
-                                                                @if ($errors->has('age'))
-                                                                    <span
-                                                                        class="text-danger">{{ $errors->first('age') }}</span>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-3">
-                                                            <div class="mb-3">
-                                                                <label class="mb-1"><strong>Location</strong></label>
-                                                                <select required name="location" id=""
-                                                                    class="form-control" style="background: #2A2A2A">
-                                                                    <option value="">Select</option>
-                                                                    @foreach ($cities as $cities)
-                                                                        <option value="{{ $cities->name }}">
-                                                                            {{ $cities->name }}
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label
+                                                                        class="mb-1"><strong>Experience</strong></label>
+                                                                    <select required name="experience" id=""
+                                                                        class="form-control"
+                                                                        style="background: #2A2A2A">
+                                                                        <option value="">Select</option>
+                                                                        <option value="Less Then 1 Years">Less Then 1
+                                                                            Years
                                                                         </option>
-                                                                    @endforeach
-                                                                </select>
-
-                                                                @if ($errors->has('location'))
-                                                                    <span
-                                                                        class="text-danger">{{ $errors->first('location') }}</span>
-                                                                @endif
+                                                                        <option value="1-2 Years">1-2 Years</option>
+                                                                        <option value="2-3 Years">2-3 Years</option>
+                                                                        <option value="3-4 Years">3-4 Years</option>
+                                                                        <option value="4-5 Years">4-5 Years</option>
+                                                                        <option value="5-6 Years">5-6 Years</option>
+                                                                        <option value="6-7 Years">6-7 Years</option>
+                                                                        <option value="7-8 Years">7-8 Years</option>
+                                                                        <option value="8-9 Years">8-9 Years</option>
+                                                                        <option value="9-10 Years">9-10 Years</option>
+                                                                        <option value="More Then 10 Years">More Then 10
+                                                                            Years</option>
+                                                                    </select>
+                                                                    @if ($errors->has('experience'))
+                                                                        <span
+                                                                            class="text-danger">{{ $errors->first('experience') }}</span>
+                                                                    @endif
+                                                                </div>
                                                             </div>
-                                                        </div>
-
-
-                                                    </div>
-                                                </div>
-                                                <div id="company_info" class="tab-pane" role="tabpanel">
-                                                    <h1 class="text-center">Company Info</h1>
-                                                    <i class="fas fa-exclamation" style="color: red;"></i> <small> Please fill all the form completey it will help you to get your profile approved by admin Thank you.</small> <i class="fas fa-exclamation" style="color: red;"></i>
-                                                    <div class="row">
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="text-label form-label">Company
-                                                                    Name*</label>
-                                                                <input type="text" name="c_name"
-                                                                    class="form-control"
-                                                                    placeholder="Enter Company Name" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="text-label form-label">Company Email
-                                                                    Address*</label>
-                                                                <input type="email" class="form-control"
-                                                                    id="emial1" name="c_email"
-                                                                    placeholder="Enter Company Email" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="text-label form-label">Company Phone
-                                                                    Number*</label>
-                                                                <input type="text" name="c_phone"
-                                                                    class="form-control"
-                                                                    placeholder="(+92) 300-000-0000" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="mb-1"><strong>Location</strong></label>
-                                                                <select required name="c_location" id=""
-                                                                    class="form-control" style="background: #2A2A2A">
-                                                                    <option value="">Select</option>
-                                                                    @foreach ($all_cities as $cities)
-                                                                        <option value="{{ $cities->name }}">
-                                                                            {{ $cities->name }}
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="mb-1"><strong>Age</strong></label>
+                                                                    <select required name="age" id=""
+                                                                        class="form-control"
+                                                                        style="background: #2A2A2A">
+                                                                        <option value="">Select</option>
+                                                                        <option value="Less Then 15 Years">Less Then 15
+                                                                            Years</option>
+                                                                        <option value="15-20 Years">15-20 Years
                                                                         </option>
-                                                                    @endforeach
-                                                                </select>
+                                                                        <option value="20-25 Years">20-25 Years
+                                                                        </option>
+                                                                        <option value="25-30 Years">25-30 Years
+                                                                        </option>
+                                                                        <option value="30-35 Years">30-35 Years
+                                                                        </option>
+                                                                        <option value="35-40 Years">35-40 Years
+                                                                        </option>
+                                                                        <option value="40-45 Years">40-45 Years
+                                                                        </option>
+                                                                        <option value="45-50 Years">45-50 Years
+                                                                        </option>
+                                                                        <option value="More Then 50 Years">More Then 50
+                                                                            Years</option>
+                                                                    </select>
+                                                                    @if ($errors->has('age'))
+                                                                        <span
+                                                                            class="text-danger">{{ $errors->first('age') }}</span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 mb-3">
+                                                                <div class="mb-3">
+                                                                    <label
+                                                                        class="mb-1"><strong>Location</strong></label>
+                                                                    <select required name="location" id=""
+                                                                        class="form-control"
+                                                                        style="background: #2A2A2A">
+                                                                        <option value="">Select</option>
+                                                                        @foreach ($cities as $cities)
+                                                                            <option value="{{ $cities->name }}">
+                                                                                {{ $cities->name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
 
-                                                                @if ($errors->has('c_location'))
-                                                                    <span
-                                                                        class="text-danger">{{ $errors->first('c_location') }}</span>
-                                                                @endif
+                                                                    @if ($errors->has('location'))
+                                                                        <span
+                                                                            class="text-danger">{{ $errors->first('location') }}</span>
+                                                                    @endif
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="text-label form-label">Company
-                                                                    About*</label>
-                                                                <input type="text" name="c_about_us"
-                                                                    class="form-control"
-                                                                    placeholder="Enter Company About Section" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="text-label form-label">Company Website
-                                                                    Link*</label>
-                                                                <input type="text" name="c_website"
-                                                                    class="form-control"
-                                                                    placeholder="https://example.com" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="text-label form-label">Company
-                                                                    Revenue*</label>
-                                                                <input type="number" name="c_revenue"
-                                                                    class="form-control"
-                                                                    placeholder="Enter Company Annual Revenue"
-                                                                    required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-12 mb-2">
-                                                            <div class="mb-3">
-                                                                <label class="text-label form-label">Your position in
-                                                                    Company*</label>
-                                                                <input type="text" name="c_position"
-                                                                    placeholder="Your Designation"
-                                                                    class="form-control" required>
-                                                            </div>
-                                                        </div>
-                                                        <div class="text-center">
-                                                            <button type="submit"
-                                                                class="btn btn-primary btn-block">Submit</button>
-                                                        </div>
 
+
+                                                        </div>
                                                     </div>
-                                                </div>
-                                               </form>
+                                                    <div id="company_info" class="tab-pane" role="tabpanel">
+                                                        <h1 class="text-center">Company Info</h1>
+                                                        <i class="fas fa-exclamation" style="color: red;"></i> <small>
+                                                            Please fill all the form completey it will help you to get
+                                                            your profile approved by admin Thank you.</small> <i
+                                                            class="fas fa-exclamation" style="color: red;"></i>
+                                                        <div class="row">
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="text-label form-label">Company
+                                                                        Name*</label>
+                                                                    <input type="text" name="c_name"
+                                                                        class="form-control"
+                                                                        placeholder="Enter Company Name" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="text-label form-label">Company Email
+                                                                        Address*</label>
+                                                                    <input type="email" class="form-control"
+                                                                        id="emial1" name="c_email"
+                                                                        placeholder="Enter Company Email" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="text-label form-label">Company
+                                                                        Logo*</label>
+                                                                    <input type="file" name="c_image"
+                                                                        class="form-control" required multiple>
+                                                                    @if ($errors->has('c_image'))
+                                                                        <span
+                                                                            class="text-danger">{{ $errors->first('c_image') }}</span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="text-label form-label">Company Phone
+                                                                        Number*</label>
+                                                                    <input type="text" name="c_phone"
+                                                                        class="form-control"
+                                                                        placeholder="(+92) 300-000-0000" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label
+                                                                        class="mb-1"><strong>Location</strong></label>
+                                                                    <select required name="c_location" id=""
+                                                                        class="form-control"
+                                                                        style="background: #2A2A2A">
+                                                                        <option value="">Select</option>
+                                                                        @foreach ($all_cities as $cities)
+                                                                            <option value="{{ $cities->name }}">
+                                                                                {{ $cities->name }}
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+
+                                                                    @if ($errors->has('c_location'))
+                                                                        <span
+                                                                            class="text-danger">{{ $errors->first('c_location') }}</span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="text-label form-label">Company
+                                                                        About*</label>
+                                                                    <input type="text" name="c_about_us"
+                                                                        class="form-control"
+                                                                        placeholder="Enter Company About Section"
+                                                                        required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="text-label form-label">Company
+                                                                        Website
+                                                                        Link*</label>
+                                                                    <input type="text" name="c_website"
+                                                                        class="form-control"
+                                                                        placeholder="https://example.com" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="text-label form-label">Company
+                                                                        Revenue*</label>
+                                                                    <input type="number" name="c_revenue"
+                                                                        class="form-control"
+                                                                        placeholder="Enter Company Annual Revenue"
+                                                                        required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 mb-2">
+                                                                <div class="mb-3">
+                                                                    <label class="text-label form-label">Your position
+                                                                        in
+                                                                        Company*</label>
+                                                                    <input type="text" name="c_position"
+                                                                        placeholder="Your Designation"
+                                                                        class="form-control" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-center">
+                                                                <button type="submit"
+                                                                    class="btn btn-primary btn-block">Submit</button>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                         <div class="new-account mt-3">

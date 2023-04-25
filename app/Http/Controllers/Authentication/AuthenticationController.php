@@ -66,7 +66,7 @@ class AuthenticationController extends Controller
 
     public function jobs(Request $request)
     {
-        
+
         try {
             if ($request->page == null) {
                 $loadmore = "?page=2";
@@ -79,7 +79,11 @@ class AuthenticationController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-
+    public function jobDetails($id)
+    {
+        $PostJob = PostJob::where('status', 1)->where('id', $id)->with('Users')->with('Skills')->first();
+        return view('frontend.jobDetails', compact('PostJob'));
+    }
     public function changePostPassword(Request $request)
     {
         try {

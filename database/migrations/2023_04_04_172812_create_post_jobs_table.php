@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->string('status')->default(1);
             $table->string('skills')->nullable();
+            $table->string('qualification')->nullable();
             $table->timestamps();
         });
     }

@@ -21,7 +21,8 @@ class PostJob extends Model
         'location',
         'status',
         'skills',
-        'slug'
+        'slug',
+        'qualification'
     ];
     public function Users()
     {
