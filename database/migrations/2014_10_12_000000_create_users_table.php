@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('email')->unique()->nullable();
+            $table->string('email', 250)->unique()->nullable();
             $table->string('wa_no')->unique()->nullable();
             $table->string('password')->nullable();
             $table->text('views')->default(0);
