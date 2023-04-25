@@ -61,8 +61,12 @@ class AuthenticationController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
+
+
     public function jobs(Request $request)
     {
+        
         try {
             if ($request->page == null) {
                 $loadmore = "?page=2";
