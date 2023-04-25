@@ -11,7 +11,7 @@
     <meta name="description" content="Cybinix Job Portal">
     <meta property="og:title" content="Cybinix Job Portal">
     <meta property="og:description" content="Cybinix Job Portal">
-    <meta property="og:image" content="{{ asset('dashboard') }}/social-image.png">
+    <meta property="og:image" content="{{ asset('front/logo-full.png') }}">
     <meta name="format-detection" content="telephone=no">
     <title>@yield('title')</title>
     @include('frontend.layouts.heads')
