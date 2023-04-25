@@ -18,9 +18,7 @@
                                     <thead>
                                         <tr>
                                             <th class="text-center">ID</th>
-                                            <th class="text-center">Address</th>
                                             <th class="text-center">Email</th>
-                                            <th class="text-center">Phone</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -28,14 +26,19 @@
                                         @foreach ($NewsLetter as $NewsLetter)
                                             <tr>
                                                 <td class="text-center">{{ $NewsLetter->id }}</td>
-                                                <td class="text-center">{{ $NewsLetter->address }}</td>
                                                 <td class="text-center">{{ $NewsLetter->email }}</td>
-                                                <td class="text-center">{{ $NewsLetter->phone }}</td>
                                                 <td class="text-center">
                                                     <div class="d-flex" style="justify-content: center">
-                                                        <a href="{{ route('address.edit', $NewsLetter->id) }}"
-                                                            class="btn btn-primary shadow btn-xs sharp me-1"><i
-                                                                class="fas fa-pencil-alt"></i></a>
+
+                                                                <form method="POST"
+                                                            action="{{ route('newsletter.delete', $NewsLetter->id) }}">
+                                                            @csrf
+                                                            <input name="_method" type="hidden" value="DELETE">
+                                                            <button type="submit"
+                                                                class="btn btn-danger shadow btn-xs sharp show_confirm"
+                                                                data-toggle="tooltip" title='Delete'><i
+                                                                    class="fa fa-trash"></i></button>
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -78,5 +81,24 @@
 @section('extra-scripts')
     <script src="{{ asset('dashboard') }}/vendor/datatables/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('dashboard') }}/js/plugins-init/datatables.init.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
+    <script type="text/javascript">
+        $('.show_confirm').click(function(event) {
+            var form = $(this).closest("form");
+            var name = $(this).data("name");
+            event.preventDefault();
+            swal({
+                    title: `Are you sure you want to delete this record?`,
+                    text: "If you delete this, it will be gone forever.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
+        });
+    </script>
 @endsection
