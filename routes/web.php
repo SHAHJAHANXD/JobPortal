@@ -163,12 +163,10 @@ Route::middleware('VerifyUser')->group(function () {
 
                 Route::prefix('contact')->group(function () {
                     Route::get('/get', [ContactUsController::class, 'get'])->name('ContactUs.get');
-                    Route::post('/store', [ContactUsController::class, 'store'])->name('ContactUs.store');
                     Route::delete('/delete/{id}', [ContactUsController::class, 'destroy'])->name('ContactUs.delete');
                 });
                 Route::prefix('newsletter')->group(function () {
                     Route::get('/get', [NewsletterController::class, 'get'])->name('newsletter.get');
-                    Route::post('/store', [NewsletterController::class, 'store'])->name('newsletter.store');
                     Route::delete('/delete/{id}', [NewsletterController::class, 'destroy'])->name('newsletter.delete');
                 });
 
