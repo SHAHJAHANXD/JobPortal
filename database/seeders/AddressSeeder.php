@@ -18,7 +18,7 @@ class AddressSeeder extends Seeder
         AddressSetting::create([
             'address' => 'Gulshan Iqbal, Rahim Yar Khan, PK',
             'email' => 'info@jobs.cybinix.com',
-            'email' => '+92 318 750 7015',
+            'phone' => '+92 318 750 7015',
         ]);
     }
 }
