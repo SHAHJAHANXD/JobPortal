@@ -104,7 +104,7 @@
         <div class="footer-bottom">
             <div class="footer-bottom-info">
                 <div class="footer-copy-right">
-                    <span class="copyrights-text">Copyright © {{ $date }} by thewebmax All Rights Reserved.</span>
+                    <span class="copyrights-text">Copyright © {{ $date }} by <a href="https://cybinix.com">Cybinix</a> All Rights Reserved.</span>
                 </div>
                 <ul class="social-icons">
                     <li><a href="javascript:void(0);" class="fab fa-facebook-f"></a></li>
