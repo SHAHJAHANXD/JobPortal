@@ -55,7 +55,7 @@
                                             style="height: 80px; width: 100px;">
                                         <div class="twm-jobs-category green"><span class="twm-bg-green" style="background: red">{{ $jobs->job_type }}</span></div>
                                         <div class="twm-mid-content">
-                                            <a href="job-detail.html" class="twm-job-title">
+                                            <a href="{{ route('candidate.jobDetails' , $jobs->id) }}" class="twm-job-title">
                                                 <h4>{{ $jobs->title }}</h4>
                                             </a>
                                         </div>
