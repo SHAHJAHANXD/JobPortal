@@ -19,6 +19,9 @@
                 </div>
             </div>
         </div>
+        @php
+            $address = \App\Models\AddressSetting::where('id', 1)->first();
+        @endphp
         <div class="footer-top">
             <div class="row">
                 <div class="col-lg-3 col-md-12">
@@ -29,13 +32,13 @@
                         {{-- <p>Many desktop publishing packages and web page editors now.</p> --}}
                         <ul class="ftr-list">
                             <li>
-                                <p><span>Address :</span>65 Sunset CA 90026, USA </p>
+                                <p><span>Address :</span>{{ $address->address }}</p>
                             </li>
                             <li>
-                                <p><span>Email :</span>example@max.com</p>
+                                <p><span>Email :</span>{{ $address->email }}</p>
                             </li>
                             <li>
-                                <p><span>Call :</span>555-555-1234</p>
+                                <p><span>Phone :</span>{{ $address->phone }}</p>
                             </li>
                         </ul>
                     </div>
