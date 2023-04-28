@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(LanguageSeeder::class);
         $this->call(CitySeeder::class);
         $this->call(AddressSeeder::class);
+        $this->call(HomePageSeeder::class);
     }
 }

@@ -137,7 +137,9 @@
                     <span class="nav-text">Settings</span>
                 </a>
                 <ul aria-expanded="false">
+                    <li><a href="{{ route('env.edit') }}">Environment Settings</a></li>
                     <li><a href="{{ route('address.get') }}">Address Settings</a></li>
+                    <li><a href="{{ route('homePage.edit') }}">Home Page Settings</a></li>
                     <li><a href="{{ route('ContactUs.get') }}">Contact Us </a></li>
                     <li><a href="{{ route('newsletter.get') }}">Newsletter </a></li>
                 </ul>

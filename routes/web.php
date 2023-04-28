@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\AdminCotroller;
 use App\Http\Controllers\Authentication\AuthenticationController;
 use App\Http\Controllers\Candidate\CandidateDashboardController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\Chat\ChatController;
+// use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\Employer\EmployerController;
 use App\Http\Controllers\GoogleController;
@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/activate-employer-account-email/{id}', [AdminCotroller::class, 'ActivateEmployerAccountEmail'])->name('admin.ActivateEmployerAccountEmail');
 
 Route::get('/', [AuthenticationController::class, 'index'])->name('index');
@@ -64,14 +65,14 @@ Route::group(['middleware' => 'auth:web'], function () {
 Route::middleware('VerifyUser')->group(function () {
     Route::group(['middleware' => 'auth:web'], function () {
         // Chat
-        Route::post('/candidate/chat/send', [ChatController::class, 'sendMessage'])->name('candidate.sendMessage');
-        Route::get('/candidate/chat/{userId}', [ChatController::class, 'getMessages'])->name('candidate.getMessages');
+        // Route::post('/candidate/chat/send', [ChatController::class, 'sendMessage'])->name('candidate.sendMessage');
+        // Route::get('/candidate/chat/{userId}', [ChatController::class, 'getMessages'])->name('candidate.getMessages');
 
         Route::get('/candidate/complete-profile', [CandidateDashboardController::class, 'completeprofile'])->name('candidate.completeprofile');
         Route::post('/candidate/post-complete-profile', [CandidateDashboardController::class, 'postcompleteprofile'])->name('candidate.postcompleteprofile');
         Route::middleware('SecureCandidate')->group(function () {
             Route::prefix('candidate')->group(function () {
-                Route::get('/inbox', [ChatController::class, 'inbox'])->name('candidate.inbox');
+                // Route::get('/inbox', [ChatController::class, 'inbox'])->name('candidate.inbox');
                 Route::get('/all-jobs', [CandidateDashboardController::class, 'allJobs'])->name('candidate.allJobs');
                 Route::get('/job-detail/{id}', [CandidateDashboardController::class, 'jobDetails'])->name('candidate.jobDetails');
                 Route::get('/job-detail-to-apply/{id}', [CandidateDashboardController::class, 'jobDetailsToApply'])->name('candidate.jobDetailsToApply');
@@ -96,10 +97,10 @@ Route::middleware('VerifyUser')->group(function () {
         Route::get('/employer/profile-approved', [EmployerController::class, 'profielApproved'])->name('employer.profielApproved');
 
         Route::middleware('SecureEmployer')->group(function () {
-            Route::post('/employer/chat/send', [ChatController::class, 'sendMessage'])->name('employer.sendMessage');
-            Route::get('/employer/chat/{userId}', [ChatController::class, 'getMessages'])->name('employer.getMessages');
+            // Route::post('/employer/chat/send', [ChatController::class, 'sendMessage'])->name('employer.sendMessage');
+            // Route::get('/employer/chat/{userId}', [ChatController::class, 'getMessages'])->name('employer.getMessages');
             Route::prefix('employer')->group(function () {
-                Route::get('/inbox', [ChatController::class, 'inbox'])->name('employer.inbox');
+                // Route::get('/inbox', [ChatController::class, 'inbox'])->name('employer.inbox');
                 Route::get('/dashboard', [EmployerController::class, 'dashboard'])->name('employer.dashboard');
                 Route::get('/profile', [EmployerController::class, 'profile'])->name('employer.profile');
                 Route::get('/post-new-job', [EmployerController::class, 'postNewJob'])->name('employer.postNewJob');
@@ -121,10 +122,10 @@ Route::middleware('VerifyUser')->group(function () {
     });
     Route::middleware('SecureAdmin')->group(function () {
         Route::group(['middleware' => 'auth:web'], function () {
-            Route::post('/admin/chat/send', [ChatController::class, 'sendMessage'])->name('admin.sendMessage');
-            Route::get('/admin/chat/{userId}', [ChatController::class, 'getMessages'])->name('admin.getMessages');
+            // Route::post('/admin/chat/send', [ChatController::class, 'sendMessage'])->name('admin.sendMessage');
+            // Route::get('/admin/chat/{userId}', [ChatController::class, 'getMessages'])->name('admin.getMessages');
             Route::prefix('admin')->group(function () {
-                Route::get('/inbox', [ChatController::class, 'inbox'])->name('admin.inbox');
+                // Route::get('/inbox', [ChatController::class, 'inbox'])->name('admin.inbox');
                 Route::get('/dashboard', [AdminCotroller::class, 'dashboard'])->name('admin.dashboard');
                 Route::get('/profile', [AdminCotroller::class, 'profile'])->name('admin.profile');
                 Route::get('/change-password', [AuthenticationController::class, 'changePassword'])->name('admin.changePassword');
@@ -162,6 +163,14 @@ Route::middleware('VerifyUser')->group(function () {
                     Route::get('/edit/{id}', [AddressController::class, 'edit'])->name('address.edit');
                     Route::post('/post-edit', [AddressController::class, 'postEdit'])->name('address.postEdit');
                 });
+                Route::prefix('home-page-setting')->group(function () {
+                    Route::get('/edit', [AdminCotroller::class, 'edit'])->name('homePage.edit');
+                    Route::post('/post-edit', [AdminCotroller::class, 'postEdit'])->name('homePage.postEdit');
+                });
+                Route::prefix('env-setting')->group(function () {
+                    Route::get('/edit', [AdminCotroller::class, 'envEdit'])->name('env.edit');
+                    Route::post('/post-edit', [AdminCotroller::class, 'envPostEdit'])->name('env.postEdit');
+                });
 
                 Route::prefix('contact')->group(function () {
                     Route::get('/get', [ContactUsController::class, 'get'])->name('ContactUs.get');
@@ -171,7 +180,6 @@ Route::middleware('VerifyUser')->group(function () {
                     Route::get('/get', [NewsletterController::class, 'get'])->name('newsletter.get');
                     Route::delete('/delete/{id}', [NewsletterController::class, 'destroy'])->name('newsletter.delete');
                 });
-
             });
         });
     });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\GotVerifiedMail;
 use App\Mail\UserVerifyMail;
+use App\Models\HomePageSetting;
 use App\Models\JobSkill;
 use App\Models\LanguageUserSpeak;
 use App\Models\Skills;
@@ -109,6 +110,78 @@ class AdminCotroller extends Controller
             }
             return response()->json($data);
         } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+    public function envEdit()
+    {
+        return view('admin.env.edit');
+    }
+    public function envPostEdit(Request $request)
+    {
+        $env_val['APP_URL'] = $request->APP_URL;
+        $env_val['APP_DEBUG'] = $request->APP_DEBUG;
+        $env_val['ADMIN_EMAIL'] = $request->ADMIN_EMAIL;
+
+        $env_val['MAIL_MAILER'] = $request->MAIL_MAILER;
+        $env_val['MAIL_HOST'] = $request->MAIL_HOST;
+        $env_val['MAIL_PORT'] = $request->MAIL_PORT;
+        $env_val['MAIL_USERNAME'] = $request->MAIL_USERNAME;
+        $env_val['MAIL_PASSWORD'] = $request->MAIL_PASSWORD;
+        $env_val['MAIL_ENCRYPTION'] = $request->MAIL_ENCRYPTION;
+        $env_val['MAIL_FROM_ADDRESS'] = $request->MAIL_FROM_ADDRESS;
+        $env_val['MAIL_FROM_NAME'] = $request->MAIL_FROM_NAME;
+
+        $env_val['GOOGLE_CLIENT_SECRET'] = $request->GOOGLE_CLIENT_SECRET;
+        $env_val['GOOGLE_CLIENT_ID'] = $request->GOOGLE_CLIENT_ID;
+        $env_val['GOOGLE_CLIENT_CALL_BACK_URL'] = $request->GOOGLE_CLIENT_CALL_BACK_URL;
+
+        $update = $this->setEnvValue($env_val);
+        if ($update == true) {
+            return redirect()->back()->with('success', __('Successfully updated!'));
+        }
+        return redirect()->back()->with('error', __('Something went wrong!'));
+    }
+    public function setEnvValue($values)
+    {
+        $envFile = app()->environmentFilePath();
+        $str = file_get_contents($envFile);
+        if (count($values) > 0) {
+            foreach ($values as $envKey => $envValue) {
+                $str .= "\n";
+                $keyPosition = strpos($str, "{$envKey}=");
+                $endOfLinePosition = strpos($str, "\n", $keyPosition);
+                $oldLine = substr($str, $keyPosition, $endOfLinePosition - $keyPosition);
+
+                if (!$keyPosition || !$endOfLinePosition || !$oldLine) {
+                    $str .= "{$envKey}={$envValue}\n";
+                } else {
+                    $str = str_replace($oldLine, "{$envKey}={$envValue}", $str);
+                }
+            }
+        }
+        $str = substr($str, 0, -1);
+        if (!file_put_contents($envFile, $str)) return false;
+        return true;
+    }
+    public function edit()
+    {
+        $HomePageSetting = HomePageSetting::where('id', 1)->first();
+        return view('admin.HomePageSetting.edit', compact('HomePageSetting'));
+    }
+    public function postEdit(Request $request)
+    {
+        $HomePageSetting = HomePageSetting::where('id', 1)->first();
+        try {
+            DB::beginTransaction();
+            if ($HomePageSetting) {
+                $HomePageSetting->update($request->all());
+            }
+            DB::commit();
+            return redirect()->back()->with('success', 'Record updated successfully!');
+        } catch (Exception $e) {
+            DB::rollback();
+            DB::commit();
             return redirect()->back()->with('error', $e->getMessage());
         }
     }

@@ -100,6 +100,7 @@
         @php
 
                 $date = \Carbon\Carbon::now()->format('Y');
+                $HomePageSetting = \App\Models\HomePageSetting::first();
         @endphp
         <div class="footer-bottom">
             <div class="footer-bottom-info">
@@ -107,10 +108,11 @@
                     <span class="copyrights-text">Copyright © {{ $date }} by <a href="https://cybinix.com" target="_block">Cybinix</a> All Rights Reserved.</span>
                 </div>
                 <ul class="social-icons">
-                    <li><a href="javascript:void(0);" class="fab fa-facebook-f"></a></li>
-                    <li><a href="javascript:void(0);" class="fab fa-twitter"></a></li>
-                    <li><a href="javascript:void(0);" class="fab fa-instagram"></a></li>
-                    <li><a href="javascript:void(0);" class="fab fa-youtube"></a></li>
+                    <li><a href="{{ $HomePageSetting->facebook }}" class="fab fa-facebook-f"></a></li>
+                    <li><a href="{{ $HomePageSetting->twitter }}" class="fab fa-twitter"></a></li>
+                    <li><a href="{{ $HomePageSetting->instagram }}" class="fab fa-instagram"></a></li>
+                    <li><a href="{{ $HomePageSetting->youtube }}" class="fab fa-youtube"></a></li>
+                    <li><a href="{{ $HomePageSetting->whatsapp }}" class="fab fa-whatsapp"></a></li>
                 </ul>
             </div>
         </div>
