@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Cybinix Job Portal
+    Cybinix Job Portal | Users
 @endsection
 @section('extra-heads')
     <link href="{{ asset('dashboard') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -44,6 +44,7 @@
                                 <table id="example3" class="display" style="min-width: 845px">
                                     <thead>
                                         <tr>
+                                            <th class="text-center">Image</th>
                                             <th class="text-center">First Name</th>
                                             <th class="text-center">Last Name</th>
                                             <th class="text-center">Email</th>
@@ -51,6 +52,8 @@
                                             <th class="text-center">Designation</th>
                                             <th class="text-center">Account Status</th>
                                             <th class="text-center">Account Status Action</th>
+                                            <th class="text-center">Account</th>
+                                            <th class="text-center">Account Action</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
@@ -88,7 +91,23 @@
                                                 </td>
 
                                                 <td class="text-center">
-                                                    <div class="d-flex">
+                                                    @if ($user->status == 1)
+                                                        <span class="badge light badge-success">Activated</span>
+                                                    @else
+                                                        <span class="badge light badge-danger">Blocked</span>
+                                                    @endif
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($user->status == 0)
+                                                        <a href="{{ route('admin.UpdateAccountStatus', $user->id) }}"  class="btn btn-success shadow btn-xs me-1">Activate</a>
+                                                    @endif
+                                                    @if ($user->status == 1)
+                                                        <a href="{{ route('admin.UpdateAccountStatus', $user->id) }}"  class="btn btn-danger shadow btn-xs me-1">Block</a>
+                                                    @endif
+                                                </td>
+
+                                                <td class="text-center">
+                                                    <div class="d-flex" style="    justify-content: center;">
                                                         <a href="#"
                                                             class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                                 class="fas fa-pencil-alt"></i></a>

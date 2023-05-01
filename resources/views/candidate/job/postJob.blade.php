@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Cybinix Job Portal
+    Cybinix Job Portal | Post New Job
 @endsection
 @section('extra-heads')
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>

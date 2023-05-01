@@ -18,6 +18,11 @@ class JobSkillController extends Controller
     {
         try {
             DB::beginTransaction();
+            $count = JobSkill::where('name', $request->name)->count();
+            if($count == 1)
+            {
+                return redirect()->back()->with('error', 'JobSkill is already exsits!');
+            }
             JobSkill::create($request->all());
             DB::commit();
             return redirect()->back()->with('success', 'JobSkill created successfully!');

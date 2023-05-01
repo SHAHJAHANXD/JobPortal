@@ -128,6 +128,8 @@
                         <li><a href="{{ route('category.get') }}">Job Category</a></li>
                         <li><a href="{{ route('JobType.get') }}">Job Type</a></li>
                         <li><a href="{{ route('JobSkill.get') }}">Job Skills</a></li>
+                        <li><a href="{{ route('jobListing.get') }}">Job Listing</a></li>
+
                     </ul>
                 </li>
                 <li><a class="has-arrow " href="javascript:void()" aria-expanded="false">

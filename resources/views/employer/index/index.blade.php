@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-Cybinix Job Portal
+Cybinix Job Portal | Employer Dashboard
 @endsection
 @section('content')
     <div class="content-body">

@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Cybinix Job Portal | ContactUsSetting
+    Cybinix Job Portal | Contact Us Setting
 @endsection
 @section('extra-heads')
     <link href="{{ asset('dashboard') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">

@@ -160,7 +160,7 @@ class EmployerController extends Controller
     public function BlockJob($id)
     {
         PostJob::where('id', $id)->update(['status' => 0]);
-        return redirect()->back()->with('success', 'Job Blocked Successfully!');
+        return redirect()->back()->with('success', 'Job Drafted Successfully!');
     }
     public function appliedJobs()
     {

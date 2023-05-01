@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-Cybinix Job Portal
+    Cybinix Job Portal | Admin Dashboard
 @endsection
 @section('content')
     <div class="content-body">
@@ -114,9 +114,8 @@ Cybinix Job Portal
                                         <div class="card-body p-4 p-lg-3 p-xl-4 ">
                                             <div class="students1 one d-flex align-items-center justify-content-between ">
                                                 <div class="content">
-                                                    <h2 class="mb-0">$19,522</h2>
-                                                    <span class="mb-2 fs-14">Expense</span>
-                                                    <h5>+0,5% than last month</h5>
+                                                    <h2 class="mb-0">{{ $employer }}</h2>
+                                                    <span class="mb-2 fs-14">Employers</span>
                                                 </div>
                                                 <div>
                                                     <div class="d-inline-block position-relative donut-chart-sale mb-3">
@@ -142,9 +141,8 @@ Cybinix Job Portal
                                         <div class="card-body p-4 p-lg-3 p-xl-4 ">
                                             <div class="students1 two d-flex align-items-center justify-content-between">
                                                 <div class="content">
-                                                    <h2 class="mb-0">$45,234</h2>
-                                                    <span class="mb-2 fs-14">Income</span>
-                                                    <h5 class="fs-13">-2% than last month</h5>
+                                                    <h2 class="mb-0">{{ $candidate }}</h2>
+                                                    <span class="mb-2 fs-14">Candidates</span>
                                                 </div>
                                                 <div class="d-inline-block position-relative donut-chart-sale">
                                                     <span class="donut3"
@@ -162,8 +160,8 @@ Cybinix Job Portal
                                         <div class="card-body p-4 p-lg-3 p-xl-4">
                                             <div class="students1 three d-flex align-items-center justify-content-between">
                                                 <div class="content">
-                                                    <h2 class="mb-0">$984</h2>
-                                                    <span class="fs-14">Transactions</span>
+                                                    <h2 class="mb-0">{{ $jobs }}</h2>
+                                                    <span class="fs-14">Posted Jobs</span>
                                                 </div>
                                                 <div class="newCustomers">
                                                     <div class="d-inline-block position-relative donut-chart-sale mb-3">
@@ -177,117 +175,18 @@ Cybinix Job Portal
                                 <!---/-column-- -->
                             </div>
                         </div>
-                        <!----column-- -->
-                        <div class="col-xl-4 col-lg-4 col-md-6">
-                            <div class="card  pia-chart">
-                                <div class="card-header border-0 pb-0 flex-wrap">
-                                    <div>
-                                        <h5 class="fs-18 font-w600">Pie Chart</h5>
-                                    </div>
-                                    <div class="dropdown">
-                                        <a href="javascript:void(0);" class="btn-link btn sharp tp-btn-light btn-primary"
-                                            data-bs-toggle="dropdown" aria-expanded="false">
-                                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M8.33319 9.99985C8.33319 10.9203 9.07938 11.6665 9.99986 11.6665C10.9203 11.6665 11.6665 10.9203 11.6665 9.99986C11.6665 9.07938 10.9203 8.33319 9.99986 8.33319C9.07938 8.33319 8.33319 9.07938 8.33319 9.99985Z"
-                                                    fill="#B9A8FF" />
-                                                <path
-                                                    d="M8.33319 3.33329C8.33319 4.25376 9.07938 4.99995 9.99986 4.99995C10.9203 4.99995 11.6665 4.25376 11.6665 3.33329C11.6665 2.41282 10.9203 1.66663 9.99986 1.66663C9.07938 1.66663 8.33319 2.41282 8.33319 3.33329Z"
-                                                    fill="#B9A8FF" />
-                                                <path
-                                                    d="M8.33319 16.6667C8.33319 17.5871 9.07938 18.3333 9.99986 18.3333C10.9203 18.3333 11.6665 17.5871 11.6665 16.6667C11.6665 15.7462 10.9203 15 9.99986 15C9.07938 15 8.33319 15.7462 8.33319 16.6667Z"
-                                                    fill="#B9A8FF" />
-                                            </svg>
-
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                                            <a class="dropdown-item" href="javascript:void(0);">Edit</a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body d-flex align-items-center justify-content-center custome-tooltip">
-                                    <div id="pieChart1"></div>
-                                </div>
-                                <div class="card-footer border-0">
-                                    <div class=" d-flex justify-content-center flex-wrap color-tag">
-                                        <span class="application d-flex align-items-center px-2">
-                                            <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="13"
-                                                height="13" viewBox="0 0 13 13">
-                                                <rect width="13" height="13" rx="6.5" fill="#DD3CFF">
-                                                </rect>
-                                            </svg>
-                                            Pink
-                                        </span>
-                                        <span class="application d-flex align-items-center px-2">
-                                            <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="13"
-                                                height="13" viewBox="0 0 13 13">
-                                                <rect width="13" height="13" rx="6.5" fill="#FFE27A">
-                                                </rect>
-                                            </svg>
-                                            Yellow
-                                        </span>
-                                        <span class="application d-flex align-items-center px-2">
-                                            <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="13"
-                                                height="13" viewBox="0 0 13 13">
-                                                <rect width="13" height="13" rx="6.5" fill="#53CAFD">
-                                                </rect>
-                                            </svg>
-                                            Blue
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!----/column-- -->
-                        <!----column-- -->
-                        <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="col-xl-12 col-lg-12 col-md-12">
                             <div class="card student-chart">
                                 <div class="card-header border-0 pb-0">
                                     <h4>Your Balance</h4>
                                 </div>
                                 <div class="card-body pt-0 custome-tooltip">
-                                    <canvas id="activeUser"></canvas>
+                                    <canvas id="activeUser" style="height: 500px;"></canvas>
                                     <div
                                         class="d-flex justify-content-between align-items-center flex-wrap std-info d-none">
                                         <h4 class="fs-18 font-w600 mb-0">12.345</h4>
                                         <span><small class="text-secondary">5.4% </small>than last year</span>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!----/column-- -->
-                        <!----column-- -->
-
-                        <div class="col-xl-4 col-lg-4 col-md-12">
-                            <div class="card">
-                                <div class="card-header border-0 pb-4 arrow">
-                                    <div>
-                                        <h5 class="fs-18 font-w600">Admission Summary</h5>
-                                        <h4 class="fs-24 font-w600 mb-0 d-inline-flex me-2">$4,563</h4>
-                                        <span class="d-inline-flex align-items-center"><small
-                                                class="text-success font-w500 me-1">+1.6%</small> than last
-                                            week</span>
-                                    </div>
-                                    <svg class="theme-col" width="45" height="45" viewBox="0 0 52 52"
-                                        fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <rect width="52" height="52" rx="26" fill="var(--bs-body-bg)" />
-                                        <g clip-path="url(#clip0)">
-                                            <path
-                                                d="M17.0704 21.5996C17.0704 21.6034 17.0704 21.6073 17.0704 21.6111L17.0626 33.4848C17.0629 33.5788 17.0733 33.6725 17.0937 33.7643L17.1713 34.0284L17.249 34.1837L17.3344 34.2691C17.4413 34.4241 17.5755 34.5583 17.7305 34.6652L17.8081 34.7428L17.9013 34.836L18.1032 34.8981C18.2168 34.9317 18.3343 34.9501 18.4527 34.9525L30.3885 34.9292C31.183 34.9324 31.8297 34.2908 31.8329 33.4963C31.8329 33.4925 31.8329 33.4886 31.8329 33.4848C31.8144 32.6991 31.1819 32.0666 30.3962 32.0481L23.3062 32.0404C23.003 32.0374 22.7595 31.7891 22.7625 31.4859C22.7639 31.3448 22.8195 31.2097 22.9179 31.1085L34.481 19.5454C35.0429 18.9836 35.043 18.0727 34.4811 17.5108C33.9193 16.9489 33.0084 16.9489 32.4465 17.5107C32.4465 17.5107 32.4464 17.5108 32.4464 17.5108L20.8833 29.0739C20.6659 29.2853 20.3182 29.2804 20.1068 29.063C20.0085 28.9618 19.9528 28.8267 19.9514 28.6856L19.9592 21.6111C19.9447 20.8195 19.3064 20.1812 18.5148 20.1667C17.7202 20.1635 17.0735 20.805 17.0704 21.5996Z"
-                                                fill="white" />
-                                        </g>
-                                        <defs>
-                                            <clipPath>
-                                                <rect width="24" height="24" fill="white"
-                                                    transform="translate(25.9997 42.9706) rotate(-135)" />
-                                            </clipPath>
-                                        </defs>
-                                    </svg>
-                                </div>
-                                <div class="card-body py-2 custome-tooltip">
-                                    <div id="chartBarRunning" class="chartBarRunning"></div>
                                 </div>
                             </div>
                         </div>
@@ -328,6 +227,6 @@ Cybinix Job Portal
         <!-- /Modal -->
     </div>
     <!--**********************************
-                Content body end
-            ***********************************-->
+                    Content body end
+                ***********************************-->
 @endsection

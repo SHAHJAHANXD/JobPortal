@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Cybinix Job Portal | AddressSetting | Edit
+    Cybinix Job Portal | Home Page | Edit
 @endsection
 @section('extra-heads')
     <link href="{{ asset('dashboard') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -28,35 +28,35 @@
                                             <div class="mb-3">
                                                 <label for="">Facebook</label>
                                                 <input type="text" name="facebook" class="form-control input-default"
-                                                    value="{{ $HomePageSetting->facebook }}">
+                                                    value="{{ $HomePageSetting->facebook }}" placeholder="Enter URl Here...">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="">Twitter</label>
                                                 <input type="text" name="twitter" class="form-control input-default"
-                                                    value="{{ $HomePageSetting->twitter }}">
+                                                    value="{{ $HomePageSetting->twitter }}" placeholder="Enter URl Here...">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="">YouTube</label>
                                                 <input type="text" name="youtube" class="form-control input-default"
-                                                    value="{{ $HomePageSetting->youtube }}">
+                                                    value="{{ $HomePageSetting->youtube }}" placeholder="Enter URl Here...">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="">Instagram</label>
                                                 <input type="text" name="instagram" class="form-control input-default"
-                                                    value="{{ $HomePageSetting->instagram }}">
+                                                    value="{{ $HomePageSetting->instagram }}" placeholder="Enter URl Here...">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
                                                 <label for="">Whatsapp</label>
                                                 <input type="text" name="whatsapp" class="form-control input-default"
-                                                    value="{{ $HomePageSetting->whatsapp }}">
+                                                    value="{{ $HomePageSetting->whatsapp }}" placeholder="Enter URl Here...">
                                             </div>
                                         </div>
 

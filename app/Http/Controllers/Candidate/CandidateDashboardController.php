@@ -20,7 +20,7 @@ class CandidateDashboardController extends Controller
 {
     public function dashboard()
     {
-        $applied_jobs = appliedjob::where('candidate_id' , Auth::user()->id)->count();
+        $applied_jobs = appliedjob::where('candidate_id', Auth::user()->id)->count();
         return view('candidate.index.index', compact('applied_jobs'));
     }
     public function changePassword()

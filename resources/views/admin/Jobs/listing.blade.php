@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Cybinix Job Portal | List Job
+    Cybinix Job Portal | Job Listing
 @endsection
 @section('extra-heads')
     <link href="{{ asset('dashboard') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -45,6 +45,7 @@
                                     <thead>
                                         <tr>
 
+                                            <th class="text-center">Job By</th>
                                             <th class="text-center">Title</th>
                                             <th class="text-center">Description</th>
                                             <th class="text-center">Gender</th>
@@ -61,6 +62,7 @@
                                     <tbody>
                                         @foreach ($all_jobs as $all_jobs)
                                             <tr>
+                                                <td class="text-center">{{ $all_jobs->Users->first_name.' '.$all_jobs->Users->last_name }}</td>
                                                 <td class="text-center">{{ $all_jobs->title }}</td>
                                                 <td class="text-center"><a href="">View</a></td>
                                                 <td class="text-center">{{ $all_jobs->gender }}</td>
@@ -78,19 +80,19 @@
                                                 </td>
                                                 <td class="text-center">
                                                     @if ($all_jobs->status == 0)
-                                                        <a href="{{ route('employer.ActivateJob', $all_jobs->id) }}"  class="btn btn-success shadow btn-xs me-1">Publish</a>
+                                                        <a href="{{ route('admin.ActivateJob', $all_jobs->id) }}"  class="btn btn-success shadow btn-xs me-1">Publish</a>
                                                     @endif
                                                     @if ($all_jobs->status == 1)
-                                                        <a href="{{ route('employer.BlockJob', $all_jobs->id) }}"  class="btn btn-danger shadow btn-xs me-1">Draft</a>
+                                                        <a href="{{ route('admin.BlockJob', $all_jobs->id) }}"  class="btn btn-danger shadow btn-xs me-1">Draft</a>
                                                     @endif
                                                 </td>
 
                                                 <td class="text-center">
                                                     <div class="d-flex">
-                                                        <a href="{{ route('employer.editJob', $all_jobs->id) }}"
+                                                        <a href="{{ route('admin.editJob', $all_jobs->id) }}"
                                                             class="btn btn-primary shadow btn-xs sharp me-1"><i
                                                                 class="fas fa-pencil-alt"></i></a>
-                                                        <form method="POST" action="{{ route('employer.deleteJob', $all_jobs->id) }}">
+                                                        <form method="POST" action="{{ route('admin.deleteJob', $all_jobs->id) }}">
                                                             @csrf
                                                             <input name="_method" type="hidden" value="DELETE">
 

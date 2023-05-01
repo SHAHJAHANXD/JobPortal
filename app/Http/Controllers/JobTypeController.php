@@ -18,6 +18,11 @@ class JobTypeController extends Controller
     {
         try {
             DB::beginTransaction();
+            $count = JobType::where('name', $request->name)->count();
+            if($count == 1)
+            {
+                return redirect()->back()->with('error', 'JobType is already exsits!');
+            }
             JobType::create($request->all());
             DB::commit();
             return redirect()->back()->with('success', 'JobType created successfully!');

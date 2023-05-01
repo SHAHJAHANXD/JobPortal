@@ -20,8 +20,6 @@
                     <ul class="nav navbar-nav">
                         <li class="has-child"><a href="{{ route('index') }}">Home</a></li>
                         <li class="has-child"><a href="{{ route('jobs') }}">Jobs</a> </li>
-                        <li class="has-child"><a href="javascript:;">Employers</a></li>
-                        <li class="has-child"><a href="javascript:;">Candidates</a></li>
                         <li class="has-child"><a href="{{ route('aboutUs') }}">About Us</a></li>
                         <li class="has-child"><a href="{{ route('contactUs') }}">Contact Us</a></li>
                     </ul>

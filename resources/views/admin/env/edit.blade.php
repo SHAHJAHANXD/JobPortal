@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Cybinix Job Portal | AddressSetting | Edit
+    Cybinix Job Portal | Environment | Edit
 @endsection
 @section('extra-heads')
     <link href="{{ asset('dashboard') }}/vendor/datatables/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -26,9 +26,9 @@
                                         <h5>Application Setting</h5>
                                         <div class="col-lg-6">
                                             <div class="mb-3">
-                                                <label for="">App Debug</label>
+                                                <label for="">Admin Email</label>
                                                 <input type="text" class="form-control input-default"
-                                                    value="{{ env('APP_DEBUG') }}" name="APP_DEBUG">
+                                                    value="{{ env('ADMIN_EMAIL') }}" name="ADMIN_EMAIL">
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
@@ -88,20 +88,8 @@
                                                     value="{{ env('MAIL_FROM_ADDRESS') }}" name="MAIL_FROM_ADDRESS">
                                             </div>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label for="">Mail From Name</label>
-                                                <input type="text" class="form-control input-default"
-                                                    value="{{ env('MAIL_FROM_NAME') }}" name="MAIL_FROM_NAME">
-                                            </div>
-                                        </div>
-                                        <h5>Admin Email Setting</h5>
-                                        <div class="col-lg-6">
-                                            <div class="mb-3">
-                                                <label for="">Google Client ID</label>
-                                                <input type="text" class="form-control input-default"
-                                                    value="{{ env('ADMIN_EMAIL') }}" name="ADMIN_EMAIL">
-                                            </div>
+                                        <div class="mb-3" style="text-align: center">
+                                            <a href="{{ route('admin.testEmail') }}" class="btn btn-primary btn-sm">Test Email</a>
                                         </div>
                                         <h5>Google Setting</h5>
                                         <div class="col-lg-6">

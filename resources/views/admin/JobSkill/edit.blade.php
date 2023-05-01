@@ -27,8 +27,10 @@
                                         <input type="text" name="name" class="form-control input-default "
                                             value="{{ $JobSkill->name }}">
                                     </div>
-                                    <div class="mb-3">
-                                        <img src="{{ $JobSkill->img }}" alt="">
+                                    <div class="mb-3" style="text-align:center;">
+                                        <img src="{{ $JobSkill->img }}" alt="" style="    border-radius: 10px;
+                                        height: 250px;
+                                        margin-bottom: 15px;">
                                         <input type="text" name="img" class="form-control input-default "
                                             value="{{ $JobSkill->img }}" placeholder="Enter Url">
                                     </div>

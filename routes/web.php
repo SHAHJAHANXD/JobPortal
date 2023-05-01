@@ -126,14 +126,27 @@ Route::middleware('VerifyUser')->group(function () {
             // Route::get('/admin/chat/{userId}', [ChatController::class, 'getMessages'])->name('admin.getMessages');
             Route::prefix('admin')->group(function () {
                 // Route::get('/inbox', [ChatController::class, 'inbox'])->name('admin.inbox');
+                Route::get('/test-email', [AdminCotroller::class, 'testEmail'])->name('admin.testEmail');
                 Route::get('/dashboard', [AdminCotroller::class, 'dashboard'])->name('admin.dashboard');
                 Route::get('/profile', [AdminCotroller::class, 'profile'])->name('admin.profile');
+                Route::post('/update-profile', [AdminCotroller::class, 'updateProfile'])->name('admin.updateProfile');
                 Route::get('/change-password', [AuthenticationController::class, 'changePassword'])->name('admin.changePassword');
                 Route::post('/post-change-password', [AuthenticationController::class, 'changePostPassword'])->name('admin.post.changePassword');
                 Route::get('/all-candidates', [AdminCotroller::class, 'AllCandidates'])->name('admin.AllCandidates');
                 Route::get('/all-employers', [AdminCotroller::class, 'AllEmployers'])->name('admin.AllEmployers');
                 Route::get('/activate-employer-account/{id}', [AdminCotroller::class, 'ActivateEmployerAccount'])->name('admin.ActivateEmployerAccount');
                 Route::get('/reject-employer-account/{id}', [AdminCotroller::class, 'BlockEmployerAccount'])->name('admin.RejectEmployerAccount');
+
+                Route::get('/job-listing', [AdminCotroller::class, 'jobListing'])->name('jobListing.get');
+
+                Route::get('/edit-job/{id}', [AdminCotroller::class, 'editJob'])->name('admin.editJob');
+                Route::post('/post-edit-job', [AdminCotroller::class, 'postEditJob'])->name('admin.postEditJob');
+                Route::get('/activate-job/{id}', [AdminCotroller::class, 'ActivateJob'])->name('admin.ActivateJob');
+                Route::get('/block-job/{id}', [AdminCotroller::class, 'BlockJob'])->name('admin.BlockJob');
+                Route::delete('/delete-job/{id}', [AdminCotroller::class, 'deleteJob'])->name('admin.deleteJob');
+
+                Route::get('/update-account-status/{id}', [AdminCotroller::class, 'UpdateAccountStatus'])->name('admin.UpdateAccountStatus');
+
                 Route::prefix('category')->group(function () {
                     Route::get('/get', [CategoryController::class, 'get'])->name('category.get');
                     Route::post('/store', [CategoryController::class, 'store'])->name('category.store');

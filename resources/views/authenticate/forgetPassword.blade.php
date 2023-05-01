@@ -13,7 +13,7 @@
     <meta property="og:description" content="Cybinix Job Portal">
     <meta property="og:image" content="{{ asset('dashboard') }}/social-image.png">
     <meta name="format-detection" content="telephone=no">
-    <title>Cybinix Job Portal | Verify Email</title>
+    <title>Cybinix Job Portal | Forget Password</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('dashboard') }}/images/favicon.png">
     <link href="{{ asset('dashboard') }}/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
     <link href="{{ asset('dashboard') }}/vendor/jquery-autocomplete/jquery-ui.css" rel="stylesheet">

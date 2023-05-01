@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Cybinix Job Portal
+    Cybinix Job Portal | Edit Job
 @endsection
 @section('extra-heads')
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
@@ -181,7 +181,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block">Create Job</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Update Job</button>
                                 </div>
                             </div>
                     </form>

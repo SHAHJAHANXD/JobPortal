@@ -18,6 +18,11 @@ class CategoryController extends Controller
     {
         try {
             DB::beginTransaction();
+            $count = Category::where('name', $request->name)->count();
+            if($count == 1)
+            {
+                return redirect()->back()->with('error', 'Category is already exsits!');
+            }
             Category::create($request->all());
             DB::commit();
             return redirect()->back()->with('success', 'Category created successfully!');

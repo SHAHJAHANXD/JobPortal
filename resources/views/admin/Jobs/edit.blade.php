@@ -1,6 +1,6 @@
 @extends('layout')
 @section('title')
-    Cybinix Job Portal | Post New Job
+    Cybinix Job Portal | Job Edit
 @endsection
 @section('extra-heads')
     <script src="https://cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
@@ -10,33 +10,33 @@
         <div class="row h-100 align-items-center justify-contain-center">
             <div class="col-xl-12">
                 <div class="card" style=" margin-top: 100px;  ">
-                    <form action="{{ route('employer.postJob') }}" method="POST">
+                    <form action="{{ route('admin.postEditJob') }}" method="POST">
                         @csrf
                         <div class="card-body ">
-                            <h3 class="text-center">Add new job</h3>
+                            <h3 class="text-center">Edit Job {{ $job->title }}</h3>
                             <div class="row m-0">
                                 <h3>Job Content</h3>
                                 <div class="col-xl-12 col-md-12 sign" style="margin-top: 20px">
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>Job Title <span
                                                     style="color: red">*</span></strong></label>
-                                        <input required type="text" class="form-control" placeholder="Enter Job Title"
-                                            name="title" >
+                                        <input required type="text" class="form-control" value="{{ $job->title }}"
+                                            placeholder="Enter Job Title" name="title">
                                         @if ($errors->has('title'))
                                             <span class="text-danger">{{ $errors->first('title') }}</span>
                                         @endif
                                     </div>
                                 </div>
+                                <input type="text" hidden name="id" value="{{ $id }}">
                                 <div class="col-xl-6 col-md-6 sign" style="margin-top: 20px">
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>Job Skills <span
                                                     style="color: red">*</span></strong></label>
-                                        <select name="skills" required  class="form-control"
-                                            style="background: #2A2A2A">
-                                            <option value="">Select</option>
+                                        <select name="skills" required class="form-control" style="background: #2A2A2A">
+                                            <option value="{{ $job->skills }}">{{ $job->skills }}</option>
                                             @foreach ($Skills as $Skills)
-                                            <option value="{{ $Skills->name }}">{{ $Skills->name }}</option>
-                                        @endforeach
+                                                <option value="{{ $Skills->name }}">{{ $Skills->name }}</option>
+                                            @endforeach
                                         </select>
                                         @if ($errors->has('skills'))
                                             <span class="text-danger">{{ $errors->first('skills') }}</span>
@@ -47,9 +47,13 @@
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>Job Status <span
                                                     style="color: red">*</span></strong></label>
-                                        <select name="status" required  class="form-control"
-                                            style="background: #2A2A2A">
-                                            <option value="">Select</option>
+                                        <select name="status" required class="form-control" style="background: #2A2A2A">
+                                            @if ($job->status == 0)
+                                            <option value="{{ $job->status }}">Draft</option>
+                                            @endif
+                                            @if ($job->status == 1)
+                                            <option value="{{ $job->status }}">Publish</option>
+                                            @endif
                                             <option value="1">Publish</option>
                                             <option value="0">Draft</option>
                                         </select>
@@ -62,7 +66,7 @@
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>Job Description <span
                                                     style="color: red">*</span></strong></label>
-                                        <textarea class="ckeditor form-control" name="desc"></textarea>
+                                        <textarea class="ckeditor form-control" name="desc">{!! $job->desc !!}</textarea>
                                         @if ($errors->has('desc'))
                                             <span class="text-danger">{{ $errors->first('desc') }}</span>
                                         @endif
@@ -72,9 +76,8 @@
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>Gender <span
                                                     style="color: red">*</span></strong></label>
-                                        <select name="gender" required  class="form-control"
-                                            style="background: #2A2A2A">
-                                            <option value="">Select</option>
+                                        <select name="gender" required class="form-control" style="background: #2A2A2A">
+                                            <option value="{{ $job->gender }}">{{ $job->gender }}</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
                                         </select>
@@ -87,9 +90,8 @@
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>Experience <span
                                                     style="color: red">*</span></strong></label>
-                                        <select required name="experience"  class="form-control"
-                                            style="background: #2A2A2A">
-                                            <option value="">Select</option>
+                                        <select required name="experience" class="form-control" style="background: #2A2A2A">
+                                            <option value="{{ $job->experience }}">{{ $job->experience }}</option>
                                             <option value="Less Then 1 Years">Less Then 1 Years</option>
                                             <option value="1-2 Years">1-2 Years</option>
                                             <option value="2-3 Years">2-3 Years</option>
@@ -111,9 +113,8 @@
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>Category <span
                                                     style="color: red">*</span></strong></label>
-                                        <select required name="category" class="form-control"
-                                            style="background: #2A2A2A">
-                                            <option value="">Select</option>
+                                        <select required name="category" class="form-control" style="background: #2A2A2A">
+                                            <option value="{{ $job->category }}">{{ $job->category }}</option>
                                             @foreach ($category as $category)
                                                 <option value="{{ $category->name }}">{{ $category->name }}</option>
                                             @endforeach
@@ -128,9 +129,9 @@
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>Job Type <span
                                                     style="color: red">*</span></strong></label>
-                                        <select required name="job_type"  class="form-control"
+                                        <select required name="job_type" class="form-control"
                                             style="background: #2A2A2A">
-                                            <option value="">Select</option>
+                                            <option value="{{ $job->job_type }}">{{ $job->job_type }}</option>
                                             @foreach ($type as $type)
                                                 <option value="{{ $type->name }}">{{ $type->name }}</option>
                                             @endforeach
@@ -144,9 +145,9 @@
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>No of Recruitments <span
                                                     style="color: red">*</span></strong></label>
-                                        <select required name="recruitments"  class="form-control"
+                                        <select required name="recruitments" class="form-control"
                                             style="background: #2A2A2A">
-                                            <option value="">Select</option>
+                                            <option value="{{ $job->recruitments }}">{{ $job->recruitments }}</option>
                                             <option value="10">0-10</option>
                                             <option value="20">0-20</option>
                                             <option value="30">0-30</option>
@@ -167,9 +168,9 @@
                                     <div class="mb-3">
                                         <label class="mb-1"><strong>Job Location <span
                                                     style="color: red">*</span></strong></label>
-                                        <select required name="location"  class="form-control"
+                                        <select required name="location" class="form-control"
                                             style="background: #2A2A2A">
-                                            <option value="">Select</option>
+                                            <option value="{{ $job->location }}">{{ $job->location }}</option>
                                             @foreach ($location as $location)
                                                 <option value="{{ $location->name }}">{{ $location->name }}</option>
                                             @endforeach
@@ -180,7 +181,7 @@
                                     </div>
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary btn-block">Create Job</button>
+                                    <button type="submit" class="btn btn-primary btn-block">Update Job</button>
                                 </div>
                             </div>
                     </form>

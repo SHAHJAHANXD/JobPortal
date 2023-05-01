@@ -16,11 +16,11 @@ class HomePageSeeder extends Seeder
     public function run()
     {
         HomePageSetting::create([
-            'Facebook' => 'Enter Url here...',
-            'Twitter' => 'Enter Url here...',
-            'YouTube' => 'Enter Url here...',
-            'Instagram' => 'Enter Url here...',
-            'Whatsapp' => 'Enter Url here...',
+            'Facebook' => null,
+            'Twitter' => null,
+            'YouTube' => null,
+            'Instagram' => null,
+            'Whatsapp' => null,
         ]);
     }
 }
